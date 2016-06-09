@@ -1,0 +1,60 @@
+imports:
+    - { resource: config.yml }
+
+framework:
+    router:
+        resource: "%kernel.root_dir%/config/routing_dev.yml"
+        strict_requirements: true
+    profiler: { only_exceptions: false }
+
+    session:
+        # handler_id set to null will use default session handler from php.ini
+        handler_id:  ~
+        cookie_lifetime: 0
+        gc_maxlifetime: 86400
+
+web_profiler:
+    toolbar: true
+    intercept_redirects: false
+
+assetic:
+    use_controller: true
+
+monolog:
+    handlers:
+        main:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%.log"
+            level: debug
+            channels: [!event]
+        console:
+            type:   console
+            channels: [!event, !doctrine]
+        # uncomment to get logging in your browser
+        # you may have to allow bigger header sizes in your Web server configuration
+        #firephp:
+        #    type:   firephp
+        #    level:  info
+        #chromephp:
+        #    type:   chromephp
+        #    level:  info
+
+#swiftmailer:
+#    delivery_address: me@example.com
+
+hwi_oauth:
+    firewall_name:         secured_area
+    resource_owners:
+        facebook:
+            type:          facebook
+            client_id:     "%facebook_client_id%"
+            client_secret: "%facebook_client_secret%"
+            scope:         "email"
+            infos_url:     "https://graph.facebook.com/me?fields=id,name,email,picture.type(square)"
+            paths:
+                email:          email
+                profilepicture: picture.data.url
+    fosub:
+            username_iterations: 30
+            properties:
+                facebook: facebook

@@ -1,0 +1,6 @@
+bundle_app_homepage:
+    path:     /
+    defaults: { _controller: BundleAppBundle:Home:index }
+
+app_bundle_routing_campaign:
+    resource: "@BundleAppBundle/Resources/config/routing/campaign.yml"

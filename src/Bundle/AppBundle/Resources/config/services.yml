@@ -1,0 +1,4 @@
+services:
+    app.provider.oauth:
+        class: Bundle\AppBundle\Service\OAuthUserProvider
+        arguments: [@session,@fos_user.user_manager,{facebook: facebook}]

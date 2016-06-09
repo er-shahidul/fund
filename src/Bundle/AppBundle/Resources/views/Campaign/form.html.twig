@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    {{ massage_response }}
+
+{% endblock %}
+
+{% block javascriptBlock %}
+    {{ parent() }}
+
+    {% javascripts
+    '@BundleAppBundle/Resources/public/campaign.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock javascriptBlock %}

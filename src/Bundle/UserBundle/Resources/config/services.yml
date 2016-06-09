@@ -1,0 +1,4 @@
+services:
+    fund.security.authentication_handler:
+        class: Bundle\UserBundle\Service\AuthenticationHandler
+        arguments: [@router,@session,@translator]

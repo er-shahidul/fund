@@ -1,0 +1,61 @@
+
+<!-- BEGIN HEADER -->
+<div class="page-header">
+    <!-- BEGIN HEADER TOP -->
+    <div class="page-header-top">
+        <div class="container-fluid">
+            <!-- BEGIN LOGO -->
+
+            <!-- END LOGO -->
+
+            <!-- BEGIN TOP NAVIGATION MENU -->
+
+            <!-- END TOP NAVIGATION MENU -->
+
+
+
+            <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+            <a href="javascript:;" class="menu-toggler"></a>
+            <!-- END RESPONSIVE MENU TOGGLER -->
+        </div>
+    </div>
+    <!-- END HEADER TOP -->
+    <!-- BEGIN HEADER MENU -->
+    <div class="page-header-menu">
+        <div class="container">
+            <!-- BEGIN MEGA MENU -->
+            <nav class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Project name</a>
+                    </div>
+                    <div id="navbar" class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#">Home</a></li>
+                            <li><a href="#about">About</a></li>
+                            <li><a href="#contact">Contact</a></li>
+
+                        </ul>
+                        <ul class="nav navbar-nav" style="float: right">
+                            <li style="float: right"><a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}">
+                                    <span>Log in with Facebook</span>
+                                </a></li>
+                            {#<li ><a href="{{ path('fos_user_security_login') }}">
+                                    <span>Log in</span>
+                                </a></li>#}
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </nav>
+            <!-- END MEGA MENU -->
+        </div>
+    </div>
+    <!-- END HEADER MENU -->
+</div>
+<!-- END HEADER -->

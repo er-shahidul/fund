@@ -1,0 +1,3 @@
+campaign_create:
+    path:     /campaign/create
+    defaults: { _controller: BundleAppBundle:Campaign:create }

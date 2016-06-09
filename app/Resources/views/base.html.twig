@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <title>{% block title %} FUND {% endblock %}</title>
+        <!-- Bootstrap -->
+
+        {% block stylesheets %}
+            {% stylesheets
+            'assets/css/bootstrap.min.css'
+            filter ='cssrewrite' %}
+            <link rel="stylesheet" href="{{ asset_url }}"/>
+            {% endstylesheets %}
+        {% endblock %}
+        <link rel="shortcut icon" href="/favicon.ico"/>
+
+        {#<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}"/>#}
+    </head>
+<body>
+{% include "menu.html.twig" %}
+
+    <!-- BEGIN PAGE CONTAINER -->
+    <div class="page-container">
+        <!-- BEGIN PAGE CONTENT -->
+        <div class="page-content">
+            <div class="container-fluid">
+                {% block body %}
+                    <!-- BEGIN PAGE BREADCRUMB -->
+                    <ul class="page-breadcrumb breadcrumb">
+                        <li>
+                            <a href="#">Home</a><i class="fa fa-circle"></i>
+                        </li>
+                        <li>
+                            <a href="layout_blank_page.html">Features</a>
+                            <i class="fa fa-circle"></i>
+                        </li>
+                        <li class="active">
+                            Blank Page Layout
+                        </li>
+                    </ul>
+                    <!-- END PAGE BREADCRUMB -->
+                    <!-- BEGIN PAGE CONTENT INNER -->
+                    <div class="portlet light">
+                        <div class="portlet-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    Page content goes here
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END PAGE CONTENT INNER -->
+                {% endblock %}
+            </div>
+        </div>
+        <!-- END PAGE CONTENT -->
+    </div>
+<!-- BEGIN MODAL -->
+    <div class="modal fade" id="ajax" role="basic" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img src="{{ asset('assets/layout3/img/loading-spinner-grey.gif') }}" alt="" class="loading">
+                    <span> &nbsp;&nbsp;Loading... </span>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- END MODAL -->
+    <!-- END PAGE CONTAINER -->
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+    {% block include_javascripts %}
+
+        {% javascripts
+        'assets/js/jquery.min.js'
+        'assets/js/bootstrap.min.js'
+        %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+
+    {% endblock include_javascripts %}
+
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+
+        {% block documentready %}
+
+        {% endblock %}
+    });
+</script>
+
+</body>
+</html>
