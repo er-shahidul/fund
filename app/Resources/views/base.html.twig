@@ -59,12 +59,12 @@
         <!-- END PAGE CONTENT -->
     </div>
 <!-- BEGIN MODAL -->
-    <div class="modal fade" id="ajax" role="basic" aria-hidden="true">
+    <div class="modal fade" id="ajax" tabindex="-1" role="basic" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
-                    <img src="{{ asset('assets/layout3/img/loading-spinner-grey.gif') }}" alt="" class="loading">
-                    <span> &nbsp;&nbsp;Loading... </span>
+                    <img src="{{ asset('assets/img/ajax-modal-loading.gif') }}" alt="" class="loading">
+
                 </div>
             </div>
         </div>
@@ -74,7 +74,7 @@
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 
-    {% block include_javascripts %}
+    {% block javascriptBlock %}
 
         {% javascripts
         'assets/js/jquery.min.js'
@@ -86,7 +86,7 @@
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
         <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
 
-    {% endblock include_javascripts %}
+    {% endblock javascriptBlock %}
 
 <script type="text/javascript">
     jQuery(document).ready(function () {

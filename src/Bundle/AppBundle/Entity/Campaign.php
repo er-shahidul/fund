@@ -70,7 +70,7 @@ class Campaign
     /**
      * @var Organization
      *
-     * @ORM\ManyToOne(targetEntity="Bundle\AppBundle\Entity\Organization", inversedBy="campaign", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Bundle\AppBundle\Entity\Organization")
      * @ORM\JoinColumn(name="organization", nullable=true)
      */
     private $organization;

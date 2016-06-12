@@ -130,4 +130,20 @@ class Category
     {
         return $this->createdDate;
     }
+
+    /**
+     * @return User
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
+
+    /**
+     * @param User $createdBy
+     */
+    public function setCreatedBy($createdBy)
+    {
+        $this->createdBy = $createdBy;
+    }
 }

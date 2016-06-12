@@ -1,3 +1,8 @@
+campaign_list:
+    path:     /campaign
+    defaults: { _controller: BundleAppBundle:Campaign:index }
+
 campaign_create:
     path:     /campaign/create
     defaults: { _controller: BundleAppBundle:Campaign:create }
+

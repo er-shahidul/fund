@@ -1,3 +1,9 @@
 bundle_user_homepage:
     path:     /
     defaults: { _controller: BundleUserBundle:Default:index }
+
+campaign_user-profile-verify:
+    path:     /campaign/user-profile
+    defaults: { _controller: BundleUserBundle:Registration:userProfileVerify }
+    options:
+                expose: true

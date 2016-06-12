@@ -11,6 +11,8 @@
 
 namespace Bundle\UserBundle\Controller;
 
+use Bundle\UserBundle\Entity\User;
+use Bundle\UserBundle\Form\Type\UserType;
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
@@ -158,5 +160,34 @@ class RegistrationController extends Controller
         if ($this->get('session')->has($key)) {
             return $this->get('session')->get($key);
         }
+    }
+
+    public function userProfileVerifyAction(Request $request) {
+
+        $user = $this->getDoctrine()
+                     ->getRepository('BundleUserBundle:User')
+                     ->find($this->getUser()->getId());
+
+        $form = $this->createForm(new UserType(null), $user);
+
+        if ('POST' == $request->getMethod()) {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+
+                $this->getDoctrine()->getRepository('BundleUserBundle:User')->update($user);
+
+                $massage = 'Profile Successfully Updated';
+                $this->get('session')->getFlashBag()->add('notice', $massage);
+                return $this->redirect($this->generateUrl('campaign_list'));
+            }
+        }
+
+        return $this->render(
+            'BundleUserBundle:Profile:edit.html.twig',
+            array(
+                'form'     => $form->createView()
+            )
+        );
     }
 }
