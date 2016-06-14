@@ -20,14 +20,14 @@ class CampaignController extends Controller
     {
 
         $campaign = new Campaign();
-
+       // $verificationCheck = $this->getUser()->getProfile();
         $form = $this->createForm(new CampaignType(), $campaign);
 
         if ('POST' == $request->getMethod()) {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-
+//                if($verificationCheck->get)
                 $this->saveCampaign($campaign);
 
                 $massage = 'Campaign Successfully Inserted';
@@ -35,11 +35,13 @@ class CampaignController extends Controller
                 return $this->redirect($this->generateUrl('campaign_list'));
             }
         }
-
+        $user = $this->getUser()->getProfile();
+     
         return $this->render(
             'BundleAppBundle:Campaign:form.html.twig',
             array(
-                'form'     => $form->createView()
+                'form'     => $form->createView(),
+                'user'      => $user
             )
         );
         

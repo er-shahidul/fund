@@ -7,3 +7,15 @@ campaign_user-profile-verify:
     defaults: { _controller: BundleUserBundle:Registration:userProfileVerify }
     options:
                 expose: true
+
+campaign_user-verify:
+    path:     /campaign/user-verify
+    defaults: { _controller: BundleUserBundle:Registration:campaignUserVerify }
+    options:
+                expose: true
+
+campaign_user-verified:
+    path:     /campaign/user-verified
+    defaults: { _controller: BundleUserBundle:Registration:campaignUserVerified }
+    options:
+                expose: true

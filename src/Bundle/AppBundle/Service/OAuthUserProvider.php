@@ -81,6 +81,10 @@ class OAuthUserProvider extends BaseClass
         $entity->setEnabled(true);
         $entity->setPassword(false);
         $profile->setIpAddress($this->getClientIpAddress());
+        if(!empty($email)){
+            $profile->setConfirmationTokenEmailVerify(true);
+        }
+        
         $entity->setProfile($profile);
 
         $this->userManager->updateUser($entity);
@@ -88,9 +92,9 @@ class OAuthUserProvider extends BaseClass
     }
     public function updateProviderData(User  $userByEmailAddress){
         $entity = $userByEmailAddress;
+ 
         $facebook = $userByEmailAddress->getUsername();
 
-        $entity->setFacebook($facebook);
         $entity->getProfile()->setIpAddress($this->getClientIpAddress());
         $entity->setEnabled(true);
         $this->userManager->updateUser($entity);

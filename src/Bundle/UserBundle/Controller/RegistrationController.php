@@ -20,6 +20,7 @@ use FOS\UserBundle\Event\FilterUserResponseEvent;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use FOS\UserBundle\Model\UserInterface;
@@ -175,6 +176,40 @@ class RegistrationController extends Controller
 
             if ($form->isValid()) {
 
+                $user->setUsername($user->getUsername());
+                $this->getDoctrine()->getRepository('BundleUserBundle:User')->update($user);
+
+                $massage = 'Profile Successfully Updated';
+                $this->get('session')->getFlashBag()->add('notice', $massage);
+                return $this->redirect($this->generateUrl('campaign_list'));
+            }
+        }
+
+        return $this->render(
+            'BundleUserBundle:Profile:edit.html.twig',
+            array(
+                'form'     => $form->createView(),
+                'user'     => $user
+            )
+        );
+    }
+   /* public function userProfileVerifyAction(Request $request) {
+
+        $user = $this->getDoctrine()
+                     ->getRepository('BundleUserBundle:User')
+                     ->find($this->getUser()->getId());
+
+
+        $form = $this->createForm(new UserType(null), $user);
+
+        if ('POST' == $request->getMethod()) {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+            
+                $user->setUsername($user->getUsername());
+                $user->getProfile()->setVerificationDateDuration(new \DateTime());
+
                 $this->getDoctrine()->getRepository('BundleUserBundle:User')->update($user);
 
                 $massage = 'Profile Successfully Updated';
@@ -189,5 +224,112 @@ class RegistrationController extends Controller
                 'form'     => $form->createView()
             )
         );
+    }*/
+
+    public function campaignUserVerifyAction(Request $request) {
+
+        $tokenVerify  = $this->getUser()->getProfile()->getConfirmationTokenEmailVerify();
+        if($tokenVerify == null) {
+            $email = $request->request->get('fos_user_registration')['email'];
+            $this->verificationEmail($email);
+        }
+        $phoneNumber = $request->request->get('fos_user_registration')['profile']['PhoneNumber'];
+        $this->verificationPhone($phoneNumber);
+
+        $return = array("responseCode" => 202, "massage" => "verified");
+        $return = json_encode($return);
+        return new Response($return, 202, array('Content-Type' => 'application/json'));
+        
     }
+    public function campaignUserVerifiedAction(Request $request){
+
+
+
+        $user = $this->getDoctrine()->getRepository('BundleUserBundle:User')->findOneBy(
+            array('id' => $this->getUser()->getId())
+        );
+        if($user->getProfile()->getConfirmationTokenEmailVerify() != 1 ){
+
+            $email = $request->request->all()['email'];
+
+            if($email == $user->getProfile()->getConfirmationTokenEmail()) {
+
+                $user->getProfile()->setConfirmationTokenEmailVerify(true);
+                $this->getDoctrine()->getRepository('BundleUserBundle:User')->update($user);
+            } else {
+                $return = array("responseCode" => 203, "massage" => "Confirmation Code is Wrong");
+                $return = json_encode($return);
+                return new Response($return, 203, array('Content-Type' => 'application/json'));
+            }
+        }
+        if($request->request->all()['phone'] == $user->getProfile()->getConfirmationTokenPhone()) {
+
+            $user->getProfile()->setConfirmationTokenPhoneVerify(true);
+            $this->getDoctrine()->getRepository('BundleUserBundle:User')->update($user);
+        } else {
+            $return = array("responseCode" => 203, "massage" => "Confirmation Code is Wrong");
+            $return = json_encode($return);
+            return new Response($return, 203, array('Content-Type' => 'application/json'));
+        }
+
+        $return = array("responseCode" => 202, "massage" => "verified");
+        $return = json_encode($return);
+        return new Response($return, 202, array('Content-Type' => 'application/json'));
+
+    }
+
+    public function generateNumber(){
+        $six_digit_number = mt_rand(100000, 999999);
+        return $six_digit_number;
+    }
+    public function sendEmail($email,$code)
+    {
+
+        $message = \Swift_Message::newInstance()
+            ->setSubject('FUND Rising')
+            ->setFrom('mirbahar@emicrograph.com')
+            ->setTo($email->getEmail())
+            ->setBody('your verification code is '. ' '.$code);
+
+        return  $this->get('mailer')->send($message);
+
+    }
+
+    /**
+     * @param $email
+     * @return Response
+     */
+    private function verificationEmail($email)
+    {
+
+        $email            = $this->getDoctrine()->getRepository('BundleUserBundle:User')->findOneBy(
+            array('email' => $email, 'id' => $this->getUser()->getId())
+        );
+        $verificationCode = $this->generateNumber();
+        $email->getProfile()->setConfirmationTokenEmail($verificationCode);
+        $this->getDoctrine()->getRepository('BundleUserBundle:User')->update($email);
+        $this->sendEmail($email, $verificationCode);
+
+        return $email;
+
+    }
+    /**
+     * @param $phoneNumber
+     * @return Response
+     */
+    private function verificationPhone($phoneNumber)
+    {
+        $phone            = $this->getDoctrine()->getRepository('BundleUserBundle:User')->findOneBy(
+            array('id' => $this->getUser()->getId())
+        );
+        $verificationCode = $this->generateNumber();
+        $phone->getProfile()->setConfirmationTokenPhone($verificationCode);
+        $phone->getProfile()->setPhoneNumber($phoneNumber);
+        $phone->getProfile()->setVerificationDateDuration(new \DateTime());
+        $smsService = $this->get('sms.transporter');
+        $smsService->send($phoneNumber,'your confirmation code is '.' '.$verificationCode);
+        $this->getDoctrine()->getRepository('BundleUserBundle:User')->update($phone);
+
+    }
+
 }

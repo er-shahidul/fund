@@ -32,7 +32,111 @@ class Profile
      * @ORM\Column(name="phone_number", type="string", length=255 , nullable = true)
      * @Assert\NotBlank()
      */
-    private $PhoneNumber;
+    private $PhoneNumber; 
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="confirmation_token_phone", type="string", length=255 , nullable = true)
+     * @Assert\NotBlank()
+     */
+    private $confirmationTokenPhone;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="verification_date_duration", type="datetime", nullable = true)
+     * @Assert\NotBlank()
+     */
+    private $verificationDateDuration;
+
+    /**
+     * @return string
+     */
+    public function getConfirmationTokenPhone()
+    {
+        return $this->confirmationTokenPhone;
+    }
+
+    /**
+     * @param string $confirmationTokenPhone
+     */
+    public function setConfirmationTokenPhone($confirmationTokenPhone)
+    {
+        $this->confirmationTokenPhone = $confirmationTokenPhone;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConfirmationTokenEmail()
+    {
+        return $this->confirmationTokenEmail;
+    }
+
+    /**
+     * @param mixed $confirmationTokenEmail
+     */
+    public function setConfirmationTokenEmail($confirmationTokenEmail)
+    {
+        $this->confirmationTokenEmail = $confirmationTokenEmail;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConfirmationTokenPhoneVerify()
+    {
+        return $this->confirmationTokenPhoneVerify;
+    }
+
+    /**
+     * @param mixed $confirmationTokenPhoneVerify
+     */
+    public function setConfirmationTokenPhoneVerify($confirmationTokenPhoneVerify)
+    {
+        $this->confirmationTokenPhoneVerify = $confirmationTokenPhoneVerify;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConfirmationTokenEmailVerify()
+    {
+        return $this->confirmationTokenEmailVerify;
+    }
+
+    /**
+     * @param mixed $confirmationTokenEmailVerify
+     */
+    public function setConfirmationTokenEmailVerify($confirmationTokenEmailVerify)
+    {
+        $this->confirmationTokenEmailVerify = $confirmationTokenEmailVerify;
+    }
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="confirmation_token_email", type="string", length=255 , nullable = true)
+     * @Assert\NotBlank()
+     */
+    private $confirmationTokenEmail;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="confirmation_token_phone_verify", type="boolean", nullable = true)
+     * @Assert\NotBlank()
+     */
+    private $confirmationTokenPhoneVerify;  
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="confirmation_token_email_verify", type="boolean",  nullable = true)
+     * @Assert\NotBlank()
+     */
+    private $confirmationTokenEmailVerify;
 
     /**
      * @var string
@@ -280,5 +384,21 @@ class Profile
     public function setPhoneNumber($PhoneNumber)
     {
         $this->PhoneNumber = $PhoneNumber;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getVerificationDateDuration()
+    {
+        return $this->verificationDateDuration;
+    }
+
+    /**
+     * @param \DateTime $verificationDateDuration
+     */
+    public function setVerificationDateDuration($verificationDateDuration)
+    {
+        $this->verificationDateDuration = $verificationDateDuration;
     }
 }

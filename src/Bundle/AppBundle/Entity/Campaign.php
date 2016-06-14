@@ -271,4 +271,20 @@ class Campaign
     {
         $this->campaignDetails = $campaignDetails;
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getCampaignComments()
+    {
+        return $this->campaignComments;
+    }
+
+    /**
+     * @param ArrayCollection $campaignComments
+     */
+    public function setCampaignComments($campaignComments)
+    {
+        $this->campaignComments = $campaignComments;
+    }
 }

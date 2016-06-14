@@ -53,7 +53,12 @@
 
         </form>
     </div>
+<script type="text/javascript">
+    var tokenPhoneVerify = {{ user.confirmationTokenPhoneVerify| default("undefined") }};
 
+    var tokenEmailVerify = {{ user.confirmationTokenEmailVerify|default("undefined") }};
+
+</script>
 
 
 
@@ -65,6 +70,7 @@
 
      {% javascripts
      '@BundleAppBundle/Resources/public/js/campaign.js'
+     '@BundleAppBundle/Resources/public/js/userFormValidation.js'
      %}
      <script type="text/javascript" src="{{ asset_url }}"></script>
      {% endjavascripts %}
