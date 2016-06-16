@@ -14,6 +14,7 @@ class CampaignRepository extends EntityRepository
 {
     public function create($data)
     {
+        
         $this->_em->persist($data);
         $this->_em->flush();
         return $data;

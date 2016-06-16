@@ -1,0 +1,75 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="row">
+        <form class="form-horizontal" id="form-campaign" role="form" method="post" action="{{ path('organization_create') }}">
+
+            <div class="col-md-12">
+                <div class="portlet-body">
+
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label class="col-md-3 col-sm-3 control-label">{{ form_label(form.name) }}</label>
+                            <div class="col-md-5 col-sm-5">
+                                {{ form_widget(form.name) }}
+                                <span class="help-block">{{ form_errors(form.name) }}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-sm-3 control-label">{{ form_label(form.address) }}</label>
+                            <div class="col-md-5 col-sm-5">
+                                {{ form_widget(form.address) }}
+                                <span class="help-block">{{ form_errors(form.address) }}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-sm-3 control-label">{{ form_label(form.mobileNumber) }}</label>
+                            <div class="col-md-5 col-sm-5">
+                                {{ form_widget(form.mobileNumber) }}
+                                <span class="help-block">{{ form_errors(form.mobileNumber) }}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-sm-3 control-label">{{ form_label(form.email) }}</label>
+                            <div class="col-md-5 col-sm-5">
+                                {{ form_widget(form.email) }}
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                    </div>
+                    {{ form_row(form._token) }}
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+                                {#<a class="btn default" href="{{ path('courtfee_list') }}">Cancel</a>#}
+                                <button type="submit" id="organization-submit" class="btn green">Save</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+<script type="text/javascript">
+
+</script>
+
+
+
+{% endblock %}
+
+{#
+ {% block javascriptBlock %}
+
+     {{ parent() }}
+
+     {% javascripts
+     '@BundleAppBundle/Resources/public/js/campaign.js'
+     '@BundleAppBundle/Resources/public/js/userFormValidation.js'
+     %}
+     <script type="text/javascript" src="{{ asset_url }}"></script>
+     {% endjavascripts %}
+
+ {% endblock javascriptBlock %}#}

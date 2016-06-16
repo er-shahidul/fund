@@ -18,16 +18,17 @@ class CampaignController extends Controller
     } 
     public function createAction(Request $request)
     {
-
+        $organization = $this->checkExistingOrganization($this->getUser());
+        
         $campaign = new Campaign();
-       // $verificationCheck = $this->getUser()->getProfile();
+
         $form = $this->createForm(new CampaignType(), $campaign);
 
         if ('POST' == $request->getMethod()) {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-//                if($verificationCheck->get)
+                
                 $this->saveCampaign($campaign);
 
                 $massage = 'Campaign Successfully Inserted';
@@ -41,10 +42,19 @@ class CampaignController extends Controller
             'BundleAppBundle:Campaign:form.html.twig',
             array(
                 'form'     => $form->createView(),
-                'user'      => $user
+                'user'      => $user,
+                'organization' => $organization
             )
         );
         
+    }
+
+    private function checkExistingOrganization(User $user) {
+
+        return  $this->getDoctrine()
+                             ->getRepository("BundleAppBundle:Organization")
+                             ->findOneBy(array('createdBy'=>$user->getId()));
+
     }
     
     public  function saveCampaign(Campaign $campaign) {

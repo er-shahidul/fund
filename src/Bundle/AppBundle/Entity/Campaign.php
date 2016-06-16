@@ -5,12 +5,17 @@ namespace Bundle\AppBundle\Entity;
 use Bundle\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Campaign
  *
  * @ORM\Table(name="campaign")
  * @ORM\Entity(repositoryClass="Bundle\AppBundle\Repository\CampaignRepository")
+ * @Vich\Uploadable
  */
 class Campaign
 {
@@ -88,6 +93,66 @@ class Campaign
      * @ORM\OneToMany(targetEntity="Bundle\AppBundle\Entity\CampaignComment", mappedBy="Campaign", cascade={"persist"})
      */
     private $campaignComments;
+
+    /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @Vich\UploadableField(mapping="campaign_file", fileNameProperty="campaignFileName")
+     *
+     * @var File
+     */
+    private $campaignFile;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="status", type="boolean", length=15)
+     */
+    private $status = false;
+
+    /**
+     * @return File
+     */
+    public function getCampaignFile()
+    {
+        return $this->campaignFile;
+    }
+
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $campaignFile
+     * @return Campaign
+     */
+    public function setCampaignFile(File $campaignFile = null)
+    {
+        $this->campaignFile = $campaignFile;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCampaignFileName()
+    {
+        return $this->campaignFileName;
+    }
+
+    /**
+     * @param string $campaignFileName
+     * @return Campaign
+     */
+    public function setCampaignFileName($campaignFileName)
+    {
+        $this->campaignFileName = $campaignFileName ;
+
+        return $this;
+    }
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     * @var string
+     */
+    private $campaignFileName;
 
 
     /**
@@ -286,5 +351,21 @@ class Campaign
     public function setCampaignComments($campaignComments)
     {
         $this->campaignComments = $campaignComments;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param boolean $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
     }
 }

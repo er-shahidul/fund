@@ -1,0 +1,8 @@
+organization_list:
+    path:     /organization
+    defaults: { _controller: BundleAppBundle:Organization:index }
+
+organization_create:
+    path:     /organization/create
+    defaults: { _controller: BundleAppBundle:Organization:create }
+

@@ -26,7 +26,8 @@
         "hwi/oauth-bundle": "^0.4.1",
         "friendsofsymfony/jsrouting-bundle": "^1.6",
         "vresh/twilio-bundle": "^1.0",
-        "guzzle/guzzle": "^3.9"
+        "guzzle/guzzle": "^3.9",
+        "vich/uploader-bundle": "^0.14.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~3.0",

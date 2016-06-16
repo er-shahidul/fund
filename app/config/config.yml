@@ -105,12 +105,12 @@ hwi_oauth:
             properties:
                 facebook:  facebook
 
-vresh_twilio:
-    #(Required) Your Account SID from www.twilio.com/user/account
-    sid: "%twillo_sid%"
-    #(Required) Your Auth Token from www.twilio.com/user/account
-    authToken: "%twillo_auth_key%"
-    #(Optional, default: '2010-04-01') Twilio API version
-    version: '2010-04-01'
-    #(Optional, default: 1) Number of times to retry failed requests
-    retryAttempts: 3
+vich_uploader:
+    db_driver: orm
+    mappings:
+            campaign_file:
+                uri_prefix:         /uploads/campaign
+                upload_destination: %campaign_path%
+                inject_on_load:     false
+                delete_on_update:   true
+                delete_on_remove:   true

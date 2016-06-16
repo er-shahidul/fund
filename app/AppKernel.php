@@ -21,7 +21,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Bundle\AppBundle\BundleAppBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
-            new Vresh\TwilioBundle\VreshTwilioBundle(),
+            new Vich\UploaderBundle\VichUploaderBundle(),
             
         );
 

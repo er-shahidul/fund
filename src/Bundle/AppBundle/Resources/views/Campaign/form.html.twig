@@ -12,14 +12,14 @@
                             <label class="col-md-3 col-sm-3 control-label">{{ form_label(form.title) }}</label>
                             <div class="col-md-5 col-sm-5">
                                 {{ form_widget(form.title) }}
-                                <span class="help-block"></span>
+                                <span class="help-block">{{ form_errors(form.title) }}</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-3 col-sm-3 control-label">{{ form_label(form.amount) }}</label>
                             <div class="col-md-5 col-sm-5">
                                 {{ form_widget(form.amount) }}
-                                <span class="help-block"></span>
+                                <span class="help-block">{{ form_errors(form.amount) }}</span>
                             </div>
                         </div>
                         <div class="form-group">
@@ -33,6 +33,36 @@
                             <label class="col-md-3 col-sm-3 control-label">{{ form_label(form.category) }}</label>
                             <div class="col-md-5 col-sm-5">
                                 {{ form_widget(form.category) }}
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        {% if organization  %}
+                        <div class="form-group">
+                            <label class="col-md-3 col-sm-3 control-label">{{ form_label(form.organization) }}</label>
+                            <div class="col-md-5 col-sm-5">
+                                {{ form_widget(form.organization) }}
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+
+                        {% else %}
+                            <div class="form-group">
+                                <label class="col-md-3 col-sm-3 control-label">If you want create campaign under organization then first create organization</label>
+                                <a class="btn default" href="{{ path('organization_create') }}" >Create Organization</a>
+                            </div>
+                        {% endif %}
+
+                        <div class="form-group">
+                            <label class="col-md-3 col-sm-3 control-label">{{ form_label(form.campaignFileName) }}</label>
+                            <div class="col-md-5 col-sm-5">
+                                {{ form_widget(form.campaignFileName) }}
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-sm-3 control-label">{{ form_label(form.status) }}</label>
+                            <div class="col-md-5 col-sm-5">
+                                {{ form_widget(form.status) }}
                                 <span class="help-block"></span>
                             </div>
                         </div>

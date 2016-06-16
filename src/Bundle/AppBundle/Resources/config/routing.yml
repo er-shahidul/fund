@@ -4,3 +4,5 @@ bundle_app_homepage:
 
 app_bundle_routing_campaign:
     resource: "@BundleAppBundle/Resources/config/routing/campaign.yml"
+app_bundle_routing_organization:
+    resource: "@BundleAppBundle/Resources/config/routing/organization.yml"
