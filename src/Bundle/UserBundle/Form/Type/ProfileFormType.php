@@ -22,7 +22,9 @@ class ProfileFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('PhoneNumber');
+            ->add('PhoneNumber','text',array(
+                'required' => false
+            ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

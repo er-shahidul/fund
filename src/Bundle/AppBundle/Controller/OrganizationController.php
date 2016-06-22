@@ -42,6 +42,35 @@ class OrganizationController extends Controller
             )
         );
         
+    } 
+    
+    public function organizationCreateAjaxAction(Request $request)
+    {
+
+        $organization = new Organization();
+
+        $form = $this->createForm(new OrganizationType(), $organization);
+
+        if ('POST' == $request->getMethod()) {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                
+                $this->saveOrganization($organization);
+
+                $massage = 'Organization Successfully Inserted';
+                $this->get('session')->getFlashBag()->add('notice', $massage);
+                return $this->redirect($this->generateUrl('campaign_create'));
+            }
+        }
+
+        return $this->render(
+            'BundleAppBundle:Organization:formAjax.html.twig',
+            array(
+                'form'     => $form->createView()
+            )
+        );
+        
     }
     
     public  function saveOrganization(Organization $organization) {

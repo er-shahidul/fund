@@ -2,7 +2,7 @@
 
 {% block body %}
     <div class="row">
-        <form class="form-horizontal" id="form-campaign" role="form" method="post" action="{{ path('organization_create') }}">
+        <form class="form-horizontal" id="form-organization" role="form" method="post" action="{{ path('organization_create') }}">
 
             <div class="col-md-12">
                 <div class="portlet-body">
@@ -41,7 +41,6 @@
                     <div class="form-actions">
                         <div class="row">
                             <div class="col-md-offset-3 col-md-9">
-                                {#<a class="btn default" href="{{ path('courtfee_list') }}">Cancel</a>#}
                                 <button type="submit" id="organization-submit" class="btn green">Save</button>
                             </div>
                         </div>
@@ -60,16 +59,14 @@
 
 {% endblock %}
 
-{#
  {% block javascriptBlock %}
 
      {{ parent() }}
 
      {% javascripts
-     '@BundleAppBundle/Resources/public/js/campaign.js'
-     '@BundleAppBundle/Resources/public/js/userFormValidation.js'
+     '@BundleAppBundle/Resources/public/js/organizationFormValidation.js'
      %}
      <script type="text/javascript" src="{{ asset_url }}"></script>
      {% endjavascripts %}
 
- {% endblock javascriptBlock %}#}
+ {% endblock javascriptBlock %}

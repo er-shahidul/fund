@@ -41,7 +41,7 @@ twig:
 assetic:
     debug:          '%kernel.debug%'
     use_controller: false
-    bundles:        [FOSUserBundle, BundleAppBundle]
+    bundles:        [FOSUserBundle,FOSCommentBundle ,BundleAppBundle]
     filters:
         cssrewrite: ~
 
@@ -114,3 +114,10 @@ vich_uploader:
                 inject_on_load:     false
                 delete_on_update:   true
                 delete_on_remove:   true
+
+fos_comment:
+    db_driver: orm
+    class:
+        model:
+            comment: Bundle\AppBundle\Entity\CampaignComment
+            thread: Bundle\AppBundle\Entity\Thread

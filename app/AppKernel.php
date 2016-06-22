@@ -22,6 +22,9 @@ class AppKernel extends Kernel
             new Bundle\AppBundle\BundleAppBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+            new FOS\CommentBundle\FOSCommentBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle($this),
             
         );
 

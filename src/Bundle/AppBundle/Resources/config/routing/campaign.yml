@@ -6,3 +6,7 @@ campaign_create:
     path:     /campaign/create
     defaults: { _controller: BundleAppBundle:Campaign:create }
 
+
+campaign_detail:
+    path:     /campaign/detail/{id}
+    defaults: { _controller: BundleAppBundle:Campaign:campaignDetails }

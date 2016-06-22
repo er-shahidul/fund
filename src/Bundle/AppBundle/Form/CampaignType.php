@@ -2,6 +2,8 @@
 
 namespace Bundle\AppBundle\Form;
 
+use Bundle\AppBundle\Entity\Organization;
+use Bundle\AppBundle\Repository\OrganizationRepository;
 use Symfony\Component\Form\AbstractType;
 
 use Symfony\Component\Form\FormBuilderInterface;
@@ -10,6 +12,13 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class CampaignType extends AbstractType
 {
+
+    private $user;
+
+    public function __construct($user)
+    {
+        $this->user = $user;
+    }
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -55,6 +64,14 @@ class CampaignType extends AbstractType
                     'required'=>false,
                     'class' => 'Bundle\AppBundle\Entity\Organization',
                     'placeholder' => 'Select Organization',
+                    'query_builder' => function (OrganizationRepository $repository)
+                    {
+                        return $repository->createQueryBuilder('o')
+                            ->where('o.status = :status')
+                            ->andWhere('o.createdBy =:user')
+                            ->setParameter('user',$this->user)
+                            ->setParameter('status', 'Active');
+                    }
                 )
             )
             ->add('campaignFileName','file', array(

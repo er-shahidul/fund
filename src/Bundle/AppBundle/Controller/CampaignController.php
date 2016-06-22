@@ -14,17 +14,27 @@ class CampaignController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('BundleAppBundle:Campaign:home.html.twig');
+        $campaignList = $this->getDoctrine()->getRepository('BundleAppBundle:Campaign')->findAll();
+        
+        return $this->render('BundleAppBundle:Campaign:home.html.twig',array(
+            'campaigns'=>$campaignList
+        ));
     } 
     public function createAction(Request $request)
     {
+
+        if(!$this->getUser()){
+
+           return  $this->redirect($this->generateUrl('hwi_oauth_service_redirect',array('service'=>'facebook')));
+        }
         $organization = $this->checkExistingOrganization($this->getUser());
-        
+
         $campaign = new Campaign();
 
-        $form = $this->createForm(new CampaignType(), $campaign);
+        $form = $this->createForm(new CampaignType($this->getUser()), $campaign);
 
         if ('POST' == $request->getMethod()) {
+
             $form->handleRequest($request);
 
             if ($form->isValid()) {
@@ -48,7 +58,17 @@ class CampaignController extends Controller
         );
         
     }
-
+    
+    public  function campaignDetailsAction(Campaign $campaign){
+        
+        return $this->render(
+            'BundleAppBundle:Campaign:campaignDetail.html.twig',
+            array(
+                'campaign'      => $campaign,
+            )
+        );
+    }
+    
     private function checkExistingOrganization(User $user) {
 
         return  $this->getDoctrine()

@@ -1,6 +1,7 @@
 bundle_app:
     resource: "@BundleAppBundle/Resources/config/routing.yml"
     prefix:   /
+
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
@@ -25,3 +26,9 @@ hwi_oauth_connect:
 
 facebook_login:
     path: /login/check-facebook
+
+fos_comment_api:
+    type: rest
+    resource: "@FOSCommentBundle/Resources/config/routing.yml"
+    prefix: /api
+    defaults: { _format: html }

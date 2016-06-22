@@ -10,6 +10,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
+
 /**
  * Campaign
  *
@@ -17,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Bundle\AppBundle\Repository\CampaignRepository")
  * @Vich\Uploadable
  */
-class Campaign
+class Campaign 
 {
     /**
      * @var int
@@ -26,7 +27,7 @@ class Campaign
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string

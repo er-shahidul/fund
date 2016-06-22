@@ -28,33 +28,35 @@
         <!-- BEGIN PAGE CONTENT -->
         <div class="page-content">
             <div class="container-fluid">
-                {% block body %}
+
                     <!-- BEGIN PAGE BREADCRUMB -->
-                    <ul class="page-breadcrumb breadcrumb">
-                        <li>
-                            <a href="#">Home</a><i class="fa fa-circle"></i>
-                        </li>
-                        <li>
-                            <a href="layout_blank_page.html">Features</a>
-                            <i class="fa fa-circle"></i>
-                        </li>
-                        <li class="active">
-                            Blank Page Layout
-                        </li>
-                    </ul>
+                    {#<ul class="page-breadcrumb breadcrumb">#}
+                        {#<li>#}
+                            {#<a href="#">Home</a><i class="fa fa-circle"></i>#}
+                        {#</li>#}
+                        {#<li>#}
+                            {#<a href="layout_blank_page.html">Features</a>#}
+                            {#<i class="fa fa-circle"></i>#}
+                        {#</li>#}
+                        {#<li class="active">#}
+                            {#Blank Page Layout#}
+                        {#</li>#}
+                    {#</ul>#}
                     <!-- END PAGE BREADCRUMB -->
                     <!-- BEGIN PAGE CONTENT INNER -->
                     <div class="portlet light">
                         <div class="portlet-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    Page content goes here
+                                    {% block body %}
+
+                                    {% endblock %}
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- END PAGE CONTENT INNER -->
-                {% endblock %}
+
             </div>
         </div>
         <!-- END PAGE CONTENT -->
@@ -65,7 +67,6 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <img src="{{ asset('assets/img/ajax-modal-loading.gif') }}" alt="" class="loading">
-
                 </div>
             </div>
         </div>
@@ -81,6 +82,7 @@
         'assets/js/jquery.min.js'
         'assets/js/bootstrap.min.js'
         'assets/js/jquery.validate.js'
+        'assets/js/metronic.js'
         %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}

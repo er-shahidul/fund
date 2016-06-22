@@ -4,14 +4,14 @@ namespace Bundle\AppBundle\Entity;
 
 use Bundle\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
-
+use FOS\CommentBundle\Entity\Comment as BaseComment;
 /**
  * CampaignComment
  *
  * @ORM\Table(name="campaign_comment")
  * @ORM\Entity(repositoryClass="Bundle\AppBundle\Repository\CampaignCommentRepository")
  */
-class CampaignComment
+class CampaignComment extends BaseComment
 {
     /**
      * @var int
@@ -20,19 +20,19 @@ class CampaignComment
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="text")
+     * @ORM\Column(name="title", type="text", nullable=true)
      */
     private $title;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="createdDate", type="datetime")
+     * @ORM\Column(name="createdDate", type="datetime", nullable=true)
      */
     private $createdDate;
     
@@ -50,7 +50,15 @@ class CampaignComment
      * @ORM\ManyToOne(targetEntity="Bundle\AppBundle\Entity\Campaign", inversedBy="campaignDetails", cascade={"persist"})
      * @ORM\JoinColumn(name="campaign", nullable=true)
      */
-    private $campaign;
+    protected $campaign;
+
+    /**
+     * Thread of this comment
+     *
+     * @var Thread
+     * @ORM\ManyToOne(targetEntity="Bundle\AppBundle\Entity\Thread")
+     */
+    protected $thread;
 
 
     /**

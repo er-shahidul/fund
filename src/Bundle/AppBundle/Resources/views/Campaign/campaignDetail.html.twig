@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+            <div class="jumbotron">
+                <h3>{{ campaign.title }}</h3>
+                <p>{{ campaign.description }}</p>
+                <p>${{ campaign.amount }}</p>
+                <div class="fb-like" data-href="{{ app.request.getUri }}"
+                     data-layout="standard" data-action="like" data-show-faces="true"
+                     data-share="true">
+                </div>
+                <div class="fb-comments"
+                     data-href="{{ app.request.getUri }}"
+                     data-numposts="5"></div>
+                {#{% include 'FOSCommentBundle:Thread:async.html.twig' with {'id': campaign.id } %}#}
+            </div>
+
+
+
+    {% stylesheets
+
+    '@FOSCommentBundle/Resources/assets/css/comments.css'
+
+    %}
+    {{ parent () }}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+    {% endstylesheets %}
+
+
+
+{% endblock %}
+
+ {% block javascriptBlock %}
+
+     {{ parent() }}
+
+     {% javascripts
+     '@BundleAppBundle/Resources/public/js/facebook/socialite.js'
+     '@BundleAppBundle/Resources/public/js/facebook/fbCustom.js'
+     %}
+     <script type="text/javascript" src="{{ asset_url }}"></script>
+     {% endjavascripts %}
+
+ {% endblock javascriptBlock %}

@@ -6,3 +6,9 @@ organization_create:
     path:     /organization/create
     defaults: { _controller: BundleAppBundle:Organization:create }
 
+organization_create_ajax:
+    path:     /organization/create-ajax
+    defaults: { _controller: BundleAppBundle:Organization:organizationCreateAjax }
+    options:
+                expose: true
+
