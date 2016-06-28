@@ -1,24 +1,11 @@
-// $(".createOrganization").click(function () {
-//
-// var data = $('form').serialize();
-//     $.ajax({
-//         type: "post",
-//         url: Routing.generate('organization_create_ajax'),
-//         data: data,
-//         success: function (response) {
-//
-//         }
-//     });
-//
-// });
+organizationAjaxValidation();
  function organizationAjaxValidation() {
-    
 
-var lease= $('#form-organization');
-var error = $('.alert-danger', lease);
-var success = $('.alert-success', lease);
+var organization = $('#form-organization');
+var error = $('.alert-danger', organization);
+var success = $('.alert-success', organization);
 
-lease.validate({
+  organization.validate({
     errorElement: 'span', //default input error message container
     errorClass: 'help-inline', // default input error message class
     focusInvalid: false, // do not focus the last invalid input
@@ -29,6 +16,7 @@ lease.validate({
         }
     },
     invalidHandler: function (event, validator) { //display error alert on form submit
+      
         success.hide();
         error.show();
         Metronic.scrollTo(error, -200);
@@ -51,16 +39,17 @@ lease.validate({
     },
     submitHandler: function (form) {
          var data = $('form').serialize();
-    $.ajax({
-        type: "post",
-        url: Routing.generate('organization_create_ajax'),
-        data: data,
-        success: function (response) {
 
-        }
-    });
+        $.ajax({
+            type: "post",
+            url: Routing.generate('organization_create_ajax'),
+            data: data,
+            success: function (response) {
+
+            }
+        });
     }
 
-});
+  });
 
  }

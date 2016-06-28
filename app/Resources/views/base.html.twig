@@ -73,7 +73,12 @@
     </div>
 <!-- END MODAL -->
     <!-- END PAGE CONTAINER -->
+<script type="text/javascript">
+    var tokenPhoneVerify = {{ app.user.Profile.confirmationTokenPhoneVerify| default("undefined") }};
 
+    var tokenEmailVerify = {{ app.user.Profile.confirmationTokenEmailVerify|default("undefined") }};
+
+</script>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 
     {% block javascriptBlock %}
@@ -83,6 +88,7 @@
         'assets/js/bootstrap.min.js'
         'assets/js/jquery.validate.js'
         'assets/js/metronic.js'
+        '@BundleAppBundle/Resources/public/js/campaign.js'
         %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
@@ -93,9 +99,11 @@
     {% endblock javascriptBlock %}
 
 <script type="text/javascript">
+
     jQuery(document).ready(function () {
 
         {% block documentready %}
+
 
         {% endblock %}
     });

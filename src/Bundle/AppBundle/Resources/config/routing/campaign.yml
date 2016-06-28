@@ -2,9 +2,25 @@ campaign_list:
     path:     /campaign
     defaults: { _controller: BundleAppBundle:Campaign:index }
 
+individula_campaign_list:
+    path:     /campaign/individula
+    defaults: { _controller: BundleAppBundle:Campaign:individualCampaignList }
+
+organizational_campaign_list:
+    path:     /campaign/organizational
+    defaults: { _controller: BundleAppBundle:Campaign:organizationalCampaignList }
+
 campaign_create:
     path:     /campaign/create
     defaults: { _controller: BundleAppBundle:Campaign:create }
+
+campaign_organization_create:
+    path:     /campaign/create-campaign-organization
+    defaults: { _controller: BundleAppBundle:Campaign:organizationCampaignCreate }
+
+campaign_individual_create:
+    path:     /campaign/individual-create
+    defaults: { _controller: BundleAppBundle:Campaign:individualCampaignCreate }
 
 
 campaign_detail:

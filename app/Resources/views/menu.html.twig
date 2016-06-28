@@ -38,17 +38,61 @@
                     <div id="navbar" class="collapse navbar-collapse">
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="#">Home</a></li>
+                            {% if app.user %}
                             <li><a href="{{ path('organization_create') }}">Organization</a></li>
-                            <li><a href="{{ path('campaign_create') }}">Campaign</a></li>
+                            <li class="menu-dropdown classic-menu-dropdown ">
+                                <a data-hover="megamenu-dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;">
+                                    Campaign <i class="fa fa-angle-down"></i>
+                                </a>
 
+                                    <ul class="dropdown-menu pull-left">
+                                        <li class="">
+                                            <a href="{{ path('campaign_list') }}">Campaign</a>
+                                        </li>
+                                        <li class="">
+                                            <a href="{{ path('individula_campaign_list') }}">Individual Campaign</a>
+                                        </li>
+                                        <li class="">
+                                            <a href="{{ path('organizational_campaign_list') }}">Organizational Campaign</a>
+                                        </li>
+                                        <li class="">
+                                            <a href="javascript:;" class="campaignCreate">Create Campaign</a>
+                                        </li>
+                                    </ul>
+
+                            </li>
+                            {% endif %}
+                            {% if is_granted("ROLE_ADMIN") %}
+                            <li class="menu-dropdown classic-menu-dropdown ">
+                                <a data-hover="megamenu-dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;">
+                                    ADMIN <i class="fa fa-angle-down"></i>
+                                </a>
+
+                                <ul class="dropdown-menu pull-left">
+                                    <li class="">
+                                        <a href="{{ path('campaign_list') }}">Campaign</a>
+                                    </li>
+                                    <li class="">
+                                        <a href="{{ path('individula_campaign_list') }}">Category</a>
+                                    </li>
+                                </ul>
+
+                            </li>
+                            {% endif %}
                         </ul>
                         <ul class="nav navbar-nav" style="float: right">
+                            {% if not app.user %}
                             <li style="float: right"><a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}">
                                     <span>Log in with Facebook</span>
-                                </a></li>
-                            {#<li ><a href="{{ path('fos_user_security_login') }}">
-                                    <span>Log in</span>
-                                </a></li>#}
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% if app.user %}
+                            <li ><a href="{{ path('fos_user_security_logout') }}">
+                                    <span>Log Out</span>
+                                </a>
+                            </li>
+                            {% endif %}
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>

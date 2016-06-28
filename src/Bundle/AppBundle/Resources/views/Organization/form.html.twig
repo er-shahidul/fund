@@ -1,6 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
+    {% include 'flash.html.twig' %}
     <div class="row">
         <form class="form-horizontal" id="form-organization" role="form" method="post" action="{{ path('organization_create') }}">
 

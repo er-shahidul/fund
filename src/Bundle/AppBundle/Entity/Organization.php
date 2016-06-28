@@ -26,37 +26,44 @@ class Organization
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, nullable=true)
      */
     private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="address", type="string", length=255)
+     * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
     private $address;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="mobileNumber", type="string", length=255)
+     * @ORM\Column(name="mobileNumber", type="string", length=255, nullable=true)
      */
     private $mobileNumber;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255)
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
      */
     private $email;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="status", type="string", length=15)
+     * @ORM\Column(name="status", type="string", length=15, nullable=true)
      */
     private $status;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="validateOrganization", type="string", length=255, nullable=true)
+     */
+    private $validateOrganization;
 
     /**
      * @var User
@@ -252,5 +259,21 @@ class Organization
     public function setCampaign($campaign)
     {
         $this->campaign = $campaign;
+    }
+
+    /**
+     * @return string
+     */
+    public function getValidateOrganization()
+    {
+        return $this->validateOrganization;
+    }
+
+    /**
+     * @param string $validateOrganization
+     */
+    public function setValidateOrganization($validateOrganization)
+    {
+        $this->validateOrganization = $validateOrganization;
     }
 }

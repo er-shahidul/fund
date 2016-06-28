@@ -13,7 +13,7 @@ Bundle\AppBundle\Entity\Organization:
     properties:
         name:
             - NotBlank: { message: "Name  should not be blank" }
-        address:
-            - NotBlank: { message: "Address  should not be blank" }
-        mobileNumber:
-            - NotBlank: { message: "Mobile Number should not be blank" }
+#        address:
+#            - NotBlank: { message: "Address  should not be blank" }
+#        mobileNumber:
+#            - NotBlank: { message: "Mobile Number should not be blank" }

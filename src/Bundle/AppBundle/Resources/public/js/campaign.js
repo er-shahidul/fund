@@ -1,5 +1,5 @@
 function onLoadUserProfile() {
-  
+
     var $url = Routing.generate('campaign_user-profile-verify');
 
     $('.modal-body').load($url,function(result){
@@ -8,20 +8,43 @@ function onLoadUserProfile() {
         $('.verified-profile-for-campaign').hide();
         $('#verify-profile').show();
         $('#verified-profile').hide();
+        if(!tokenPhoneVerify){
          verifyCheck();
          verifiedCheck();
-         organizationAjaxValidation();
-        $('#ajax').modal({show:true,backdrop: 'static', keyboard: false });
+        }else {
+            onLoadOrganizationCreate();
+        }
+        
+        $('#ajax').modal({show:true, keyboard: false });
     });
 }
+//  onLoadUserProfile()
+$('.campaignCreate').click( function () {
 
-if(typeof tokenPhoneVerify == 'undefined' || typeof tokenEmailVerify == 'undefined'){
     onLoadUserProfile();
+});
+
+function onLoadOrganizationCreate() {
+
+    var $url = Routing.generate('on_load_organization_create');
+
+    $('.modal-body').load($url,function(result) {
+
+        var zIndex = 1040 + (10 * $('.modal:visible').length);
+        $(this).css('z-index', zIndex);
+        setTimeout(function() {
+            $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+        }, 0);
+
+        $('#ajax').modal({show:true,backdrop: 'static', keyboard: false });
+    });
+    
 }
 
 
 
     function verifyCheck() {
+
         var lease = $('#form-user-profile');
         var error = $('.alert-danger', lease);
         var success = $('.alert-success', lease);
@@ -92,7 +115,7 @@ if(typeof tokenPhoneVerify == 'undefined' || typeof tokenEmailVerify == 'undefin
 
     }
 
-function verifiedCheck() {
+    function verifiedCheck() {
 
     var lease = $('#form-user-profile-verified');
     var error = $('.alert-danger', lease);
@@ -144,6 +167,7 @@ function verifiedCheck() {
                 success: function (msg) {
                     if(msg.responseCode == 202){
                         alert('successfully verified');
+
                         location.reload();
                         $('.emailVerificationCode').hide();
                         $('.verifiedEmail').hide();

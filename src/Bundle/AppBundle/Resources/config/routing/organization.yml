@@ -12,3 +12,8 @@ organization_create_ajax:
     options:
                 expose: true
 
+on_load_organization_create:
+    path:     /organization/onload-create
+    defaults: { _controller: BundleAppBundle:Organization:onLoadOrganizationCreate }
+    options:
+                expose: true

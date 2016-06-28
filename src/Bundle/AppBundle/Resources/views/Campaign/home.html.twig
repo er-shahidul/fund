@@ -1,17 +1,39 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    {% for campaign in campaigns %}
-        <a href="{{ path('campaign_detail',{id:campaign.id}) }}">
-            <div class="jumbotron">
-                <h3>{{ campaign.title }}</h3>
-                <p>{{ campaign.description }}</p>
-                <p>${{ campaign.amount }}</p>
-            </div>
+    {% if campaigns %}
+        {% for campaign in campaigns %}
+            <a href="{{ path('campaign_detail',{id:campaign.id}) }}">
+                <div class="jumbotron">
+                    <h3>{{ campaign.title }}</h3>
+                    <p>{{ campaign.description }}</p>
+                    <p>${{ campaign.amount }}</p>
+                </div>
+            </a>
+        {% endfor %}
+       {% else %}
+        <div class="jumbotron">
+            Create Your First Campaign <a href="javascript:;" class="campaignCreate">here</a>
+        </div>
+    {% endif %}
+    <script type="text/javascript">
+        var tokenPhoneVerify = {{ app.user.Profile.confirmationTokenPhoneVerify| default("undefined") }};
 
-        </a>
+        var tokenEmailVerify = {{ app.user.Profile.confirmationTokenEmailVerify|default("undefined") }};
 
-    {% endfor %}
-
+    </script>
 
 {% endblock %}
+
+ {% block javascriptBlock %}
+
+     {{ parent() }}
+
+     {% javascripts
+     '@BundleAppBundle/Resources/public/js/campaign.js'
+     '@BundleAppBundle/Resources/public/js/organization.js'
+     %}
+     <script type="text/javascript" src="{{ asset_url }}"></script>
+     {% endjavascripts %}
+
+ {% endblock javascriptBlock %}

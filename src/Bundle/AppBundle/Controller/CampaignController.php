@@ -6,20 +6,60 @@ use Bundle\AppBundle\Entity\Campaign;
 use Bundle\AppBundle\Form\CampaignType;
 use Bundle\UserBundle\Entity\User;
 use Bundle\UserBundle\Form\UserType;
+use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use Services_Twilio_RestException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\User\UserInterface;
 
-class CampaignController extends Controller
+class CampaignController extends BaseController
 {
+    
     public function indexAction()
     {
-        $campaignList = $this->getDoctrine()->getRepository('BundleAppBundle:Campaign')->findAll();
+         if($this->isFacebookLogin()){
+             return $this->isFacebookLogin();
+         }
         
+        $campaignList= $this->getDoctrine()->getRepository('BundleAppBundle:Campaign')
+                             ->findBy(array('createdBy'=>$this->getUser()));
+
         return $this->render('BundleAppBundle:Campaign:home.html.twig',array(
-            'campaigns'=>$campaignList
+            'campaigns'=>$campaignList,
+            'user' =>$this->getUser()->getProfile()
         ));
-    } 
+    }
+    public function individualCampaignListAction()
+    {
+         if($this->isFacebookLogin()){
+             return $this->isFacebookLogin();
+         }
+        
+        $campaignList= $this->getDoctrine()->getRepository('BundleAppBundle:Campaign')
+                             ->findBy(array('createdBy'=>$this->getUser(),'organization'=>null));
+
+        return $this->render('BundleAppBundle:Campaign:home.html.twig',array(
+            'campaigns'=>$campaignList,
+            'user' =>$this->getUser()->getProfile()
+        ));
+    }
+    public function organizationalCampaignListAction()
+    {
+         if($this->isFacebookLogin()){
+             return $this->isFacebookLogin();
+         }
+        $organization = $this->getDoctrine()->getRepository('BundleAppBundle:Organization')
+                                            ->findBy(array('createdBy'=>$this->getUser()));
+        
+        $campaignList= $this->getDoctrine()->getRepository('BundleAppBundle:Campaign')
+                             ->findBy(array('createdBy'=>$this->getUser(),'organization'=>$organization));
+
+        return $this->render('BundleAppBundle:Campaign:home.html.twig',array(
+            'campaigns'=>$campaignList,
+            'user' =>$this->getUser()->getProfile()
+        ));
+    }
     public function createAction(Request $request)
     {
 
@@ -31,7 +71,7 @@ class CampaignController extends Controller
 
         $campaign = new Campaign();
 
-        $form = $this->createForm(new CampaignType($this->getUser()), $campaign);
+        $form = $this->createForm(new CampaignType($this->getUser(),null), $campaign);
 
         if ('POST' == $request->getMethod()) {
 
@@ -57,6 +97,83 @@ class CampaignController extends Controller
             )
         );
         
+    }
+
+    public function organizationCampaignCreateAction(Request $request)
+    {
+        if($this->isFacebookLogin()){
+            return $this->isFacebookLogin();
+        }
+        
+        $organizationId = $request->request->get('organizationVal');
+        $organizationName = $this->getDoctrine()->getRepository('BundleAppBundle:Organization')->find($organizationId);
+        
+        $organization = $this->checkExistingOrganization($this->getUser());
+
+        $campaign = new Campaign();
+
+        $form = $this->createForm(new CampaignType($this->getUser(),$organizationName), $campaign);
+
+        if ('POST' == $request->getMethod()) {
+
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+
+                $this->saveCampaign($campaign);
+
+                $massage = 'Campaign Successfully Inserted';
+                $this->get('session')->getFlashBag()->add('notice', $massage);
+                return $this->redirect($this->generateUrl('campaign_list'));
+            }
+        }
+        $user = $this->getUser()->getProfile();
+
+        return $this->render(
+            'BundleAppBundle:Campaign:organizationCampaignForm.html.twig',
+            array(
+                'form'     => $form->createView(),
+                'user'      => $user,
+                'organization' => $organization
+            )
+        );
+
+    }
+    public function individualCampaignCreateAction(Request $request)
+    {
+        if($this->isFacebookLogin()){
+            return $this->isFacebookLogin();
+        }
+        $organization = $this->checkExistingOrganization($this->getUser());
+
+        $campaign = new Campaign();
+
+        $form = $this->createForm(new CampaignType($this->getUser(),null), $campaign);
+
+        if ('POST' == $request->getMethod()) {
+
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+
+                $this->saveCampaign($campaign);
+
+                $massage = 'Campaign Successfully Inserted';
+                $this->get('session')->getFlashBag()->add('notice', $massage);
+                return $this->redirect($this->generateUrl('campaign_list'));
+            }
+        }
+        $user = $this->getUser()->getProfile();
+
+        return $this->render(
+            'BundleAppBundle:Campaign:individualCampaignform.html.twig',
+            array(
+                'form'     => $form->createView(),
+                'user'      => $user,
+                'organization' => $organization
+            )
+        );
+
     }
     
     public  function campaignDetailsAction(Campaign $campaign){

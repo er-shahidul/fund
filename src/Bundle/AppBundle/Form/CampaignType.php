@@ -14,10 +14,13 @@ class CampaignType extends AbstractType
 {
 
     private $user;
+    private $organization = null;
 
-    public function __construct($user)
+    public function __construct($user, $organization)
     {
         $this->user = $user;
+        $this->organization = $organization;
+
     }
     /**
      * @param FormBuilderInterface $builder
@@ -50,7 +53,7 @@ class CampaignType extends AbstractType
             ))
             ->add('category', 'entity',
                 array(
-                    'property' => 'name',
+                    'property' => 'title',
                     'attr' => array('class' => 'form-control select2 input-medium'),
                     'required'=>false,
                     'class' => 'Bundle\AppBundle\Entity\Category',
@@ -62,6 +65,7 @@ class CampaignType extends AbstractType
                     'property' => 'name',
                     'attr' => array('class' => 'form-control select2 input-medium'),
                     'required'=>false,
+                    'read_only'=>true,
                     'class' => 'Bundle\AppBundle\Entity\Organization',
                     'placeholder' => 'Select Organization',
                     'query_builder' => function (OrganizationRepository $repository)
@@ -71,7 +75,8 @@ class CampaignType extends AbstractType
                             ->andWhere('o.createdBy =:user')
                             ->setParameter('user',$this->user)
                             ->setParameter('status', 'Active');
-                    }
+                    },
+                    'data'=> $this->organization
                 )
             )
             ->add('campaignFileName','file', array(

@@ -1,0 +1,108 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="row">
+        <form class="form-horizontal" id="form-campaign" role="form" method="post" action="{{ path('campaign_create') }}">
+
+            <div class="col-md-12">
+                <div class="portlet-body">
+
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label class="col-md-3 col-sm-3 control-label">{{ form_label(form.title) }}</label>
+                            <div class="col-md-5 col-sm-5">
+                                {{ form_widget(form.title) }}
+                                <span class="help-block">{{ form_errors(form.title) }}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-sm-3 control-label">{{ form_label(form.amount) }}</label>
+                            <div class="col-md-5 col-sm-5">
+                                {{ form_widget(form.amount) }}
+                                <span class="help-block">{{ form_errors(form.amount) }}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-sm-3 control-label">{{ form_label(form.description) }}</label>
+                            <div class="col-md-5 col-sm-5">
+                                {{ form_widget(form.description) }}
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-sm-3 control-label">{{ form_label(form.category) }}</label>
+                            <div class="col-md-5 col-sm-5">
+                                {{ form_widget(form.category) }}
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+
+                        {% if organization  %}
+                        <div class="form-group">
+                            <label class="col-md-3 col-sm-3 control-label">{{ form_label(form.organization) }}</label>
+                            <div class="col-md-5 col-sm-5">
+                                {{ form_widget(form.organization) }}
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+
+                        {% else %}
+                            <div class="form-group">
+                                <label class="col-md-3 col-sm-3 control-label">If you want create campaign under organization then first create organization</label>
+                                <a class="btn default createOrganization" data-target="#ajax" data-toggle="modal"  href="{{ path('organization_create_ajax') }}" >Create Organization</a>
+                            </div>
+                        {% endif %}
+
+                        <div class="form-group">
+                            <label class="col-md-3 col-sm-3 control-label">{{ form_label(form.campaignFileName) }}</label>
+                            <div class="col-md-5 col-sm-5">
+                                {{ form_widget(form.campaignFileName) }}
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-sm-3 control-label">{{ form_label(form.status) }}</label>
+                            <div class="col-md-5 col-sm-5">
+                                {{ form_widget(form.status) }}
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    {{ form_row(form._token) }}
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+
+                                <button type="submit" id="campaign-submit" class="btn green">Save</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+<script type="text/javascript">
+    var tokenPhoneVerify = {{ user.confirmationTokenPhoneVerify| default("undefined") }};
+
+    var tokenEmailVerify = {{ user.confirmationTokenEmailVerify|default("undefined") }};
+
+</script>
+
+
+
+{% endblock %}
+
+{# {% block javascriptBlock %}
+
+     {{ parent() }}
+
+     {% javascripts
+     '@BundleAppBundle/Resources/public/js/campaign.js'
+     %}
+     <script type="text/javascript" src="{{ asset_url }}"></script>
+     {% endjavascripts %}
+
+ {% endblock javascriptBlock %}#}

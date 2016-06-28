@@ -1,6 +1,16 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
+    {% for campaign in campaigns %}
+        <a href="{{ path('campaign_detail',{id:campaign.id}) }}">
+            <div class="jumbotron">
+                <h3>{{ campaign.title }}</h3>
+                <p>{{ campaign.description }}</p>
+                <p>${{ campaign.amount }}</p>
+            </div>
 
+        </a>
+
+    {% endfor %}
 {% endblock %}
 

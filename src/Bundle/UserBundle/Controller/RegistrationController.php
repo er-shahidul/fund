@@ -11,6 +11,7 @@
 
 namespace Bundle\UserBundle\Controller;
 
+use Bundle\AppBundle\Controller\BaseController;
 use Bundle\UserBundle\Entity\User;
 use Bundle\UserBundle\Form\Type\UserType;
 use FOS\UserBundle\FOSUserEvents;
@@ -31,7 +32,7 @@ use FOS\UserBundle\Model\UserInterface;
  * @author Thibault Duplessis <thibault.duplessis@gmail.com>
  * @author Christophe Coevoet <stof@notk.org>
  */
-class RegistrationController extends Controller
+class RegistrationController extends BaseController
 {
     public function registerAction(Request $request)
     {
@@ -165,6 +166,10 @@ class RegistrationController extends Controller
 
     public function userProfileVerifyAction(Request $request) {
 
+        if($this->isFacebookLogin()){
+            return new Response(json_encode('hwi_oauth_service_redirect'));
+
+        }
         $user = $this->getDoctrine()
                      ->getRepository('BundleUserBundle:User')
                      ->find($this->getUser()->getId());
@@ -193,38 +198,7 @@ class RegistrationController extends Controller
             )
         );
     }
-   /* public function userProfileVerifyAction(Request $request) {
 
-        $user = $this->getDoctrine()
-                     ->getRepository('BundleUserBundle:User')
-                     ->find($this->getUser()->getId());
-
-
-        $form = $this->createForm(new UserType(null), $user);
-
-        if ('POST' == $request->getMethod()) {
-            $form->handleRequest($request);
-
-            if ($form->isValid()) {
-            
-                $user->setUsername($user->getUsername());
-                $user->getProfile()->setVerificationDateDuration(new \DateTime());
-
-                $this->getDoctrine()->getRepository('BundleUserBundle:User')->update($user);
-
-                $massage = 'Profile Successfully Updated';
-                $this->get('session')->getFlashBag()->add('notice', $massage);
-                return $this->redirect($this->generateUrl('campaign_list'));
-            }
-        }
-
-        return $this->render(
-            'BundleUserBundle:Profile:edit.html.twig',
-            array(
-                'form'     => $form->createView()
-            )
-        );
-    }*/
 
     public function campaignUserVerifyAction(Request $request) {
 
