@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    {% include 'flash.html.twig' %}
+
+    <div class="container">
+        <h2>Category</h2>
+        <p>All Category List</p>
+        <p><a href="{{ path('category_create') }}" class="btn btn-default">Create Category</a></p>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for category in CategoriesList %}
+                <tr>
+                    <td>{{ category.title }}</td>
+                    <td>{{ category.status }}</td>
+                    <td>
+                            {% if category.status != 'Active' %}
+                                <a href="{{ path('category_status',{id:category.id}) }}">Approve</a>
+                            {% endif %}
+                            {% if category.status != 'Inactive' %}
+                                <a href="{{ path('category_status',{id:category.id}) }}">Inactive</a>
+                            {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

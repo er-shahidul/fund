@@ -1,0 +1,13 @@
+category_list:
+    path:     /admin/category
+    defaults: { _controller: BundleAppBundle:Admin/Category:index }
+
+category_create:
+    path:     /admin/category-create
+    defaults: { _controller: BundleAppBundle:Admin/Category:create }
+
+category_status:
+    path:     /admin/category-status/{id}
+    defaults: { _controller: BundleAppBundle:Admin/Category:changeStatus }
+    requirements:
+        id:  \d+

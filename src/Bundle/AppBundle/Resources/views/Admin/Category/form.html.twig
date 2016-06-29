@@ -1,0 +1,55 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    {% include 'flash.html.twig' %}
+<fieldset>
+    <legend>Category</legend>
+    <div class="row">
+        <form class="form-horizontal" id="form-category" role="form" method="post" action="{{ path('category_create') }}">
+
+            <div class="col-md-12">
+                <div class="portlet-body">
+
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label class="col-md-3 col-sm-3 control-label">{{ form_label(form.title) }}</label>
+                            <div class="col-md-5 col-sm-5">
+                                {{ form_widget(form.title) }}
+                                <span class="help-block">{{ form_errors(form.title) }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {{ form_row(form._token) }}
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button type="submit" id="category-submit" class="btn green">Save</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+    </fieldset>
+<script type="text/javascript">
+
+</script>
+
+
+
+{% endblock %}
+
+ {% block javascriptBlock %}
+
+     {{ parent() }}
+
+     {% javascripts
+     '@BundleAppBundle/Resources/public/js/CategoryFormValidation.js'
+     %}
+     <script type="text/javascript" src="{{ asset_url }}"></script>
+     {% endjavascripts %}
+
+ {% endblock javascriptBlock %}

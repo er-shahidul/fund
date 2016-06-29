@@ -2,6 +2,8 @@
 
 {% block body %}
     {% include 'flash.html.twig' %}
+<fieldset>
+    <legend>Organization</legend>
     <div class="row">
         <form class="form-horizontal" id="form-organization" role="form" method="post" action="{{ path('organization_create') }}">
 
@@ -52,6 +54,7 @@
 
         </form>
     </div>
+ </fieldset>
 <script type="text/javascript">
 
 </script>

@@ -39,7 +39,7 @@
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="#">Home</a></li>
                             {% if app.user %}
-                            <li><a href="{{ path('organization_create') }}">Organization</a></li>
+                            <li><a href="{{ path('organization_list') }}">Organization</a></li>
                             <li class="menu-dropdown classic-menu-dropdown ">
                                 <a data-hover="megamenu-dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;">
                                     Campaign <i class="fa fa-angle-down"></i>
@@ -70,10 +70,10 @@
 
                                 <ul class="dropdown-menu pull-left">
                                     <li class="">
-                                        <a href="{{ path('campaign_list') }}">Campaign</a>
+                                        <a href="{{ path('organization_list') }}">Organization</a>
                                     </li>
                                     <li class="">
-                                        <a href="{{ path('individula_campaign_list') }}">Category</a>
+                                        <a href="{{ path('category_list') }}">Category</a>
                                     </li>
                                 </ul>
 

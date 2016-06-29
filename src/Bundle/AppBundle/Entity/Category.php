@@ -25,21 +25,21 @@ class Category
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=255, nullable=true)
      */
     private $title;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="status", type="string", length=15)
+     * @ORM\Column(name="status", type="string", length=15, nullable=true)
      */
     private $status;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="createdDate", type="datetime")
+     * @ORM\Column(name="createdDate", type="datetime", nullable=true)
      */
     private $createdDate;
 

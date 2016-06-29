@@ -2,5 +2,45 @@
 
 {% block body %}
 
-<h4>Organization List</h4>
+    {% include 'flash.html.twig' %}
+
+    <div class="container">
+        <h2>Organization</h2>
+        <p>All Organization List</p>
+        <p><a href="{{ path('organization_create') }}" class="btn btn-default">Create Organization</a></p>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+           {% for organization in organizationsList %}
+               <tr>
+                   <td>{{ organization.name }}</td>
+                   <td>{{ organization.address|default }}</td>
+                   <td>{{ organization.email|default }}</td>
+                   <td>{{ organization.status }}</td>
+                   <td>
+                    {% if is_granted("ROLE_ADMIN") %}
+
+                       {% if organization.status != 'Active' %}
+                       <a href="{{ path('organization_status',{id:organization.id}) }}">Approve</a>
+                       {% endif %}
+                       {% if organization.status != 'Inactive' %}
+                       <a href="{{ path('organization_status',{id:organization.id}) }}">Inactive</a>
+                        {% endif %}
+
+                    {% endif %}
+                   </td>
+               </tr>
+           {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

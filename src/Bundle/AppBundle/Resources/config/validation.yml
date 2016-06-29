@@ -17,3 +17,8 @@ Bundle\AppBundle\Entity\Organization:
 #            - NotBlank: { message: "Address  should not be blank" }
 #        mobileNumber:
 #            - NotBlank: { message: "Mobile Number should not be blank" }
+
+Bundle\AppBundle\Entity\Category:
+    properties:
+        title:
+            - NotBlank: { message: "Title  should not be blank" }

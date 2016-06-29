@@ -18,4 +18,10 @@ class OrganizationRepository extends EntityRepository
         $this->_em->flush();
         return $data;
     }
+    public function persist($data)
+    {
+        $this->_em->persist($data);
+        $this->_em->flush();
+        return $data;
+    }
 }

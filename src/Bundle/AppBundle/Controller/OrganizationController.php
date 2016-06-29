@@ -13,7 +13,18 @@ class OrganizationController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('BundleAppBundle:Organization:home.html.twig');
+        if($this->getUser()->hasRole('ROLE_ADMIN')) {
+        $organizationList = $this->getDoctrine()
+                                 ->getRepository('BundleAppBundle:Organization')
+                                 ->findAll();
+        }else {
+            $organizationList = $this->getDoctrine()
+                ->getRepository('BundleAppBundle:Organization')
+                ->findBy(array('createdBy'=>$this->getUser(),'status'=>'Active'));
+        }
+        return $this->render('BundleAppBundle:Organization:home.html.twig',array(
+            'organizationsList' =>$organizationList
+        ));
     } 
     public function createAction(Request $request)
     {
@@ -145,6 +156,25 @@ class OrganizationController extends Controller
               ->getRepository('BundleAppBundle:Organization')
               ->findBy(array('validateOrganization'=>$name));
         return $org;
+    }
+
+    public function changeStatusAction(Organization $organization){
+
+
+        if($organization->getStatus() === 'Active'){
+            $organization->setStatus('Inactive');
+
+            $massage = 'Organization Successfully Not Approved';
+            $this->get('session')->getFlashBag()->add('success', $massage);
+        } else{
+            $organization->setStatus('Active');
+
+            $massage = 'Organization Successfully Approved';
+            $this->get('session')->getFlashBag()->add('success', $massage);
+        }
+         $this->getDoctrine()->getRepository('BundleAppBundle:Organization')->persist($organization);
+
+        return $this->redirect($this->generateUrl('organization_list'));
     }
     
 }
