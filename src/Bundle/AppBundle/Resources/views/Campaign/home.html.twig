@@ -1,28 +1,53 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    {% if campaigns %}
-        {% for campaign in campaigns %}
-            <a href="{{ path('campaign_detail',{id:campaign.id}) }}">
-                <div class="jumbotron">
-                    <h3>{{ campaign.title }}</h3>
-                    <p>{{ campaign.description }}</p>
-                    <p>${{ campaign.amount }}</p>
+    <div class="campaign-list">
+        <div class="campaign-sidebar">
+            <div class="campaign-sub-sidebar">
+                <div class="n cat">
+
+                  {#  <div class="cathead top">MOST COMMON</div>
+
+                    <a href="/2016-Olympic-Games/" class="c23 ">Road to Rio</a>
+                    <a href="/alberta-fire-relief/" class="c23 ">Alberta Fires</a>
+
+                    <div class="cathead mid">ALL CATEGORIES</div>
+
+                    <a href="/Business-Entrepreneurs/" class="c11 ">Business</a>#}
                 </div>
-            </a>
-        {% endfor %}
-       {% else %}
-        <div class="jumbotron">
-            Create Your First Campaign <a href="javascript:;" class="campaignCreate">here</a>
+            </div>
         </div>
-    {% endif %}
+        {#<div class="single-campaign">#}
+                {% if campaigns %}
+                    {% for campaign in campaigns %}
+
+                            <div class="tile mb20 mr20">
+                                <a href="{{ path('campaign_detail',{id:campaign.id}) }}" class="pho">
+                                    <img src="{{ asset('assets/img/people.png') }}">
+                                </a>
+                                <a href="{{ path('campaign_detail',{id:campaign.id}) }}" class="amt">${{ campaign.amount }}</a>
+                                <a href="{{ path('campaign_detail',{id:campaign.id}) }}" class="pro">
+                                    <span class="fill" style="width: 94%;"></span>
+                                </a>
+                                <a href="{{ path('campaign_detail',{id:campaign.id}) }}" class="title">{{ campaign.title }}</a>
+                                <a href="{{ path('campaign_detail',{id:campaign.id}) }}" class="loc" style="text-transform: uppercase">{{ campaign.location.name|default('N/A') }}</a>
+                            </div>
+
+                    {% endfor %}
+                   {% else %}
+                    <div class="jumbotron">
+                        Create Your First Campaign <a href="javascript:;" class="campaignCreate">here</a>
+                    </div>
+                {% endif %}
+
+        {#</div>#}
     <script type="text/javascript">
         var tokenPhoneVerify = {{ app.user.Profile.confirmationTokenPhoneVerify| default("undefined") }};
 
         var tokenEmailVerify = {{ app.user.Profile.confirmationTokenEmailVerify|default("undefined") }};
 
     </script>
-
+    </div>
 {% endblock %}
 
  {% block javascriptBlock %}

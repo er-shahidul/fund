@@ -10,6 +10,7 @@ class HomeController extends BaseController
     {
      //   var_dump($this->getUser()->getRoles());die;
         $campaignList = $this->getDoctrine()->getRepository('BundleAppBundle:Campaign')->findAll();
+        
         return $this->render('BundleAppBundle:Dashboard:home.html.twig',array(
             'campaigns'=>$campaignList
 

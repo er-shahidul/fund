@@ -1,3 +1,6 @@
+$('.datepicker').datepicker({
+    format: 'yyyy-mm-dd'
+});
 function onLoadUserProfile() {
 
     var $url = Routing.generate('campaign_user-profile-verify');

@@ -10,9 +10,10 @@
             </div>
 
             <div class="col-sm-4">
-                <a  data-toggle="modal" href="#myModal2">
+                <a  data-toggle="modal" href="{{ path('organization_create_ajax') }}" data-target="#myModal3" data-toggle="modal">
                     <div class="campaign-stat">
                         Organization Campaign
+
                     </div>
                 </a>
             </div>
@@ -91,7 +92,6 @@
                             </div>
                             <div class="modal-footer">
 
-                                <input type="submit" class="btn btn-primary nextOrganization" value="Next">
                                 <a class="btn btn-primary blue createOrganization" data-target="#myModal3" data-toggle="modal"
                                    href="{{ path('organization_create_ajax') }}" >New Organization</a>
                             </div>
@@ -106,6 +106,7 @@
         <div class="modal-content">
             <div class="modal-body">
                     <img src="{{ asset('assets/img/ajax-modal-loading.gif') }}" alt="" class="loading">
+
             </div>
         </div>
     </div>
@@ -121,15 +122,14 @@
         }
     });
 </script>
-{#
 
 {% block javascriptBlock %}
 
 
     {% javascripts
-    '@BundleAppBundle/Resources/public/js/organization.js'
+    '@BundleAppBundle/Resources/public/js/organizationFormValidation.js'
     %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
-{% endblock javascriptBlock %}#}
+{% endblock javascriptBlock %}

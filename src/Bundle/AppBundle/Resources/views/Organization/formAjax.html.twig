@@ -44,7 +44,8 @@
                             <div class="form-actions">
                                 <div class="row">
                                     <div class="col-md-offset-3 col-md-9">
-                                        <button type="submit" id="organization-submit" class="btn green">Save</button>
+                                        <button type="submit" id="organization-submit" class="btn green">Next</button>
+                                        <input type="button" class="btn btn-primary" data-target="#myModal2"  data-toggle="modal"  value="Skip">
                                     </div>
                                 </div>
                             </div>
@@ -54,3 +55,13 @@
             </form>
         </div>
     </div>
+
+ {% block javascriptBlock %}
+
+     {% javascripts
+     '@BundleAppBundle/Resources/public/js/organization.js'
+     %}
+     <script type="text/javascript" src="{{ asset_url }}"></script>
+     {% endjavascripts %}
+
+ {% endblock javascriptBlock %}

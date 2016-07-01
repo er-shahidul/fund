@@ -3,19 +3,48 @@
 {% block body %}
 
             <div class="jumbotron">
-                <h3>{{ campaign.title }}</h3>
-                <p>{{ campaign.description }}</p>
-                <p>${{ campaign.amount }}</p>
-                <div class="fb-like" data-href="{{ app.request.getUri }}"
-                     data-layout="standard" data-action="like" data-show-faces="true"
-                     data-share="true">
-                </div>
-                <div class="fb-comments"
-                     data-href="{{ app.request.getUri }}"
-                     data-numposts="5"></div>
-                {#{% include 'FOSCommentBundle:Thread:async.html.twig' with {'id': campaign.id } %}#}
-            </div>
+                <div class="col-md-18">
+                    <div class="col-md-8">
+                        <div class="campaign-img-contain">
+                            <img class="campaign-img" src="{{ asset('assets/img/people.png') }}">
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        {{ campaign.description }}
 
+                    </div>
+                </div>
+
+                <div class="col-md-18">
+
+                  {#  <div class="fb-share-button" data-href="{{ app.request.getUri }}"
+                         data-layout="button_count" data-size="large" data-mobile-iframe="false">
+                    </div>#}
+
+                    <div class="fb-share-button" data-href="{{ app.request.getUri }}"
+                         data-layout="button" data-size="large" data-mobile-iframe="true">
+                        <a class="fb-xfbml-parse-ignore" target="_blank" title="share on facebook"
+                           href="http://www.facebook.com/sharer.php?s=100&p[title]=Share on Facebook"></a></div>
+                </div>
+
+                <div class="col-md-18">
+                    <p>${{ campaign.amount }}</p>
+                </div>
+                 <div class="col-md-18">
+                    <div class="fb-like" data-href="{{ app.request.getUri }}"
+                         data-layout="standard" data-action="like" data-show-faces="true"
+                         data-share="false">
+                    </div>
+                </div>
+
+                <div class="col-md-18">
+                    <div class="fb-comments"
+                         data-href="{{ app.request.getUri }}"
+                         data-numposts="5">
+
+                    </div>
+                </div>
+            </div>
 
 
     {% stylesheets

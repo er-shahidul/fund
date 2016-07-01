@@ -1,16 +1,55 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    {% for campaign in campaigns %}
-        <a href="{{ path('campaign_detail',{id:campaign.id}) }}">
-            <div class="jumbotron">
-                <h3>{{ campaign.title }}</h3>
-                <p>{{ campaign.description }}</p>
-                <p>${{ campaign.amount }}</p>
+<div style="background-color: #fdf8f8">
+    <div class="campaign-list">
+        <div class="campaign-sidebar">
+            <div class="campaign-sub-sidebar">
+                <div class="n cat">
+
+                    {#  <div class="cathead top">MOST COMMON</div>
+
+                      <a href="/2016-Olympic-Games/" class="c23 ">Road to Rio</a>
+                      <a href="/alberta-fire-relief/" class="c23 ">Alberta Fires</a>
+
+                      <div class="cathead mid">ALL CATEGORIES</div>
+
+                      <a href="/Business-Entrepreneurs/" class="c11 ">Business</a>#}
+                </div>
             </div>
+        </div>
+        {#<div class="single-campaign">#}
+        {% if campaigns %}
+            {% for campaign in campaigns %}
 
-        </a>
+                <div class="tile mb20 mr20">
+                    <a href="{{ path('campaign_detail',{id:campaign.id}) }}" class="pho">
+                        {% if campaign.CampaignFiles is defined %}
 
-    {% endfor %}
+                        <img src="{{ asset('assets/img/people.png') }}">
+
+                        {% else %}
+
+                         <img src="{{ asset('assets/img/people.png') }}">
+
+                        {% endif %}
+                    </a>
+                    <a href="{{ path('campaign_detail',{id:campaign.id}) }}" class="amt">${{ campaign.amount }}</a>
+                    <a href="{{ path('campaign_detail',{id:campaign.id}) }}" class="pro">
+                        <span class="fill" style="width: 94%;"></span>
+                    </a>
+                    <a href="{{ path('campaign_detail',{id:campaign.id}) }}" class="title">{{ campaign.title }}</a>
+                    <a href="{{ path('campaign_detail',{id:campaign.id}) }}" class="title" style="text-transform: uppercase">{{ campaign.location.name|default('N/A') }}</a>
+                </div>
+
+            {% endfor %}
+        {% else %}
+            <div class="jumbotron">
+                Create Your First Campaign <a href="javascript:;" class="campaignCreate">here</a>
+            </div>
+        {% endif %}
+
+    </div>
+</div>
 {% endblock %}
 

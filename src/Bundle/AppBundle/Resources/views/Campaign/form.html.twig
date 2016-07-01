@@ -54,9 +54,17 @@
                         {% endif %}
 
                         <div class="form-group">
-                            <label class="col-md-3 col-sm-3 control-label">{{ form_label(form.campaignFileName) }}</label>
+                            <label class="col-md-3 col-sm-3 control-label">{{ form_label(form.location) }}</label>
                             <div class="col-md-5 col-sm-5">
-                                {{ form_widget(form.campaignFileName) }}
+                                {{ form_widget(form.location) }}
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 col-sm-3 control-label">{{ form_label(form.campaignFiles) }}</label>
+                            <div class="col-md-5 col-sm-5">
+                                {{ form_widget(form.campaignFiles) }}
                                 <span class="help-block"></span>
                             </div>
                         </div>

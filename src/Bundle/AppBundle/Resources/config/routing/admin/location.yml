@@ -1,0 +1,13 @@
+location_list:
+    path:     /admin/location
+    defaults: { _controller: BundleAppBundle:Admin/Location:index }
+
+location_create:
+    path:     /admin/location-create
+    defaults: { _controller: BundleAppBundle:Admin/Location:create }
+
+location_status:
+    path:     /admin/location-status/{id}
+    defaults: { _controller: BundleAppBundle:Admin/Location:changeStatus }
+    requirements:
+        id:  \d+

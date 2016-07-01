@@ -8,5 +8,8 @@ app_bundle_routing_campaign:
 app_bundle_routing_category:
     resource: "@BundleAppBundle/Resources/config/routing/admin/category.yml"
 
+app_bundle_routing_location:
+    resource: "@BundleAppBundle/Resources/config/routing/admin/location.yml"
+
 app_bundle_routing_organization:
     resource: "@BundleAppBundle/Resources/config/routing/organization.yml"

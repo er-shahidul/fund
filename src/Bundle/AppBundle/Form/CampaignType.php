@@ -6,6 +6,7 @@ use Bundle\AppBundle\Entity\Organization;
 use Bundle\AppBundle\Repository\OrganizationRepository;
 use Symfony\Component\Form\AbstractType;
 
+use Symfony\Component\Form\Extension\Core\DataTransformer\DateTimeToStringTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -60,6 +61,15 @@ class CampaignType extends AbstractType
                     'placeholder' => 'Select Category',
                 )
             )
+            ->add('location', 'entity',
+                array(
+                    'property' => 'name',
+                    'attr' => array('class' => 'form-control select2 input-medium'),
+                    'required'=>false,
+                    'class' => 'Bundle\AppBundle\Entity\Location',
+                    'placeholder' => 'Select Location',
+                )
+            )
             ->add('organization', 'entity',
                 array(
                     'property' => 'name',
@@ -79,8 +89,18 @@ class CampaignType extends AbstractType
                     'data'=> $this->organization
                 )
             )
-            ->add('campaignFileName','file', array(
+            ->add($builder->create('endOfCampaignDate', 'text', array(
+                'attr' => array(
+                    'placeholder' => 'Date'
+                ),
+                'required'=>false,
+                'data_class' => null
+            ))->addViewTransformer(new DateTimeToStringTransformer(null, null, 'Y-m-d')))
+            
+            ->add('campaignFiles','file', array(
+                'multiple'=>true,
                 'required' => false,
+                'mapped'=>false,
                 'constraints' => new NotBlank()
             ));
     }

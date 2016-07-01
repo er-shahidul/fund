@@ -3,12 +3,12 @@
 namespace Bundle\AppBundle\Controller;
 
 use Bundle\AppBundle\Entity\Campaign;
+use Bundle\AppBundle\Entity\CampaignFile;
 use Bundle\AppBundle\Form\CampaignType;
 use Bundle\UserBundle\Entity\User;
 use Bundle\UserBundle\Form\UserType;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
-use Services_Twilio_RestException;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -24,7 +24,7 @@ class CampaignController extends BaseController
         
         $campaignList= $this->getDoctrine()->getRepository('BundleAppBundle:Campaign')
                              ->findBy(array('createdBy'=>$this->getUser()));
-
+        
         return $this->render('BundleAppBundle:Campaign:home.html.twig',array(
             'campaigns'=>$campaignList,
             'user' =>$this->getUser()->getProfile()
@@ -73,12 +73,15 @@ class CampaignController extends BaseController
 
         $form = $this->createForm(new CampaignType($this->getUser(),null), $campaign);
 
+
+
         if ('POST' == $request->getMethod()) {
+
 
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                
+
                 $this->saveCampaign($campaign);
 
                 $massage = 'Campaign Successfully Inserted';
@@ -119,7 +122,12 @@ class CampaignController extends BaseController
             $form->handleRequest($request);
 
             if ($form->isValid()) {
+                $files = $request->files->get('appbundle_campaign[campaignFiles]', null, true);
 
+                $this->getDoctrine()
+                    ->getRepository('BundleAppBundle:CampaignFile')
+                    ->saveCampaignFile($files,$campaign,$this->getUser());
+                
                 $this->saveCampaign($campaign);
 
                 $massage = 'Campaign Successfully Inserted';
@@ -141,6 +149,7 @@ class CampaignController extends BaseController
     }
     public function individualCampaignCreateAction(Request $request)
     {
+        
         if($this->isFacebookLogin()){
             return $this->isFacebookLogin();
         }
@@ -151,11 +160,17 @@ class CampaignController extends BaseController
         $form = $this->createForm(new CampaignType($this->getUser(),null), $campaign);
 
         if ('POST' == $request->getMethod()) {
-
+            
             $form->handleRequest($request);
 
             if ($form->isValid()) {
 
+                $files = $request->files->get('appbundle_campaign[campaignFiles]', null, true);
+        
+                $this->getDoctrine()
+                     ->getRepository('BundleAppBundle:CampaignFile')
+                     ->saveCampaignFile($files,$campaign,$this->getUser());
+                
                 $this->saveCampaign($campaign);
 
                 $massage = 'Campaign Successfully Inserted';

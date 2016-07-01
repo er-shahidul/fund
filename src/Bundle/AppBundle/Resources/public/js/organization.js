@@ -45,7 +45,7 @@ var success = $('.alert-success', organization);
             url: Routing.generate('organization_create_ajax'),
             data: data,
             success: function (response) {
-
+                
             }
         });
     }

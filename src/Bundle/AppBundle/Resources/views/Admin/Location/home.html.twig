@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    {% include 'flash.html.twig' %}
+
+    <div class="container">
+        <h2>Location</h2>
+        <p>All Location List</p>
+        <p><a href="{{ path('location_create') }}" class="btn btn-default">Create Location</a></p>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for location in LocationList %}
+                <tr>
+                    <td>{{ location.name }}</td>
+                    <td>{{ location.approved }}</td>
+                    <td>
+                            {% if location.approved != 'Active' %}
+                                <a href="{{ path('category_status',{id:location.id}) }}">Approve</a>
+                            {% endif %}
+                            {% if location.approved != 'Inactive' %}
+                                <a href="{{ path('category_status',{id:location.id}) }}">Inactive</a>
+                            {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

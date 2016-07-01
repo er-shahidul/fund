@@ -5,10 +5,7 @@ namespace Bundle\AppBundle\Entity;
 use Bundle\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
-
 
 
 /**
@@ -16,7 +13,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="campaign")
  * @ORM\Entity(repositoryClass="Bundle\AppBundle\Repository\CampaignRepository")
- * @Vich\Uploadable
  */
 class Campaign 
 {
@@ -56,6 +52,13 @@ class Campaign
      * @ORM\Column(name="createdDate", type="datetime")
      */
     private $createdDate;
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="end_of_campaign_date", type="datetime", nullable=true)
+     */
+    private $endOfCampaignDate;
 
     /**
      * @var User
@@ -72,6 +75,14 @@ class Campaign
      * @ORM\JoinColumn(name="category", nullable = true)
      */
     private $category;
+    
+    /**
+     * @var Location
+     *
+     * @ORM\ManyToOne(targetEntity="Bundle\AppBundle\Entity\Location")
+     * @ORM\JoinColumn(name="location", nullable = true)
+     */
+    private $location;
 
     /**
      * @var Organization
@@ -96,13 +107,11 @@ class Campaign
     private $campaignComments;
 
     /**
-     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     * @var ArrayCollection
      *
-     * @Vich\UploadableField(mapping="campaign_file", fileNameProperty="campaignFileName")
-     *
-     * @var File
+     * @ORM\OneToMany(targetEntity="Bundle\AppBundle\Entity\CampaignFile", mappedBy="campaign")
      */
-    private $campaignFile;
+    private $campaignFiles;
     
     /**
      * @var boolean
@@ -110,51 +119,7 @@ class Campaign
      * @ORM\Column(name="status", type="boolean", length=15)
      */
     private $status = false;
-
-    /**
-     * @return File
-     */
-    public function getCampaignFile()
-    {
-        return $this->campaignFile;
-    }
-
-    /**
-     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $campaignFile
-     * @return Campaign
-     */
-    public function setCampaignFile(File $campaignFile = null)
-    {
-        $this->campaignFile = $campaignFile;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCampaignFileName()
-    {
-        return $this->campaignFileName;
-    }
-
-    /**
-     * @param string $campaignFileName
-     * @return Campaign
-     */
-    public function setCampaignFileName($campaignFileName)
-    {
-        $this->campaignFileName = $campaignFileName ;
-
-        return $this;
-    }
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     *
-     * @var string
-     */
-    private $campaignFileName;
-
+    
 
     /**
      * Get id
@@ -335,6 +300,7 @@ class Campaign
      */
     public function setCampaignDetails($campaignDetails)
     {
+ 
         $this->campaignDetails = $campaignDetails;
     }
 
@@ -368,5 +334,53 @@ class Campaign
     public function setStatus($status)
     {
         $this->status = $status;
+    }
+
+    /**
+     * @return Location
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    /**
+     * @param Location $location
+     */
+    public function setLocation($location)
+    {
+        $this->location = $location;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getEndOfCampaignDate()
+    {
+        return $this->endOfCampaignDate;
+    }
+
+    /**
+     * @param \DateTime $endOfCampaignDate
+     */
+    public function setEndOfCampaignDate($endOfCampaignDate)
+    {
+        $this->endOfCampaignDate = $endOfCampaignDate;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getCampaignFiles()
+    {
+        return $this->campaignFiles;
+    }
+
+    /**
+     * @param ArrayCollection $campaignFiles
+     */
+    public function setCampaignFiles($campaignFiles)
+    {
+        $this->campaignFiles = $campaignFiles;
     }
 }

@@ -105,16 +105,6 @@ hwi_oauth:
             properties:
                 facebook:  facebook
 
-vich_uploader:
-    db_driver: orm
-    mappings:
-            campaign_file:
-                uri_prefix:         /uploads/campaign
-                upload_destination: %campaign_path%
-                inject_on_load:     false
-                delete_on_update:   true
-                delete_on_remove:   true
-
 fos_comment:
     db_driver: orm
     class:
