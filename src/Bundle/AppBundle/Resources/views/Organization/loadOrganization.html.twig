@@ -19,52 +19,12 @@
             </div>
         </div>
     </div>
-        {#<div class="modal fade" id="myModal2">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        Organization
-                    </div>
-                    <div class="modal-body">
-                            <div class="col-md-12">
-                                <div class="portlet-body">
-
-                                    <div class="form-body">
-                                        <div class="verify-profile-for-campaign">
-
-                                            <div class="form-group">
-                                                <label class="col-md-3 col-sm-3 control-label">Organization</label>
-                                                <div class="col-md-5 col-sm-5">
-
-                                                    <select>
-                                                        <option value="">Select Organization</option>
-                                                        {% for organization in organizationList %}
-                                                            <option value="{{ organization.id }}">{{ organization.name }}</option>
-                                                        {% endfor %}
-                                                    </select>
-                                                    <span class="help-block"></span>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-                    <div class="modal-footer">
-                        <a href="" class="btn btn-primary">Save changes</a>
-                        <a class="btn default createOrganization" data-target="#myModal3" data-toggle="modal"
-                           href="{{ path('organization_create_ajax') }}" >Create Organization</a>
-                    </div>
-                </div>
-            </div>
-        </div>#}
 
         <div class="modal fade" id="myModal2"  role="basic" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header" style="background: lightgrey;">
-                        <button type="button" class="close close-modal-refresh" data-dismiss="modal" aria-hidden="true"></button>
+                        <button type="button" class="close close-modal-refresh" data-dismiss="modal" aria-hidden="true">close</button>
                         <h4 class="modal-title bold" style="text-align: center;">Organization</h4>
                     </div>
                     <form id="individualFrm" method="post" action="{{ path('campaign_organization_create') }}">

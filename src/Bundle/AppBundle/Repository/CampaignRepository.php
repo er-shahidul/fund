@@ -19,4 +19,22 @@ class CampaignRepository extends EntityRepository
         $this->_em->flush();
         return $data;
     }
+    public function getSearchResult($data,$category = null)
+    {
+        $search = $data['search'];
+
+        $query = $this->createQueryBuilder('cam');
+        $query->leftJoin('cam.category', 'c');
+        $query->leftJoin('cam.location', 'l');
+        $query->where($query->expr()->like("cam.title", "'%$search%'"  ));
+        $query->orWhere($query->expr()->like("l.name", "'%$search%'"  ));
+        $query->orWhere($query->expr()->like("c.title", "'%$search%'"  ));
+        if (!empty($category)){
+            $query->andWhere('c.id = :category');
+            $query->setParameter('category', $category);
+        }
+        $query->orderBy('cam.id', 'DESC');
+ 
+        return $query->getQuery()->getResult();
+    }
 }

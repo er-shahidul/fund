@@ -1,21 +1,39 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-<div style="background-color: #fdf8f8">
+<div id="wrapper" style="background-color: #fdf8f8">
+    <form action="{% if categoryTitle.id is not defined %}
+                    {{ path('campaign_search') }}
+                    {% else %}
+                    {{ path('campaign_search_category_wise',{id:categoryTitle.id}) }}
+                    {% endif %}"
+          method="post">
+        <div class="search_short cnt mb30" id="search_input_wrapper">
+            <div class="search_icon_update"></div>
+            {{ form_widget(form.search, { 'attr': {'class': 'search_field_short blink search-term-left',
+                'placeholder': 'Search by name, keyword, or city...'} }) }}
+            <input type="submit" class="btn btn-default blue" value="Search">
+
+        </div>
+    </form>
     <div class="campaign-list">
         <div class="campaign-sidebar">
-            <div class="campaign-sub-sidebar">
-                <div class="n cat">
+            <div id="sidebar-wrapper">
+                <ul class="sidebar-nav">
+                    <li class="sidebar-brand">
+                        <a href="{{ path('bundle_app_homepage') }}">
+                            All Categories
+                        </a>
+                    </li>
+                    {% for category in categories %}
+                    <li>
+                        <a href="{{ path('campaign_category_based',{title:category.title}) }}"
+                           class="{% if categoryTitle.title|default == category.title %}active{% else  %}{% endif %}">
+                            {{ category.title }}
+                        </a></li>
+                    {% endfor %}
 
-                    {#  <div class="cathead top">MOST COMMON</div>
-
-                      <a href="/2016-Olympic-Games/" class="c23 ">Road to Rio</a>
-                      <a href="/alberta-fire-relief/" class="c23 ">Alberta Fires</a>
-
-                      <div class="cathead mid">ALL CATEGORIES</div>
-
-                      <a href="/Business-Entrepreneurs/" class="c11 ">Business</a>#}
-                </div>
+                </ul>
             </div>
         </div>
         {#<div class="single-campaign">#}
@@ -43,12 +61,16 @@
                 </div>
 
             {% endfor %}
+
         {% else %}
             <div class="jumbotron">
-                Create Your First Campaign <a href="javascript:;" class="campaignCreate">here</a>
+               First create Campaign
             </div>
         {% endif %}
-
+        <div style="clear: both"></div>
+        <div>
+        {{ knp_pagination_render(campaigns) }}
+        </div>
     </div>
 </div>
 {% endblock %}

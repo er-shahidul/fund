@@ -4,6 +4,8 @@ namespace Bundle\AppBundle\Controller;
 
 use Bundle\AppBundle\Entity\Campaign;
 use Bundle\AppBundle\Entity\CampaignFile;
+use Bundle\AppBundle\Entity\Category;
+use Bundle\AppBundle\Form\CampaignSearchType;
 use Bundle\AppBundle\Form\CampaignType;
 use Bundle\UserBundle\Entity\User;
 use Bundle\UserBundle\Form\UserType;
@@ -217,5 +219,82 @@ class CampaignController extends BaseController
         $campaignRepo->create($campaign);
     }
 
-    
+    public function categoryBasedCampaignListAction(Request $request ,Category $category)
+    {
+        list($form, $data) = $this->campaignSearch($request);
+
+        $campaignList = $this->paginate($this->getDoctrine()
+                             ->getRepository('BundleAppBundle:Campaign')
+                             ->findByCategory(array('category'=>$category)));
+        
+        $categoryList = $this->getDoctrine()
+                             ->getRepository('BundleAppBundle:Category')
+                             ->findAll();
+
+        return $this->render('BundleAppBundle:Dashboard:home.html.twig',array(
+            'campaigns'=>$campaignList,
+            'categories'=>$categoryList,
+            'categoryTitle'=>$category,
+            'form' => $form->createView()
+
+        ));
+    }
+     public function campaignSearchAction(Request $request)
+    {
+
+        list($form, $data) = $this->campaignSearch($request);
+
+        $searchResult = $this->paginate($this->getDoctrine()
+                             ->getRepository('BundleAppBundle:Campaign')
+                             ->getSearchResult($data));
+
+        $categoryList = $this->getDoctrine()
+                             ->getRepository('BundleAppBundle:Category')
+                             ->findAll();
+
+        return $this->render('BundleAppBundle:Dashboard:home.html.twig',array(
+            'campaigns'=>$searchResult,
+            'categories'=>$categoryList,
+            'categoryTitle'=>'',
+            'form' => $form->createView()
+
+        ));
+    }
+    public function campaignSearchCategoryWiseAction(Request $request,Category $category)
+    {        
+
+        list($form, $data) = $this->campaignSearch($request);
+
+        $searchResult = $this->paginate($this->getDoctrine()
+                             ->getRepository('BundleAppBundle:Campaign')
+                             ->getSearchResult($data,$category));
+
+        $categoryList = $this->getDoctrine()
+                             ->getRepository('BundleAppBundle:Category')
+                             ->findAll();
+
+        return $this->render('BundleAppBundle:Dashboard:home.html.twig',array(
+            'campaigns'=>$searchResult,
+            'categories'=>$categoryList,
+            'categoryTitle'=>$category,
+            'form' => $form->createView()
+
+        ));
+    }
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    private function campaignSearch(Request $request)
+    {
+        $form = new CampaignSearchType();
+        $data = $request->get($form->getName());
+        $form = $this->createForm($form);
+        $form->submit($data);
+
+        return array($form, $data);
+    }
+
+
 }

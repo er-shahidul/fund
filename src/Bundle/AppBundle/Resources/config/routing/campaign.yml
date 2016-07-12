@@ -26,3 +26,15 @@ campaign_individual_create:
 campaign_detail:
     path:     /campaign/detail/{id}
     defaults: { _controller: BundleAppBundle:Campaign:campaignDetails }
+
+campaign_category_based:
+    path:     /campaign/category-based/{title}
+    defaults: { _controller: BundleAppBundle:Campaign:categoryBasedCampaignList }
+
+campaign_search:
+    path:     /campaign/search
+    defaults: { _controller: BundleAppBundle:Campaign:campaignSearch }
+
+campaign_search_category_wise:
+    path:     /campaign/category-wise-search/{id}
+    defaults: { _controller: BundleAppBundle:Campaign:campaignSearchCategoryWise }
