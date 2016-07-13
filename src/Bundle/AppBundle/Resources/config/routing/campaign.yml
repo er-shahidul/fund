@@ -22,6 +22,10 @@ campaign_individual_create:
     path:     /campaign/individual-create
     defaults: { _controller: BundleAppBundle:Campaign:individualCampaignCreate }
 
+campaign_individual_update:
+    path:     /campaign/individual-update/{id}
+    defaults: { _controller: BundleAppBundle:Campaign:individualCampaignUpdate }
+
 
 campaign_detail:
     path:     /campaign/detail/{id}

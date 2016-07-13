@@ -30,7 +30,14 @@ class Campaign
      *
      * @ORM\Column(name="title", type="string", length=255)
      */
-    private $title;
+    private $title; 
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="campaign_video_url", type="string", length=255, nullable=true)
+     */
+    private $campaignVideoUrl;
 
     /**
      * @var float
@@ -52,6 +59,13 @@ class Campaign
      * @ORM\Column(name="createdDate", type="datetime")
      */
     private $createdDate;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updatedDate", type="datetime", nullable=true)
+     */
+    private $updatedDate;
     
     /**
      * @var \DateTime
@@ -67,6 +81,14 @@ class Campaign
      * @ORM\JoinColumn(name="created_by", nullable=true)
      */
     private $createdBy;
+
+    /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="Bundle\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="updated_by", nullable=true)
+     */
+    private $updatedBy;
 
     /**
      * @var Category
@@ -382,5 +404,53 @@ class Campaign
     public function setCampaignFiles($campaignFiles)
     {
         $this->campaignFiles = $campaignFiles;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUpdatedBy()
+    {
+        return $this->updatedBy;
+    }
+
+    /**
+     * @param User $updatedBy
+     */
+    public function setUpdatedBy($updatedBy)
+    {
+        $this->updatedBy = $updatedBy;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedDate()
+    {
+        return $this->updatedDate;
+    }
+
+    /**
+     * @param \DateTime $updatedDate
+     */
+    public function setUpdatedDate($updatedDate)
+    {
+        $this->updatedDate = $updatedDate;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCampaignVideoUrl()
+    {
+        return $this->campaignVideoUrl;
+    }
+
+    /**
+     * @param string $campaignVideoUrl
+     */
+    public function setCampaignVideoUrl($campaignVideoUrl)
+    {
+        $this->campaignVideoUrl = $campaignVideoUrl;
     }
 }

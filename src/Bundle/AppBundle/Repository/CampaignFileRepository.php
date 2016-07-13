@@ -25,21 +25,23 @@ class CampaignFileRepository extends EntityRepository
         $this->_em->persist($data);
     }
     public function saveCampaignFile($files,$campaign,$user){
+   
+        if(!in_array(null,$files)) {
+            /** @var UploadedFile $file */
 
-        /** @var UploadedFile $file */
+            foreach ($files as $file) {
 
-        foreach ($files as $file) {
+                $campaignFile = new CampaignFile();
 
-            $campaignFile = new CampaignFile();
+                $campaignFile->setFile($file);
+                $campaignFile->upload();
+                $campaignFile->setFileType($file->getClientMimeType());
+                $campaignFile->setCreatedBy($user);
+                $campaignFile->setFileName($file->getClientOriginalName());
+                $campaignFile->setCampaign($campaign);
+                $this->_em->persist($campaignFile);
 
-            $campaignFile->setFile($file);
-            $campaignFile->upload();
-            $campaignFile->setFileType($file->getClientMimeType());
-            $campaignFile->setCreatedBy($user);
-            $campaignFile->setFileName($file->getClientOriginalName());
-            $campaignFile->setCampaign($campaign);
-            $this->_em->persist($campaignFile);
-
+            }
         }
     }
 }

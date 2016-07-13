@@ -31,6 +31,7 @@
                                 </a>
                                 <a href="{{ path('campaign_detail',{id:campaign.id}) }}" class="title">{{ campaign.title }}</a>
                                 <a href="{{ path('campaign_detail',{id:campaign.id}) }}" class="loc" style="text-transform: uppercase">{{ campaign.location.name|default('N/A') }}</a>
+                                <a href="{{ path('campaign_individual_update',{id:campaign.id}) }}" class="btn btn-default" style="float: right">Edit</a>
                             </div>
 
                     {% endfor %}

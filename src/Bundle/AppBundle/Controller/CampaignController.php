@@ -38,12 +38,17 @@ class CampaignController extends BaseController
              return $this->isFacebookLogin();
          }
         
-        $campaignList= $this->getDoctrine()->getRepository('BundleAppBundle:Campaign')
+        $campaignList = $this->getDoctrine()->getRepository('BundleAppBundle:Campaign')
                              ->findBy(array('createdBy'=>$this->getUser(),'organization'=>null));
+        $campaignFiles = $this->getDoctrine()
+                              ->getRepository('BundleAppBundle:CampaignFile')
+                              ->findBy(array('createdBy'=>$this->getUser()));
+    
 
         return $this->render('BundleAppBundle:Campaign:home.html.twig',array(
             'campaigns'=>$campaignList,
-            'user' =>$this->getUser()->getProfile()
+            'user' =>$this->getUser()->getProfile(),
+            'campaignFiles' =>$campaignFiles
         ));
     }
     public function organizationalCampaignListAction()
@@ -109,10 +114,14 @@ class CampaignController extends BaseController
         if($this->isFacebookLogin()){
             return $this->isFacebookLogin();
         }
-        
-        $organizationId = $request->request->get('organizationVal');
-        $organizationName = $this->getDoctrine()->getRepository('BundleAppBundle:Organization')->find($organizationId);
-        
+
+        if($request->request->get('organizationVal')){
+            $organizationId = $request->request->get('organizationVal');
+            $organizationName = $this->getDoctrine()->getRepository('BundleAppBundle:Organization')->find($organizationId);
+        } else {
+            $organizationName = null ;
+        }
+
         $organization = $this->checkExistingOrganization($this->getUser());
 
         $campaign = new Campaign();
@@ -168,6 +177,50 @@ class CampaignController extends BaseController
             if ($form->isValid()) {
 
                 $files = $request->files->get('appbundle_campaign[campaignFiles]', null, true);
+
+
+                $this->getDoctrine()
+                     ->getRepository('BundleAppBundle:CampaignFile')
+                     ->saveCampaignFile($files,$campaign,$this->getUser());
+
+
+                $this->saveCampaign($campaign);
+
+                $massage = 'Campaign Successfully Inserted';
+                $this->get('session')->getFlashBag()->add('notice', $massage);
+                return $this->redirect($this->generateUrl('campaign_list'));
+            }
+        }
+
+        $user = $this->getUser()->getProfile();
+
+        return $this->render(
+            'BundleAppBundle:Campaign:individualCampaignform.html.twig',
+            array(
+                'form'     => $form->createView(),
+                'user'      => $user,
+                'organization' => $organization
+            )
+        );
+
+    }
+    public function individualCampaignUpdateAction(Request $request , Campaign $campaign)
+    {
+
+        if($this->isFacebookLogin()){
+            return $this->isFacebookLogin();
+        }
+        $organization = $this->checkExistingOrganization($this->getUser());
+        
+        $form = $this->createForm(new CampaignType($this->getUser(),null), $campaign);
+
+        if ('POST' == $request->getMethod()) {
+            
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+
+                $files = $request->files->get('appbundle_campaign[campaignFiles]', null, true);
         
                 $this->getDoctrine()
                      ->getRepository('BundleAppBundle:CampaignFile')
@@ -183,22 +236,28 @@ class CampaignController extends BaseController
         $user = $this->getUser()->getProfile();
 
         return $this->render(
-            'BundleAppBundle:Campaign:individualCampaignform.html.twig',
+            'BundleAppBundle:Campaign:individualCampaignEditform.html.twig',
             array(
                 'form'     => $form->createView(),
                 'user'      => $user,
-                'organization' => $organization
+                'organization' => $organization,
+                'campaign' =>$campaign
             )
         );
 
     }
     
     public  function campaignDetailsAction(Campaign $campaign){
-        
+
+        $campaignGallary = $this->getDoctrine()
+            ->getRepository('BundleAppBundle:CampaignFile')
+            ->findBy(array('campaign'=>$campaign));
+
         return $this->render(
             'BundleAppBundle:Campaign:campaignDetail.html.twig',
             array(
                 'campaign'      => $campaign,
+                'campaignGallary' => $campaignGallary
             )
         );
     }
@@ -215,6 +274,7 @@ class CampaignController extends BaseController
 
         $campaign->setCreatedDate(new \DateTime(date('Y-m-d')));
         $campaign->setCreatedBy($this->getUser());
+        $campaign->setStatus(false);
         $campaignRepo = $this->getDoctrine()->getRepository("BundleAppBundle:Campaign");
         $campaignRepo->create($campaign);
     }

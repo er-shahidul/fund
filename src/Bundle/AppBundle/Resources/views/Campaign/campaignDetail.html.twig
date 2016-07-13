@@ -5,14 +5,38 @@
             <div class="jumbotron">
                 <div class="col-md-18">
                     <div class="col-md-8">
-                        <div class="campaign-img-contain">
-                            <img class="campaign-img" src="{{ asset('assets/img/people.png') }}">
+                        <div class="campaign-img-contain" id="loadImage">
+                            <img class="campaign-img defaultLoadImage" width="300" height="350"
+                                 src="{{ asset('uploads/campaign/') }}{{ campaignGallary[0].path }}">
                         </div>
+
+                    </div><br/>
+
+                    <div class="col-md-8">
+                        {% for gallary in  campaignGallary  %}
+                        <div class="campaign-img-contain">
+                            <img class="thumbnail"
+                                 onclick="loadImage('{{ asset('uploads/campaign/') }}{{ gallary.path }}')"
+                                 style="float: left;width: 150px ;height: 150px;" src="{{ asset('uploads/campaign/') }}{{ gallary.path }}">
+                        </div>
+                        {% endfor %}
                     </div>
+
                     <div class="col-md-8">
                         {{ campaign.description }}
 
                     </div>
+
+
+
+                    <div class="col-md-8">
+                        {% set videoUrl = campaign.campaignVideoUrl |split('/') %}
+                        {% if videoUrl[3] is defined %}
+                        <iframe width="420" height="345" src="https://www.youtube.com/embed/{{ videoUrl[3] }}">
+                        </iframe>
+                        {% endif %}
+                    </div>
+
                 </div>
 
                 <div class="col-md-18">
@@ -67,6 +91,7 @@
      {% javascripts
      '@BundleAppBundle/Resources/public/js/facebook/socialite.js'
      '@BundleAppBundle/Resources/public/js/facebook/fbCustom.js'
+     '@BundleAppBundle/Resources/public/js/image.js'
      %}
      <script type="text/javascript" src="{{ asset_url }}"></script>
      {% endjavascripts %}

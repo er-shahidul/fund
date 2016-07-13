@@ -19,6 +19,7 @@ class CampaignType extends AbstractType
 
     public function __construct($user, $organization)
     {
+
         $this->user = $user;
         $this->organization = $organization;
 
@@ -34,17 +35,27 @@ class CampaignType extends AbstractType
                 'required' => false,
                 'attr' => array('class' => 'form-control input-large')
             ))
-            ->add('status', 'choice', array(
-                'choices' => array(
-                    true => 'Published',
-                    false => 'Un-published'
-                ),
-                'multiple' => false,
-                'expanded' => true,
-                'required' => true,
-                'data'     => false
-            ))
-            ->add('amount', 'text', array(
+            ->add('campaignVideoUrl', 'text', array(
+                'required' => false,
+                'attr' => array('class' => 'form-control input-large')
+            ));
+            if($this->user->hasRole("ROLE_ADMIN")) {
+                $builder->add(
+                    'status',
+                    'choice',
+                    array(
+                        'choices'  => array(
+                            true  => 'Published',
+                            false => 'Un-published'
+                        ),
+                        'multiple' => false,
+                        'expanded' => true,
+                        'required' => true,
+                        'data'     => false
+                    )
+                );
+            }
+        $builder->add('amount', 'text', array(
                 'required' => false,
                 'attr' => array('class' => 'form-control input-large')
             ))
@@ -86,7 +97,8 @@ class CampaignType extends AbstractType
                             ->setParameter('user',$this->user)
                             ->setParameter('status', 'Active');
                     },
-                    'data'=> $this->organization
+
+                    'data'=> $this->organization ? $this->organization:null
                 )
             )
             ->add($builder->create('endOfCampaignDate', 'text', array(
