@@ -13,7 +13,7 @@ class HomeController extends BaseController
         
         $campaignList = $this->paginate($this->getDoctrine()->getRepository('BundleAppBundle:Campaign')->findAll());
         $categoryList = $this->getDoctrine()->getRepository('BundleAppBundle:Category')->findAll();
-        
+      
         $form = new CampaignSearchType();
         $form = $this->createForm($form);
         

@@ -1,0 +1,7 @@
+donation_list:
+    path:     /campaign
+    defaults: { _controller: BundleAppBundle:Campaign:index }
+
+donation_create:
+    path:     /donation/create/{id}
+    defaults: { _controller: BundleAppBundle:Donation:create }

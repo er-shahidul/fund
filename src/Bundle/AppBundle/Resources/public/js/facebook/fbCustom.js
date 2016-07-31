@@ -9,3 +9,11 @@
 
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
+
+document.getElementById('shareBtn').onclick = function() {
+    FB.ui({
+        method: 'share',
+        mobile_iframe: true,
+        href: shareUrl,
+    }, function(response){});
+}

@@ -5,6 +5,9 @@ bundle_app_homepage:
 app_bundle_routing_campaign:
     resource: "@BundleAppBundle/Resources/config/routing/campaign.yml"
 
+app_bundle_routing_donation:
+    resource: "@BundleAppBundle/Resources/config/routing/donation.yml"
+
 app_bundle_routing_category:
     resource: "@BundleAppBundle/Resources/config/routing/admin/category.yml"
 

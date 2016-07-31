@@ -120,6 +120,13 @@ class Campaign
      * @ORM\OneToMany(targetEntity="Bundle\AppBundle\Entity\CampaignDetails", mappedBy="Campaign", cascade={"persist"})
      */
     private $campaignDetails;
+    
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Bundle\AppBundle\Entity\Donation", mappedBy="Campaign", cascade={"persist"})
+     */
+    private $donationDetails;
 
     /**
      * @var ArrayCollection
@@ -452,5 +459,21 @@ class Campaign
     public function setCampaignVideoUrl($campaignVideoUrl)
     {
         $this->campaignVideoUrl = $campaignVideoUrl;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getDonationDetails()
+    {
+        return $this->donationDetails;
+    }
+
+    /**
+     * @param ArrayCollection $donationDetails
+     */
+    public function setDonationDetails($donationDetails)
+    {
+        $this->donationDetails = $donationDetails;
     }
 }

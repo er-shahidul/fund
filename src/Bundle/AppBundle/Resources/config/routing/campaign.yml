@@ -26,6 +26,13 @@ campaign_individual_update:
     path:     /campaign/individual-update/{id}
     defaults: { _controller: BundleAppBundle:Campaign:individualCampaignUpdate }
 
+campaign_detail_create:
+    path:     /campaign/detail-create/{id}
+    defaults: { _controller: BundleAppBundle:Campaign:campaignDetails }
+
+campaign_detail_update:
+    path:     /campaign/detail-update/{id}
+    defaults: { _controller: BundleAppBundle:Campaign:campaignDetailsUpdate }
 
 campaign_detail:
     path:     /campaign/detail/{id}
@@ -42,3 +49,11 @@ campaign_search:
 campaign_search_category_wise:
     path:     /campaign/category-wise-search/{id}
     defaults: { _controller: BundleAppBundle:Campaign:campaignSearchCategoryWise }
+
+campaign_get_image:
+    path:     /campaign/image/{id}
+    defaults: { _controller: BundleAppBundle:Campaign:getCampaignSingleImage }
+
+campaign_get_progress_bar:
+    path:     /campaign/progrress-bar/{id}
+    defaults: { _controller: BundleAppBundle:Campaign:getCampaignProgressBar }

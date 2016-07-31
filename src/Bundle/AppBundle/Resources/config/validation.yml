@@ -18,6 +18,26 @@ Bundle\AppBundle\Entity\Organization:
 #        mobileNumber:
 #            - NotBlank: { message: "Mobile Number should not be blank" }
 
+Bundle\AppBundle\Entity\Donation:
+    properties:
+        first_name:
+            - NotBlank: { message: "First Name  should not be blank" }
+
+        last_name:
+            - NotBlank: { message: "Last Name  should not be blank" }
+
+        email:
+            - NotBlank: { message: "Email  should not be blank" }
+
+        postalCode:
+            - NotBlank: { message: "Postal Code  should not be blank" }
+
+        donate_amount:
+            - NotBlank: { message: "Amount  should not be blank" }
+
+        notes:
+            - NotBlank: { message: "Notes  should not be blank" }
+
 Bundle\AppBundle\Entity\Category:
     properties:
         title:
