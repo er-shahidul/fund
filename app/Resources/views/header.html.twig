@@ -1,0 +1,171 @@
+<header id="wpo-header" class="wpo-header wpo-header-v1">
+
+    <div class="container-inner header-wrap">
+        <div class="container header-wrapper-inner">
+            <div class="col-xs-12">
+                <!-- LOGO -->
+                <div class="logo-in-theme pull-left">
+                    <div class="logo logo-theme">
+                        <a href="http://venusdemo.com/unity/demo-1/">
+                            <img src="http://venusdemo.com/unity/demo-1/wp-content/themes/unity/images/logo.png"
+                                 alt="Unity Theme"/>
+                        </a>
+                    </div>
+                </div>
+                <div class="pull-left hidden-xs hidden-sm">
+                    <div class="top-menu">
+                        <nav class="wp-topmenu" role="navigation">
+                            <div class="navbar-collapse">
+                                <ul id="main-topmenu" class="wpo-menu-top nav navbar-nav">
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4591">
+                                        <a href="#">Contact</a></li>
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5020">
+                                        <a href="#">What you can do</a></li>
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4758">
+                                        <a href="#">Gallerys</a></li>
+                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4759">
+                                        <a href="#">Events</a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+                <div class="pull-right hidden-xs hidden-sm">
+                        <div class="wpo-search input-group">
+		            <span class="input-group-addon input-large">
+                        {% if not app.user %}
+                        <a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}">
+                            <span>Log in with Facebook</span>
+                        </a>
+                        {% endif %}
+                        {% if app.user %}
+                            <a href="{{ path('fos_user_security_logout') }}">
+                                <span>Log Out</span>
+                            </a>
+                        {% endif %}
+					</span>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MENU -->
+        <div class="wpo-mainmenu-wrap hidden-xs">
+            <div class="container">
+                <div class="mainmenu-content">
+                    <nav id="wpo-mainnav" data-duration="300" class="wpo-megamenu  animate navbar navbar-mega"
+                         role="navigation">
+                        <div class="navbar-header">
+                            <a href="javascript:;"
+                               data-target=".navbar-collapse"
+                               data-pos="left" data-effect="off-canvas-effect-1"
+                               data-nav="#wpo-off-canvas"
+                               data-toggle="offcanvas"
+                               class="navbar-toggle off-canvas-toggle btn-primary btn-xs visible-xs">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </a>
+                        </div><!-- //END #navbar-header -->
+                        <div class="collapse navbar-collapse navbar-ex1-collapse no-padding">
+                            <ul id="main-menu" class="nav navbar-nav megamenu">
+                                <li class="menu-item-4631" data-id="4631" data-alignsub="left" data-level="1">
+                                    <a href="http://venusdemo.com/unity/demo-1/?post_type=download">Home</a>
+                                </li>
+                                {% if app.user %}
+                                <li class="menu-item-2496 dropdown parent mega depth-0" data-id="2496"
+                                    data-alignsub="left" data-level="1"><a
+                                        href="http://venusdemo.com/unity/demo-1/?post_type=tribe_events"
+                                        class="dropdown-toggle">Campaigns <b class="caret"></b></a>
+                                    <div class="dropdown-menu">
+                                        <div class="dropdown-menu-inner">
+                                            <div class="row">
+                                                <div class="mega-col col-md-12 " data-type="menu">
+                                                    <div class="mega-col-inner">
+                                                        <ul class="megamenu-items">
+                                                            <li class="menu-item-4732" data-id="4732"
+                                                                data-alignsub="left" data-level="2"><a
+                                                                    href="{{ path('campaign_list') }}">Campaign
+                                                                </a>
+                                                            </li>
+                                                            <li class="menu-item-4734" data-id="4734" data-alignsub="left" data-level="2">
+                                                                <a href="{{ path('individula_campaign_list') }}">Individual Campaign</a>
+                                                            </li>
+
+                                                            <li class="menu-item-4733" data-id="4733"
+                                                                data-alignsub="left" data-level="2">
+                                                                <a href="{{ path('organizational_campaign_list') }}">Organizational Campaign</a>
+                                                            </li>
+                                                            <li class="menu-item-4733" data-id="4733"
+                                                                data-alignsub="left" data-level="2">
+                                                                <a href="javascript:;" class="campaignCreate">Create Campaign</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+{%  endif %}
+                                {#<li class="menu-item-395 dropdown parent mega depth-0 aligned-left" data-id="395"
+                                    data-alignsub="left" data-level="1"><a
+                                        href="http://venusdemo.com/unity/demo-1/?page_id=22" class="dropdown-toggle">Category
+                                    <b class="caret"></b></a>
+                                    <div class="dropdown-menu">
+                                        <div class="dropdown-menu-inner">
+                                            <div class="row">
+                                                <div class="mega-col col-md-12 " data-type="menu">
+                                                    <div class="mega-col-inner">
+                                                        <ul class="megamenu-items">
+                                                            <li class="menu-item-481" data-id="481" data-alignsub="left"
+                                                                data-level="2"><a
+                                                                    href="http://venusdemo.com/unity/demo-1/?page_id=22">Blog
+                                                                Right Sidebar</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>#}
+                                {% if is_granted("ROLE_ADMIN") %}
+                                    <li class="menu-item-4688 dropdown parent mega depth-0 aligned-fullwidth">
+                                        <a data-hover="megamenu-dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;">
+                                            ADMIN <i class="fa fa-angle-down"></i>
+                                        </a>
+
+                                        <ul class="dropdown-menu pull-left">
+                                            <li class="">
+                                                <a href="{{ path('organization_list') }}">Organization</a>
+                                            </li>
+                                            <li class="">
+                                                <a href="{{ path('category_list') }}">Category</a>
+                                            </li>
+                                            <li class="">
+                                                <a href="{{ path('location_list') }}">Location</a>
+                                            </li>
+                                        </ul>
+
+                                    </li>
+                                {% endif %}
+
+                            </ul>
+                        </div>
+                    </nav>
+
+                    <div class="btn-create-campaign hidden-xs hidden-sm">
+
+                        <a class="user-campaign button" href="http://venusdemo.com/unity/demo-1/?page_id=4501"><i
+                                class="fa fa-plus"></i><span class="hidden-sm hidden-md">Create a campaign</span></a>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <!-- //MENU -->
+        <!-- // Setting -->
+    </div>
+
+</header>

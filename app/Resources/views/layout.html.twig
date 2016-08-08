@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <script
+            type="text/javascript">document.documentElement.className = document.documentElement.className + ' yes-js js_active js'</script>
+    <title>{% block title %} FUND {% endblock %}</title>
+    <style>
+        .wishlist_table .add_to_cart, a.add_to_wishlist.button.alt {
+            border-radius: 16px;
+            -moz-border-radius: 16px;
+            -webkit-border-radius: 16px;
+        }
+    </style>
+    <link rel="alternate" type="application/rss+xml" title="Unity Theme &raquo; Feed"
+          href="http://venusdemo.com/unity/demo-1/?feed=rss2"/>
+    <link rel="alternate" type="application/rss+xml" title="Unity Theme &raquo; Comments Feed"
+          href="http://venusdemo.com/unity/demo-1/?feed=comments-rss2"/>
+    <link rel="alternate" type="text/calendar" title="Unity Theme &raquo; iCal Feed"
+          href="http://venusdemo.com/unity/demo-1?post_type=tribe_events/?ical=1"/>
+    <link rel="alternate" type="application/rss+xml" title="Unity Theme &raquo; Home (Default) Comments Feed"
+          href="http://venusdemo.com/unity/demo-1/?feed=rss2&#038;page_id=2837"/>
+
+    {% block stylesheets %}
+        {% stylesheets
+        'assets/css/app.css'
+        'assets/css/woocommerce.css'
+        'assets/css/styles.css'
+        'assets/css/edd.min.css'
+        'assets/css/settings.css'
+        'assets/css/colorbox.css'
+        'assets/css/prettyPhoto.css'
+        'assets/css/jquery.selectBox.css'
+        'assets/css/style.css'
+        'assets/css/font-awesome.min.css'
+        'assets/css/checkbox.min.css'
+        'assets/css/style(1).css'
+        'assets/css/bootstrap.css'
+        'assets/css/template.css'
+        'assets/css/font-awesome.css'
+        'assets/css/js_composer.css'
+        'assets/plugins/css/sidebar.css'
+
+        filter ='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}"/>
+        {% endstylesheets %}
+    {% endblock %}
+    <link rel="shortcut icon" href="/favicon.ico"/>
+    <style id='rs-plugin-settings-inline-css' type='text/css'>
+        .tp-caption a {
+            color: #ff7302;
+            text-shadow: none;
+            -webkit-transition: all 0.2s ease-out;
+            -moz-transition: all 0.2s ease-out;
+            -o-transition: all 0.2s ease-out;
+            -ms-transition: all 0.2s ease-out
+        }
+
+        .tp-caption a:hover {
+            color: #ffa902
+        }
+    </style>
+
+    <script type='text/javascript'>
+        /* <![CDATA[ */
+        var edd_scripts = {
+            "ajaxurl": "http:\/\/venusdemo.com\/unity\/demo-1\/wp-admin\/admin-ajax.php",
+            "position_in_cart": "",
+            "already_in_cart_message": "You have already added this item to your cart",
+            "empty_cart_message": "Your cart is empty",
+            "loading": "Loading",
+            "select_option": "Please select an option",
+            "ajax_loader": "\/unity\/demo-1\/wp-content\/plugins\/easy-digital-downloads\/assets\/images\/loading.gif",
+            "is_checkout": "0",
+            "default_gateway": "paypal",
+            "redirect_to_checkout": "1",
+            "checkout_page": "http:\/\/venusdemo.com\/unity\/demo-1\/?page_id=4417",
+            "permalinks": "0",
+            "quantities_enabled": ""
+        };
+        /* ]]> */
+    </script>
+    <link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://venusdemo.com/unity/demo-1/xmlrpc.php?rsd"/>
+    <link rel="wlwmanifest" type="application/wlwmanifest+xml"
+          href="http://venusdemo.com/unity/demo-1/wp-includes/wlwmanifest.xml"/>
+    <meta name="generator" content="WordPress 4.2.9"/>
+    <meta name="generator" content="WooCommerce 2.3.7"/>
+    <link rel='canonical' href='http://venusdemo.com/unity/demo-1/'/>
+    <link rel='shortlink' href='http://venusdemo.com/unity/demo-1/'/>
+    <meta name="generator" content="Easy Digital Downloads v2.3.9"/>
+
+    <meta name="generator" content="Powered by Visual Composer - drag and drop page builder for WordPress."/>
+    <!--[if IE 8]>
+
+    <![endif]-->
+
+    <style type="text/css">.mc4wp-form input[name="_mc4wp_required_but_not_really"] {
+            display: none !important;
+        }</style>
+    <!--[if lt IE 9]>
+
+    <![endif]-->
+</head>
+
+
+<body
+        class="home page page-id-2837 page-template page-template-template-visual page-template-template-visual-php wpo-animate-scroll  wpb-js-composer js-comp-ver-4.4.2 vc_responsive tribe-theme-unity">
+
+<!-- OFF-CANVAS MENU SIDEBAR -->
+<div id="wpo-off-canvas" class="wpo-off-canvas">
+    <div class="wpo-off-canvas-body">
+        <div class="wpo-off-canvas-header">
+            <form role="search" method="get" class="searchform" action="http://venusdemo.com/unity/demo-1/">
+                <div class="wpo-search input-group">
+                    <input name="s" maxlength="40" class="form-control input-large input-search" type="text" size="20"
+                           placeholder="Search...">
+		<span class="input-group-addon input-large btn-search">
+			<input type="submit" class="fa" value="&#xf002;"/>
+						<input type="hidden" name="post_type" value="download"/>
+					</span>
+                </div>
+            </form>
+
+
+            <button type="button" class="close btn btn-close" data-dismiss="modal">
+                <i class="fa fa-times"></i>
+            </button>
+            <div class="mobile-menu-header">
+                Menu
+            </div>
+        </div>
+        <nav class="navbar navbar-offcanvas navbar-static" role="navigation">
+            <div class="navbar-collapse">
+                <ul id="main-menu-offcanvas" class="wpo-menu-top nav navbar-nav">
+                    <li id="menu-item-2840" class="mobile-dropdown menu-item-2840 level-0"><a
+                                href="http://venusdemo.com/unity/demo-1/" class="mobile-dropdown-toggle">Home </a><span
+                                class="caret mobile-toggle"></span>
+                        <ul class="mobile-dropdown-menu">
+                            <li id="menu-item-5080" class="menu-item-5080 level-1"><a
+                                        href="http://venusdemo.com/unity/demo-1/">Home 1</a></li>
+                            <li id="menu-item-4684" class="menu-item-4684 level-1"><a
+                                        href="http://venusdemo.com/unity/demo-1/?page_id=4680">Home 2</a></li>
+                            <li id="menu-item-4779" class="menu-item-4779 level-1"><a
+                                        href="http://venusdemo.com/unity/demo-1/?page_id=4762">Home 3</a></li>
+                            <li id="menu-item-4843" class="menu-item-4843 level-1"><a
+                                        href="http://venusdemo.com/unity/demo-1/?page_id=4837">Home 4</a></li>
+                        </ul>
+                    </li>
+                    <li id="menu-item-2496" class="mobile-dropdown menu-item-2496 level-0"><a
+                                href="http://venusdemo.com/unity/demo-1/?post_type=tribe_events"
+                                class="mobile-dropdown-toggle">Event </a><span class="caret mobile-toggle"></span>
+                        <ul class="mobile-dropdown-menu">
+                            <li id="menu-item-4732" class="menu-item-4732 level-1"><a
+                                        href="http://venusdemo.com/unity/demo-1/?post_type=tribe_events">List View</a></li>
+                            <li id="menu-item-4734" class="menu-item-4734 level-1"><a
+                                        href="http://venusdemo.com/unity/demo-1/?post_type=tribe_events&amp;eventDisplay=month">Month</a>
+                            </li>
+                            <li id="menu-item-4733" class="menu-item-4733 level-1"><a
+                                        href="http://venusdemo.com/unity/demo-1/?post_type=tribe_events&amp;eventDisplay=day">Today</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="menu-item-4631" class="menu-item-4631 level-0"><a
+                                href="http://venusdemo.com/unity/demo-1/?post_type=download">Campaigns</a></li>
+                    <li id="menu-item-395" class="mobile-dropdown menu-item-395 level-0"><a
+                                href="http://venusdemo.com/unity/demo-1/?page_id=22"
+                                class="mobile-dropdown-toggle">Blog </a><span class="caret mobile-toggle"></span>
+                        <ul class="mobile-dropdown-menu">
+                            <li id="menu-item-481" class="menu-item-481 level-1"><a
+                                        href="http://venusdemo.com/unity/demo-1/?page_id=22">Blog Right Sidebar</a></li>
+                            <li id="menu-item-479" class="menu-item-479 level-1"><a
+                                        href="http://venusdemo.com/unity/demo-1/?page_id=469">Blog Left Sidebar</a></li>
+                            <li id="menu-item-2529" class="menu-item-2529 level-1"><a
+                                        href="http://venusdemo.com/unity/demo-1/?page_id=2527">Blog Listing</a></li>
+                            <li id="menu-item-4646" class="menu-item-4646 level-1"><a
+                                        href="http://venusdemo.com/unity/demo-1/?page_id=4644">Blog Masonry</a></li>
+                        </ul>
+                    </li>
+                    <li id="menu-item-4688" class="menu-item-4688 level-0"><a href="#">Portfolio</a></li>
+                    <li id="menu-item-5050" class="mobile-dropdown menu-item-5050 level-0"><a
+                                href="http://venusdemo.com/unity/demo-1/?page_id=5025"
+                                class="mobile-dropdown-toggle">Shop </a><span class="caret mobile-toggle"></span>
+                        <ul class="mobile-dropdown-menu">
+                            <li id="menu-item-5051" class="menu-item-5051 level-1"><a
+                                        href="http://venusdemo.com/unity/demo-1/?page_id=5027">Checkout</a></li>
+                        </ul>
+                    </li>
+                    <li id="menu-item-1767" class="mobile-dropdown menu-item-1767 level-0"><a title="Page" href="#"
+                                                                                              class="mobile-dropdown-toggle">Page </a><span
+                                class="caret mobile-toggle"></span>
+                        <ul class="mobile-dropdown-menu">
+                            <li id="menu-item-26" class="menu-item-26 level-1"><a
+                                        href="http://venusdemo.com/unity/demo-1/?page_id=24">Contact Us</a></li>
+                            <li id="menu-item-1849" class="menu-item-1849 level-1"><a
+                                        href="http://venusdemo.com/unity/demo-1/?page_id=1846">FAQ</a></li>
+                            <li id="menu-item-1882" class="menu-item-1882 level-1"><a
+                                        href="http://venusdemo.com/unity/demo-1/404-page-not-found">404 Error</a></li>
+                            <li id="menu-item-2062" class="menu-item-2062 level-1"><a
+                                        href="http://venusdemo.com/unity/demo-1/?page_id=2058">Services</a></li>
+                            <li id="menu-item-4327" class="menu-item-4327 level-1"><a
+                                        href="http://venusdemo.com/unity/demo-1/?page_id=3443">Pricing Tables</a></li>
+                            <li id="menu-item-5021" class="menu-item-5021 level-1"><a
+                                        href="http://venusdemo.com/unity/demo-1/?page_id=4535">What you can do</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+<!-- //OFF-CANVAS MENU SIDEBAR -->
+
+<!-- START Wrapper -->
+<section class="wpo-wrapper shop1">
+    <!-- Top bar -->
+    <section id="wpo-topbar" class="wpo-topbar">
+        <div class="topbar-inner">
+            <div class="container">
+                <div class="topbar-mobile hidden-lg hidden-md">
+                    <div class="pull-right">
+                        <div class="active-mobile pull-left hidden-md">
+                            <div class="navbar-header-topbar">
+                                <a href="javascript:;"
+                                   data-target=".navbar-collapse"
+                                   data-pos="left" data-effect="off-canvas-effect-1"
+                                   data-nav="#wpo-off-canvas"
+                                   data-toggle="offcanvas"
+                                   class="navbar-toggle off-canvas-toggle btn-primary btn-xs visible-xs">
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="active-mobile pull-left search-popup">
+                            <span class="fa fa-search"></span>
+                            <div class="active-content">
+                                <form role="search" method="get" class="searchform"
+                                      action="http://venusdemo.com/unity/demo-1/">
+                                    <div class="wpo-search input-group">
+                                        <input name="s" maxlength="40" class="form-control input-large input-search"
+                                               type="text" size="20" placeholder="Search...">
+		<span class="input-group-addon input-large btn-search">
+			<input type="submit" class="fa" value="&#xf002;"/>
+						<input type="hidden" name="post_type" value="download"/>
+					</span>
+                                    </div>
+                                </form>
+
+
+                            </div>
+                        </div>
+                        <div class="active-mobile pull-left setting-popup">
+                            <span class="fa fa-user"></span>
+                            <div class="active-content">
+                                <h3 class="white title">Settings</h3>
+                                <div class="pull-left">
+                                    <div class="menu-top-menu-header-container">
+                                        <ul id="menu-top-menu-header" class="menu-topbar">
+                                            <li id="menu-item-4591"
+                                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4591">
+                                                <a href="http://venusdemo.com/unity/demo-1/?page_id=24">Contact</a></li>
+                                            <li id="menu-item-5020"
+                                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5020">
+                                                <a href="http://venusdemo.com/unity/demo-1/?page_id=4535">What you can
+                                                    do</a></li>
+                                            <li id="menu-item-4758"
+                                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4758">
+                                                <a href="http://venusdemo.com/unity/demo-1/?page_id=4720">Gallerys</a>
+                                            </li>
+                                            <li id="menu-item-4759"
+                                                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4759">
+                                                <a href="http://venusdemo.com/unity/demo-1/events/">Events</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="active-mobile pull-left cart-popup hidden">
+                            <span class="fa fa-shopping-cart"></span>
+                            <div class="active-content">
+                                <h3 class="white title">
+                                    Shopping Bag </h3>
+                                <div class="widget_shopping_cart_content"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- // Topbar -->
+
+    <!-- HEADER -->
+    {{ include('header.html.twig') }}
+    <!-- //HEADER -->
+    <section id="wpo-mainbody" class="default-visual default-home wpo-mainbody">
+        <div class="wrapper-content">
+            <div class="container-inner">
+                {% block body %}
+
+                {% endblock %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer-->
+    {{ include('footer.html.twig') }}
+    <!--End Footer-->
+</section>
+<!-- END Wrapper -->
+<div class="modal fade" id="wpo_modal_quickview" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close btn btn-close" data-dismiss="modal" aria-hidden="true">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body"><span class="spinner"></span></div>
+        </div>
+    </div>
+</div>
+
+{% block javascriptBlock %}
+
+    {% javascripts
+    'assets/js/jquery.js'
+    'assets/js/jquery.min.js'
+    'assets/js/jquery-migrate.min.js'
+    'assets/js/jquery.noty.packaged.min.js'
+    'assets/js/app.js'
+
+    'assets/js/edd-ajax.min.js'
+    'assets/js/jquery.themepunch.tools.min.js'
+    'assets/js/jquery.themepunch.revolution.min.js'
+    'assets/js/bootstrap.min.js'
+    'assets/plugins/js/revolution.js'
+
+    'assets/plugins/js/jquery.selectBox.min.js'
+    'assets/plugins/js/raphael-min.js'
+    'assets/themes/js/main.js'
+    'assets/themes/js/wpo-plugin.js'
+    'assets/plugins/js/js_composer_front.js'
+    'assets/plugins/js/metronic.js'
+    'assets/plugins/facebook/socialite.js'
+    'assets/plugins/facebook/fbCustom.js'
+    'assets/plugins/js/waypoints.min.js'
+    'assets/js/jquery.validate.js'
+
+    'assets/js/bootstrap-datepicker.js'
+    '@BundleAppBundle/Resources/public/js/campaign.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+
+{% endblock javascriptBlock %}
+
+<div class="return-top">
+    <span class="fa fa-angle-up">&nbsp;</span>
+    <span>TOP</span>
+</div>
+<script type="text/javascript">
+    var tokenPhoneVerify = {{ app.user.Profile.confirmationTokenPhoneVerify| default("undefined") }};
+
+    var tokenEmailVerify = {{ app.user.Profile.confirmationTokenEmailVerify|default("undefined") }};
+
+</script>
+<script type="text/javascript">
+
+    jQuery(document).ready(function () {
+
+        {% block documentready %}
+        $('.datepicker').datepicker();
+
+        {% endblock %}
+    });
+</script>
+</body>
+
+</html>

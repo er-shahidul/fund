@@ -1,0 +1,138 @@
+<footer id="wpo-footer" class="wpo-footer">
+    <section class="wpb-container" ><div class="wpb-inner container" ><div class="row">
+        <div class="col-sm-4 wpb_column vc_column_container">
+            <div class="wpb_wrapper  vc_custom_1419328548000">
+
+                <div class="wpb_widgetised_column wpb_content_element">
+                    <div class="wpb_wrapper">
+                        <aside id="mc4wp_widget-3" class="widget clearfix widget_mc4wp_widget"><h3 class="widget-title"><span>Newsletter</span></h3><!-- Form by MailChimp for WordPress plugin v2.2.7 - https://mc4wp.com/ --><div id="mc4wp-form-1" class="form mc4wp-form"><form method="post"><div class="description">
+                            <span class="content">Subscribe to receive inspiration, ideas, and news in your inbox.</span>
+                        </div>
+                            <div class="input-form">
+                                <input id="mc4wp_email" class="form-control" name="EMAIL" required="required" type="email" placeholder="Email address" />
+                            </div>
+                            <div class="button-submit"><input class="btn btn-newsletter" type="submit" value="Subcribe" /></div>
+                            <input type="text" name="_mc4wp_required_but_not_really" value="" /><input type="hidden" name="_mc4wp_timestamp" value="1470041456" /><input type="hidden" name="_mc4wp_form_submit" value="1" /><input type="hidden" name="_mc4wp_form_instance" value="1" /><input type="hidden" name="_mc4wp_form_nonce" value="77ba3e8ce3" /></form></div><!-- / MailChimp for WP Plugin --></aside>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-2 wpb_column vc_column_container">
+            <div class="wpb_wrapper ">
+                <div class="vc_wp_custommenu wpb_content_element"><div class="widget widget_nav_menu"><h2 class="widgettitle">Company</h2><div class="menu-footer-1-container"><ul id="menu-footer-1" class="menu"><li id="menu-item-34" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-34"><a href="#">Contact Us</a></li>
+                    <li id="menu-item-35" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-35"><a href="#">Returns</a></li>
+                    <li id="menu-item-36" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-36"><a href="#">Site Map</a></li>
+                    <li id="menu-item-37" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-37"><a href="#">Brands</a></li>
+                    <li id="menu-item-38" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-38"><a href="#">Gift Vouchers</a></li>
+                </ul></div></div></div>
+
+            </div>
+        </div>
+
+        <div class="col-sm-2 wpb_column vc_column_container">
+            <div class="wpb_wrapper ">
+                <div class="vc_wp_custommenu wpb_content_element"><div class="widget widget_nav_menu"><h2 class="widgettitle">Categories</h2><div class="menu-footer-2-container"><ul id="menu-footer-2" class="menu"><li id="menu-item-43" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-43"><a href="#">My Account</a></li>
+                    <li id="menu-item-44" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-44"><a href="#">Order History</a></li>
+                    <li id="menu-item-45" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-45"><a href="#">Wish List</a></li>
+                    <li id="menu-item-46" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-46"><a href="#">Newsletter</a></li>
+                    <li id="menu-item-47" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-47"><a href="#">Specials</a></li>
+                </ul></div></div></div>
+
+            </div>
+        </div>
+
+        <div class="col-sm-4 bg-right wpb_column vc_column_container">
+            <div class="wpb_wrapper  vc_custom_1419413480447">
+                <div class="vc_wp_text wpb_content_element contact-footer"><div class="widget widget_text"><h2 class="widgettitle">Contact info</h2>			<div class="textwidget"><p class="contact-heading">Head Office</p>
+                    <p><b>Address:</b> 8 King Street, Melbourne Victoria 89 USA<br />
+                        <b>Phone:</b> +22 6 4567 8900</p>
+                    <p class="contact-heading">Office</p>
+                    <p><b>Address:</b> 2 Queen Street,California, USA<br />
+                        <b>Phone:</b> +22 6 4567 8900</p>
+                </div>
+                </div></div>
+
+            </div>
+        </div>
+    </div></div></section>
+</footer>
+
+<section class="wpo-copyright">
+    <div class="container">
+        <div class="copyright">
+            <address>
+                Copyright <a href="http://themeforest.net/user/Opal_WP/">OpalTheme</a>. All Rights Reserved.				</address>
+
+
+        </div>
+    </div>
+</section>
+
+{#
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        // CUSTOM AJAX CONTENT LOADING FUNCTION
+        var ajaxRevslider = function (obj) {
+
+            // obj.type : Post Type
+            // obj.id : ID of Content to Load
+            // obj.aspectratio : The Aspect Ratio of the Container / Media
+            // obj.selector : The Container Selector where the Content of Ajax will be injected. It is done via the Essential Grid on Return of Content
+
+            var content = "";
+
+            data = {};
+
+            data.action = 'revslider_ajax_call_front';
+            data.client_action = 'get_slider_html';
+            data.token = 'ddaf22168f';
+            data.type = obj.type;
+            data.id = obj.id;
+            data.aspectratio = obj.aspectratio;
+
+            // SYNC AJAX REQUEST
+            jQuery.ajax({
+                type: "post",
+                url: "http://venusdemo.com/unity/demo-1/wp-admin/admin-ajax.php",
+                dataType: 'json',
+                data: data,
+                async: false,
+                success: function (ret, textStatus, XMLHttpRequest) {
+                    if (ret.success == true)
+                        content = ret.data;
+                },
+                error: function (e) {
+                    console.log(e);
+                }
+            });
+
+            // FIRST RETURN THE CONTENT WHEN IT IS LOADED !!
+            return content;
+        };
+
+// CUSTOM AJAX FUNCTION TO REMOVE THE SLIDER
+        var ajaxRemoveRevslider = function (obj) {
+            return jQuery(obj.selector + " .rev_slider").revkill();
+        };
+
+// EXTEND THE AJAX CONTENT LOADING TYPES WITH TYPE AND FUNCTION
+        var extendessential = setInterval(function () {
+            if (jQuery.fn.tpessential != undefined) {
+                clearInterval(extendessential);
+                if (typeof(jQuery.fn.tpessential.defaults) !== 'undefined') {
+                    jQuery.fn.tpessential.defaults.ajaxTypes.push({
+                        type: "revslider",
+                        func: ajaxRevslider,
+                        killfunc: ajaxRemoveRevslider,
+                        openAnimationSpeed: 0.3
+                    });
+                    // type:  Name of the Post to load via Ajax into the Essential Grid Ajax Container
+                    // func: the Function Name which is Called once the Item with the Post Type has been clicked
+                    // killfunc: function to kill in case the Ajax Window going to be removed (before Remove function !
+                    // openAnimationSpeed: how quick the Ajax Content window should be animated (default is 0.3)
+                }
+            }
+        }, 30);
+    });
+</script>#}

@@ -459,10 +459,10 @@ class CampaignController extends BaseController
         if(!empty($campaignGallary)){
             $imagePath = $campaignGallary[0]->getPath();
             $path = 'uploads/campaign/'.$imagePath;
-            return new Response("<img src='$path'>");
+            return new Response("<img src='$path' class='attachment-thumbnails-crowdfunding wp-post-image' alt=\"campaign-6\">");
         }else{
             $path = 'assets/img/people.png';
-            return new Response("<img src='$path'>");
+            return new Response("<img src='$path' class='attachment-thumbnails-crowdfunding wp-post-image'>");
         }
         
     }
@@ -480,10 +480,83 @@ class CampaignController extends BaseController
                 $totalDonationAmount += $recentDonation->getDonateAmount();
             }
             $percentage = ($totalDonationAmount * 100) / $campaign->getAmount();
-            return new Response("<span class=\"fill\" style=\"width: $percentage%;\"></span>");
+            $roundPercentage = round($percentage,2);
+            return new Response("<span class=\"funded\">$roundPercentage%</span>");
         } else{
+            return new Response("<span class=\"funded\">0%</span>");
+        }
 
-            return new Response("<span class=\"fill \" style=\"width: 0%;\"></span>");
+
+    }
+    public function getCampaignTargetAmountAction(Campaign $campaign){
+
+
+        $recentDonations = $this->getDoctrine()
+            ->getRepository('BundleAppBundle:Donation')
+            ->findBy(array('campaign'=>$campaign),array('id'=>'DESC'));
+        
+
+            $totalDonationAmount = 0;
+            foreach ($recentDonations as $recentDonation){
+                $totalDonationAmount += $recentDonation->getDonateAmount();
+            }
+            return new Response("$totalDonationAmount");
+      
+        
+    }
+    public function getSuccessFullCampaignAction(Campaign $campaign){
+
+
+        $recentDonations = $this->getDoctrine()
+            ->getRepository('BundleAppBundle:Donation')
+            ->findBy(array('campaign'=>$campaign),array('id'=>'DESC'));
+
+        if(!empty($recentDonations)) {
+
+            $totalDonationAmount = 0;
+            foreach ($recentDonations as $recentDonation){
+                $totalDonationAmount += $recentDonation->getDonateAmount();
+            }
+            $percentage = ($totalDonationAmount * 100) / $campaign->getAmount();
+            $roundPercentage = round($percentage,2);
+            if($roundPercentage >= 100){
+                return new Response("<span class=\"campaign-successful\">SUCCESSFUL</span>");
+            } else{
+                return new Response("<span class=\"campaign-unsuccessful\">UNSUCCESSFUL</span>");
+            }
+        } else{
+            return new Response("<span class='campaign-unsuccessful'>UNSUCCESSFUL</span>");
+        }
+
+
+    }
+    public function getCampaignBackersAction(Campaign $campaign){
+        
+        $recentDonations = $this->getDoctrine()
+            ->getRepository('BundleAppBundle:Donation')
+            ->findBy(array('campaign'=>$campaign),array('id'=>'DESC'));
+
+        if(!empty($recentDonations)) {
+
+            $totalBackers = count($recentDonations);
+            return new Response("$totalBackers");
+        } else{
+            return new Response("0");
+        }
+
+
+    }
+    public function getCountCampaignByCategoriesWiseAction(Category $category){
+        
+        $countCampaignByCategories = $this->getDoctrine()
+            ->getRepository('BundleAppBundle:Campaign')
+            ->countCampaignByCategories($category);
+
+        if(!empty($countCampaignByCategories)) {
+
+            return new Response("$countCampaignByCategories");
+        } else{
+            return new Response("0");
         }
 
 

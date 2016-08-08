@@ -2,6 +2,8 @@
 
 namespace Bundle\AppBundle\Repository;
 
+use Bundle\AppBundle\Entity\Campaign;
+use Bundle\AppBundle\Entity\Category;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -36,5 +38,17 @@ class CampaignRepository extends EntityRepository
         $query->orderBy('cam.id', 'DESC');
  
         return $query->getQuery()->getResult();
+    }
+    public function countCampaignByCategories(Category $category)
+    {
+
+        $query = $this->createQueryBuilder('cam');
+        $query->select('COUNT(cam.id) as camCount');
+        $query->leftJoin('cam.category', 'c');
+        $query->leftJoin('cam.location', 'l');
+        $query->andWhere('c.id = :category');
+        $query->setParameter('category', $category);
+
+        return $query->getQuery()->getSingleScalarResult();
     }
 }

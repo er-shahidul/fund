@@ -1,88 +1,245 @@
-{% extends "base.html.twig" %}
+{% extends "layout.html.twig" %}
 
 {% block body %}
-    <div class="container">
-        <div class="row">
+    <div class="row">
+        <!-- MAIN CONTENT -->
+        <div id="wpo-content" class="col-xs-12 no-sidebar">
+            <article id="post-2837" class="clearfix post-2837 page type-page status-publish hentry">
+                <section class="wpb-container vc_custom_1421986226710">
+                    <div class="wpb-inner container">
+                        <div class="row">
+                            <div class="col-sm-12 wpb_column vc_column_container wpb_animate_when_almost_visible wpb_bottom-to-top">
+                                <div class="wpb_wrapper  vc_custom_1425354912163">
+                                    <div class="widget campaigns-tab-featured">
+                                        <div class="widget-content">
+                                            <div class="carousel slide" id="carousel-vJu4D"
+                                                 data-ride="carousel">
+                                                <div class="carousel-inner" role="listbox">
+                                                    {% for index, campaign in campaigns %}
+                                                    <div class="item {{ index == 0 ? 'active' :''  }}">
+                                                        <div class="item-campaign row item-layout-1">
+                                                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                                                <div class="entry-thumbnail">
+                                                                    {% render url('campaign_get_image', {'id': campaign.id}) %}
+                                                                </div>
+                                                                <div class="campaign-title">
+                                                                    <a href="{{ path('campaign_detail',{id:campaign.id}) }}"
+                                                                       title="{{ campaign.title }}"><span>{{ campaign.title|default('N/A') }}</span></a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12">
+                                                                <div class="entry-description">
+                                                                    <p>
+                                                                        {{ campaign.description|readmore(path('campaign_detail',{id:campaign.id}),200)}}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12">
+                                                                <div class="row">
+                                                                    <div class="barometer-main">
+                                                                        <div
+                                                                                class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                                            <div class="barometer"
+                                                                                 data-progress="40"
+                                                                                 data-width="148"
+                                                                                 data-height="148"
+                                                                                 data-strokewidth="11"
+                                                                                 data-stroke="#FFF"
+                                                                                 data-progress-stroke="#FED857">
+                                                                                <span>
+                                                                                    {% render url('campaign_get_progress_bar', {'id': campaign.id}) %}
+                                                                                </span>
+                                                                            </div>
+                                                                            <div
+                                                                                    class="campaign-time-left text-center">
+                                                                                <span class="title">Expired on<br/>0</span><span> days left</span>
+                                                                            </div>
+                                                                        </div>
 
+                                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 xs-text-center">
 
- <div id="wrapper" style="background-color: #fdf8f8">
-    <div class="col-xs-6 col-md-12">
-        <div class="row1">
-            <form action="{% if categoryTitle.id is not defined %}
-                            {{ path('campaign_search') }}
-                            {% else %}
-                            {{ path('campaign_search_category_wise',{id:categoryTitle.id}) }}
-                            {% endif %}"
-                  method="post">
-                <div class="search_short cnt mb30" id="search_input_wrapper">
-                    <div class="search_icon_update"></div>
-                    {{ form_widget(form.search, { 'attr': {'class': 'search_field_short blink search-term-left',
-                        'placeholder': 'Search by name, keyword, or city...'} }) }}
-                    <input type="submit" class="btn btn-default blue" value="Search">
+                                                                            <ul class="campaign-status text-center">
 
-                </div>
+                                                                                <li class="campaign-raised">
+                                                                                    <span class="label">Current</span><div class="clearfix"></div>
+                                                                                    <span class="text">&#036;{% render url('campaign_get_target_amount', {'id': campaign.id}) %}</span>
+                                                                                </li>
 
-            </form>
+                                                                                <li class="campaign-goal">
+                                                                                    <p class="label">Target</p>
+                                                                                    <p class="text">&#036;{{ campaign.amount|default('') }}</p>
+                                                                                </li>
 
+                                                                                <li class="campaign-backers">
+                                                                                    <span class="label">Backers</span>
+                                                                                    <span class="text">{% render url('campaign_get_backers', {'id': campaign.id}) %}</span>
+                                                                                </li>
+                                                                            </ul>
+
+                                                                        </div>
+
+                                                                        <div class="col-xs-12">
+                                                                            <div class = "text-center quick-donate">
+                                                                                    <a href="{{ path('donation_create',{id:campaign.id}) }}" class="btn btn-donate-black">
+                                                                                        Donate now
+                                                                                    </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {% endfor %}
+
+                                                </div>
+                                                <div class="clearfix"></div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="wpb-container">
+                    <div class="wpb-inner container">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                <div class="wpo-sidebar wpo-sidebar-left">
+                                    <div class="sidebar-inner">
+
+                                        <aside id="categories-9" class="widget  clearfix widget_categories"><h3 class="widget-title">CATEGORIES</h3>
+                                            <ul>
+                                                {% for category in categories %}
+                                                    <li class="cat-item">
+                                                        <a href="{{ path('campaign_category_based',{title:category.title}) }}"
+                                                           class="{% if categoryTitle.title|default == category.title %}active{% else  %}{% endif %}">
+                                                            {{ category.title }} ( {% render url('campaign_count_categories_wise', {'id': category.id}) %} )
+                                                        </a>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+
+                                        </aside>
+
+                                    </div>
+                                </div>
+                                {#<div class="wpb_column vc_column_container wpb_animate_when_almost_visible wpb_bottom-to-top">
+                                    <div class="wpb_wrapper ">
+
+                                        <div class="widget wpo-social-counter bg-sidebar">
+                                            <h3 class="widget-title visual-title font-size-md separator_align_left">
+                                                <span> <a href="{{ path('bundle_app_homepage') }}">
+                                                        All Categories
+                                                    </a>
+                                                </span>
+                                            </h3>
+
+                                            <div class="widget-content">
+                                                <nav class="sidebar" role="navigation">
+                                                        <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+                                                            <ul class="nav navbar-nav">
+                                                                {% for category in categories %}
+                                                                    <li>
+                                                                        <a href="{{ path('campaign_category_based',{title:category.title}) }}"
+                                                                           class="{% if categoryTitle.title|default == category.title %}active{% else  %}{% endif %}">
+                                                                            {{ category.title }}
+                                                                        </a>
+                                                                    </li>
+                                                                {% endfor %}
+
+                                                            </ul>
+                                                        </div>
+                                                </nav>
+
+                                            </div>
+                                        </div>
+                                      #}{#  <div class="widget wpo-facebook-fanbox no-padding">
+                                            <h3 class="widget-title visual-title font-size-md separator_align_left">
+                                                <span> Find us on Facebook</span>
+                                            </h3>
+                                            <iframe
+                                                    src="http://www.facebook.com/plugins/likebox.php?href=https://www.facebook.com/BrainOs.LTD&amp;width=369&amp;colorscheme=light&amp;show_faces=true&amp;stream=false&amp;header=false&amp;height=240&amp;force_wall=true&amp;connections=8"
+                                                    style="border:none; overflow:hidden; width:369px; height: 240px;">
+                                            </iframe>
+                                        </div>#}{#
+                                    </div>
+                                </div>#}
+                            </div>
+                            <div class="col-lg-9 col-md-8 col-sm-6 col-xs-12">
+                                <div class="widget-content">
+                                    {% if campaigns %}
+                                        {% for campaign in campaigns %}
+                                            <div class="item-campaign col-lg-4 col-md-4 col-sm-6 col-xs-12">
+
+                                                <div class="item-content item-campaign-wrapper">
+                                                    <div class="entry-thumbnail text-center">
+                                                        {% render url('campaign_get_image', {'id': campaign.id}) %}
+                                                        <div class="donate-now">
+                                                            <a href="{{ path('donation_create',{id:campaign.id}) }}" class="btn btn-slide">
+                                                                Donate now
+                                                            </a>
+                                                        </div>
+                                                        {% render url('campaign_get_successfull', {'id': campaign.id}) %}
+                                                    </div>
+                                                    <div class="campaign-main">
+                                                        <ul class="campaign-status text-center">
+
+                                                            <li class="campaign-raised">
+                                                                <span class="label">Current</span>
+                                                                 <span class="text">&#036;{{ campaign.amount|default('') }}</span>
+                                                            </li>
+
+                                                            <li class="campaign-funded">
+                                                                {% render url('campaign_get_progress_bar', {'id': campaign.id}) %}
+                                                            </li>
+
+                                                            <li class="campaign-backers">
+                                                                <span class="label">Backers</span>
+                                                                <span class="text">{% render url('campaign_get_backers', {'id': campaign.id}) %}</span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                    <div class="entry-title">
+                                                        <a href="{{ path('campaign_detail',{id:campaign.id}) }}"
+                                                           title="{{ campaign.title }}"><span>{{ campaign.title|default('N/A') }}</span></a>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                    <div class="desciption text-center">
+                                                        {{ campaign.description|readmore(path('campaign_detail',{id:campaign.id}),40)}}
+                                                    </div>
+                                                    <div class="entry-author text-center">
+                                                        <span>By</span> <strong> {{ campaign.createdBy.profile.fullName|default('N/A')}}</strong>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        {% endfor %}
+
+                                    {% else %}
+                                        <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+                                            First create Campaign
+                                        </div>
+                                    {% endif %}
+                                    <div style="clear: both;"></div>
+                                    <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+                                    {{ knp_pagination_render(campaigns) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!--banner post-->
+                <!--end banner post-->
+            </article><!-- #post -->
         </div>
-        </div>
-
-    <div class="col-xs-6 col-md-12">
-        <div class="row1">
-            <div class="campaign-sidebar">
-                <div id="sidebar-wrapper">
-                    <ul class="sidebar-nav">
-                        <li class="sidebar-brand">
-                            <a href="{{ path('bundle_app_homepage') }}">
-                                All Categories
-                            </a>
-                        </li>
-                        {% for category in categories %}
-                            <li>
-                                <a href="{{ path('campaign_category_based',{title:category.title}) }}"
-                                   class="{% if categoryTitle.title|default == category.title %}active{% else  %}{% endif %}">
-                                    {{ category.title }}
-                                </a></li>
-                        {% endfor %}
-
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="row2">
-        {#<div class="single-campaign">#}
-        {% if campaigns %}
-            {% for campaign in campaigns %}
-
-                <div class="tile mb20 mr20">
-
-                    <a href="{{ path('campaign_detail',{id:campaign.id}) }}" class="pho">
-                        {% render url('campaign_get_image', {'id': campaign.id}) %}
-                    </a>
-                    <a href="{{ path('campaign_detail',{id:campaign.id}) }}" class="amt">${{ campaign.amount }}</a>
-
-                    <a href="{{ path('campaign_detail',{id:campaign.id}) }}" class="pro">
-                        {#<span class="fill" style="width: 90%;"></span>#}
-                        {% render url('campaign_get_progress_bar', {'id': campaign.id}) %}
-                    </a>
-                    <a href="{{ path('campaign_detail',{id:campaign.id}) }}" class="title">{{ campaign.title }}</a>
-                    <a href="{{ path('campaign_detail',{id:campaign.id}) }}" class="title" style="text-transform: uppercase">{{ campaign.location.name|default('N/A') }}</a>
-                </div>
-
-            {% endfor %}
-
-        {% else %}
-            <div class="jumbotron">
-               First create Campaign
-            </div>
-        {% endif %}
-        </div>
-        <div style="clear: both"></div>
-        <div class="row3">{{ knp_pagination_render(campaigns) }}</div>
-    </div>
-</div>
-        </div>
+        <!-- //MAIN CONTENT -->
     </div>
 {% endblock %}
 

@@ -57,3 +57,19 @@ campaign_get_image:
 campaign_get_progress_bar:
     path:     /campaign/progrress-bar/{id}
     defaults: { _controller: BundleAppBundle:Campaign:getCampaignProgressBar }
+
+campaign_get_backers:
+    path:     /campaign/backers/{id}
+    defaults: { _controller: BundleAppBundle:Campaign:getCampaignBackers }
+
+campaign_get_successfull:
+    path:     /campaign/successfull/{id}
+    defaults: { _controller: BundleAppBundle:Campaign:getSuccessFullCampaign }
+
+campaign_get_target_amount:
+    path:     /campaign/targat-amount/{id}
+    defaults: { _controller: BundleAppBundle:Campaign:getCampaignTargetAmount }
+
+campaign_count_categories_wise:
+    path:     /campaign/count-categories-wise/{id}
+    defaults: { _controller: BundleAppBundle:Campaign:getCountCampaignByCategoriesWise }

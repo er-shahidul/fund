@@ -6,7 +6,7 @@ function onLoadUserProfile() {
     var $url = Routing.generate('campaign_user-profile-verify');
 
     $('.modal-body').load($url,function(result){
-
+    
         $('.verify-profile-for-campaign').show();
         $('.verified-profile-for-campaign').hide();
         $('#verify-profile').show();
@@ -15,9 +15,10 @@ function onLoadUserProfile() {
          verifyCheck();
          verifiedCheck();
         }else {
+
             onLoadOrganizationCreate();
         }
-        
+
         $('#ajax').modal({show:true, keyboard: false });
     });
 }
