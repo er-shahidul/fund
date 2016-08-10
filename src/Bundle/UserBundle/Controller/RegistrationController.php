@@ -202,21 +202,30 @@ class RegistrationController extends BaseController
 
     public function campaignUserVerifyAction(Request $request) {
 
-        $tokenVerify  = $this->getUser()->getProfile()->getConfirmationTokenEmailVerify();
+        /*$tokenVerify  = $this->getUser()->getProfile()->getConfirmationTokenEmailVerify();
+ 
         if($tokenVerify == null) {
             $email = $request->request->get('fos_user_registration')['email'];
             $this->verificationEmail($email);
         }
         $phoneNumber = $request->request->get('fos_user_registration')['profile']['PhoneNumber'];
-        $this->verificationPhone($phoneNumber);
-
-        $return = array("responseCode" => 202, "massage" => "verified");
-        $return = json_encode($return);
-        return new Response($return, 202, array('Content-Type' => 'application/json'));
+        $this->verificationPhone($phoneNumber);*/
         
+        $user = $this->getDoctrine()
+            ->getRepository('BundleUserBundle:User')
+            ->find($this->getUser()->getId());
+
+        $form = $this->createForm(new UserType(null), $user);
+
+        return $this->render(
+            'BundleUserBundle:Profile:confirmationCode.html.twig',
+            array(
+                'form'     => $form->createView(),
+                'user'     => $user
+            )
+        );
     }
     public function campaignUserVerifiedAction(Request $request){
-
 
 
         $user = $this->getDoctrine()->getRepository('BundleUserBundle:User')->findOneBy(
@@ -231,7 +240,7 @@ class RegistrationController extends BaseController
                 $user->getProfile()->setConfirmationTokenEmailVerify(true);
                 $this->getDoctrine()->getRepository('BundleUserBundle:User')->update($user);
             } else {
-                $return = array("responseCode" => 203, "massage" => "Confirmation Code is Wrong");
+                $return = array("responseCode" => 203, "massage" => "Confirmation Email Code is Wrong");
                 $return = json_encode($return);
                 return new Response($return, 203, array('Content-Type' => 'application/json'));
             }
@@ -241,11 +250,11 @@ class RegistrationController extends BaseController
             $user->getProfile()->setConfirmationTokenPhoneVerify(true);
             $this->getDoctrine()->getRepository('BundleUserBundle:User')->update($user);
         } else {
-            $return = array("responseCode" => 203, "massage" => "Confirmation Code is Wrong");
+            $return = array("responseCode" => 203, "massage" => "Confirmation Phone Code is Wrong");
             $return = json_encode($return);
             return new Response($return, 203, array('Content-Type' => 'application/json'));
         }
-
+       // return $this->redirect($this->generateUrl('organization_list'));
         $return = array("responseCode" => 202, "massage" => "verified");
         $return = json_encode($return);
         return new Response($return, 202, array('Content-Type' => 'application/json'));

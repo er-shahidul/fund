@@ -1,0 +1,71 @@
+
+    <div class="row">
+        <form id="individualFrm" method="post" action="{{ path('campaign_organization_create') }}">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="portlet-body">
+
+                        <div class="form-body">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-md-3 col-sm-3 control-label">Organization</label>
+                                    <select class="form-control organizationVal" name="organizationVal">
+                                        <option value="">Select Organization</option>
+                                        {% for organization in organizationList %}
+                                            <option value="{{ organization.id }}">{{ organization.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <div class="text-center quick-donate" style="width:inherit">
+                            <a  class = "btn btn-donate-black createNewOrganization" href="javascript:;">
+                                Create New Organization </a>
+                        </div>
+                        <br/>
+                        <div class="text-center quick-donate" style="width:inherit">
+                            <input type="submit" class="btn btn-donate-black nextOrganization" value="Next">
+                        </div>
+
+                    </div>
+                    </div>
+                </div>
+        </form>
+    </div>
+
+
+<script type="text/javascript">
+
+    $('.nextOrganization').click( function () {
+
+        if(!$('.organizationVal').val()){
+            alert('please select at least one organization');
+            return false;
+        }
+    });
+
+    $('.createNewOrganization').click( function () {
+        var $url = Routing.generate('organization_create_ajax');
+
+        $('.modal-body').load($url,function(result) {
+
+            $('#ajax').modal({show:true,backdrop: 'static', keyboard: false });
+        });
+    });
+
+</script>
+
+{% block javascriptBlock %}
+
+
+    {% javascripts
+    '@BundleAppBundle/Resources/public/js/organizationFormValidation.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+{% endblock javascriptBlock %}

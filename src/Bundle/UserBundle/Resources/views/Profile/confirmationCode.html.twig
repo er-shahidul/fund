@@ -1,0 +1,47 @@
+<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+<div class="row">
+
+    <form class="form-horizontal" id="form-user-profile-verified" role="form" method="post" action="{{ path('campaign_user-verified') }}">
+
+        <div class="col-md-12">
+            <div class="portlet-body">
+
+                <div class="form-body">
+                    <div class="verified-profile-for-campaign">
+                        {% if user.profile.confirmationTokenEmailVerify == null %}
+                            <div class="form-group">
+                                <label class="col-md-3 col-sm-3 control-label">Email Verification Code</label>
+                                <div class="col-md-5 col-sm-5">
+                                    <input type="text" placeholder="verification email code" id="emailVerificationCode" class="form-control emailVerificationCode" >
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+                        {% endif %}
+                        <div class="form-group">
+                            <label class="col-md-3 col-sm-3 control-label">Phone Verification Code</label>
+                            <div class="col-md-5 col-sm-5">
+                                <input type="text" value="" placeholder="verification phone code" id="phoneVerificationCode" class="form-control phoneVerificationCode" >
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{ form_row(form._token) }}
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="submit" id="verified-profile" class="btn green">Confirm</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+    </div>
+
+<script type="text/javascript">
+    $('#verified-profile').click( function () {
+        verifiedCheck();
+    });
+</script>

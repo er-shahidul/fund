@@ -112,15 +112,22 @@ class CampaignController extends BaseController
     }
     public function organizationCampaignCreateAction(Request $request)
     {
+
         if($this->isFacebookLogin()){
             return $this->isFacebookLogin();
         }
 
         if($request->request->get('organizationVal')){
+
             $organizationId = $request->request->get('organizationVal');
             $organizationName = $this->getDoctrine()->getRepository('BundleAppBundle:Organization')->find($organizationId);
+
         } else {
             $organizationName = null ;
+        }
+        if($request->query->get('organizationVal')){
+            $organizationId = $request->query->get('organizationVal');
+            $organizationName = $this->getDoctrine()->getRepository('BundleAppBundle:Organization')->find($organizationId);
         }
 
         $organization = $this->checkExistingOrganization($this->getUser());
@@ -159,6 +166,7 @@ class CampaignController extends BaseController
         );
 
     }
+   
     public function individualCampaignCreateAction(Request $request)
     {
         

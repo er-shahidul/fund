@@ -6,7 +6,7 @@ function onLoadUserProfile() {
     var $url = Routing.generate('campaign_user-profile-verify');
 
     $('.modal-body').load($url,function(result){
-    
+
         $('.verify-profile-for-campaign').show();
         $('.verified-profile-for-campaign').hide();
         $('#verify-profile').show();
@@ -25,25 +25,31 @@ function onLoadUserProfile() {
 //  onLoadUserProfile()
 $('.campaignCreate').click( function () {
 
-    onLoadUserProfile();
+     // onLoadUserProfile();
+     onLoadOrganizationCreate();
 });
+
 
 function onLoadOrganizationCreate() {
 
     var $url = Routing.generate('on_load_organization_create');
 
     $('.modal-body').load($url,function(result) {
-
-        var zIndex = 1040 + (10 * $('.modal:visible').length);
-        $(this).css('z-index', zIndex);
-        setTimeout(function() {
-            $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
-        }, 0);
-
+        
         $('#ajax').modal({show:true,backdrop: 'static', keyboard: false });
     });
     
 }
+/*function userVerified() {
+
+    var $url = Routing.generate('campaign_user-verify');
+
+    $('.modal-body').load($url,function(result) {
+        
+        $('#ajax').modal({show:true,backdrop: 'static', keyboard: false });
+    });
+    
+}*/
 
 
 
@@ -94,22 +100,30 @@ function onLoadOrganizationCreate() {
                 success.show();
                 error.hide();
                 var datastring = $("#form-user-profile").serialize();
-
+                console.log('execute!!!');
                 $.ajax({
                     type: "post",
                     url: Routing.generate('campaign_user-verify'),
                     data: datastring,
-                    dataType: 'json',
+                    dataType: 'html',
                     success: function (msg) {
+                        console.log(msg);
+                        var $url = Routing.generate('campaign_user-verify');
 
-                        if (msg.responseCode == 202) {
+                        $('.modal-body').load($url,function(result) {
+
+                            $('#ajax').modal({show:true,backdrop: 'static', keyboard: false });
+                        });
+                       /* if (msg.responseCode == 202) {
 
                             $('.verify-profile-for-campaign').hide();
                             $('.verified-profile-for-campaign').show();
 
                             $('#verify-profile').hide();
                             $('#verified-profile').show();
-                        }
+
+
+                        }*/
                     }
                 });
 
@@ -170,15 +184,16 @@ function onLoadOrganizationCreate() {
                 dataType: 'json',
                 success: function (msg) {
                     if(msg.responseCode == 202){
-                        alert('successfully verified');
+                        
+                        var $url = Routing.generate('on_load_organization_create');
 
-                        location.reload();
-                        $('.emailVerificationCode').hide();
-                        $('.verifiedEmail').hide();
+                        $('.modal-body').load($url,function(result) {
 
-                    } else{
+                            $('#ajax').modal({show:true,backdrop: 'static', keyboard: false });
+                        });
+
+                    } else {
                         alert(msg.massage);
-
                     }
                 }
             });

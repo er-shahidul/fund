@@ -17,6 +17,13 @@ on_load_organization_create:
     defaults: { _controller: BundleAppBundle:Organization:onLoadOrganizationCreate }
     options:
                 expose: true
+
+load_organization_list:
+    path:     /organization/load-list
+    defaults: { _controller: BundleAppBundle:Organization:loadOrganizationList }
+    options:
+                expose: true
+
 organization_status:
     path:     /organization/status/{id}
     defaults: { _controller: BundleAppBundle:Organization:changeStatus }

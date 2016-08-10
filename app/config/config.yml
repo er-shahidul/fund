@@ -79,6 +79,14 @@ doctrine:
         auto_mapping: true
 
 # Swiftmailer Configuration
+swiftmailer:
+    transport:  smtp
+    encryption: ssl
+    auth_mode:  login
+    host:       smtp.gmail.com
+    username:   mirbahar@emicrograph.com
+    password:   01917147677
+# Swiftmailer Configuration
 #swiftmailer:
 #    transport: "%mailer_transport%"
 #    host:      "%mailer_host%"

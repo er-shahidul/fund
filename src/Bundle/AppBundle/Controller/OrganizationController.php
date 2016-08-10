@@ -6,8 +6,10 @@ use Bundle\AppBundle\Entity\Campaign;
 use Bundle\AppBundle\Entity\Organization;
 use Bundle\AppBundle\Form\CampaignType;
 use Bundle\AppBundle\Form\OrganizationType;
+use Bundle\UserBundle\Form\Type\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class OrganizationController extends Controller
 {
@@ -89,7 +91,8 @@ class OrganizationController extends Controller
 
                 $massage = 'Organization Successfully Inserted';
                 $this->get('session')->getFlashBag()->add('success', $massage);
-                return $this->redirect($this->generateUrl('campaign_create'));
+               // return $this->redirect($this->generateUrl('campaign_create'));
+                return $this->redirect($this->generateUrl('campaign_organization_create',array('organizationVal'=>$organization->getId())));
             }
         }
 
@@ -113,6 +116,7 @@ class OrganizationController extends Controller
     }
 
     public function onLoadOrganizationCreateAction(Request $request) {
+
 
         $organization = new Organization();
         $organizationList = $this->getDoctrine()
@@ -142,12 +146,46 @@ class OrganizationController extends Controller
                 return $this->redirect($this->generateUrl('organization_list'));
             }
         }
+        if($this->userEmailAndPhoneVerifyCheck()){
+            return $this->render(
+                'BundleAppBundle:Organization:loadOrganization.html.twig',array(
+                'form'=>$form->createView(),
+                'organizationList' => $organizationList
+            ));    
+        } else {
+            
+            return $this->redirect($this->generateUrl('campaign_user-profile-verify'));
 
+        }
+        
+    }
+    public function loadOrganizationListAction(Request $request) {
+
+
+        $organization = new Organization();
+        $organizationList = $this->getDoctrine()
+                                 ->getRepository("BundleAppBundle:Organization")
+                                 ->findBy(array('createdBy'=>$this->getUser()->getId()));
         return $this->render(
-            'BundleAppBundle:Organization:loadOrganization.html.twig',array(
-            'form'=>$form->createView(),
+            'BundleAppBundle:Organization:loadOrganizationList.html.twig',array(
             'organizationList' => $organizationList
         ));
+        
+    }
+    public function isFacebookLogin()
+    {
+        if(!$this->getUser()){
+            return  $this->redirect($this->generateUrl('hwi_oauth_service_redirect',array('service'=>'facebook')));
+        }
+    }
+    public function userEmailAndPhoneVerifyCheck(){
+        
+        $userPhone = $this->getUser()->getProfile()->getConfirmationTokenPhoneVerify();
+        $userEmail = $this->getUser()->getProfile()->getConfirmationTokenEmailVerify();
+        if($userPhone && $userEmail){
+            return true;
+        }
+
     }
     public function checkDuplicateOrganization(Organization $organization) {
 
