@@ -70,7 +70,7 @@
                         <div class="collapse navbar-collapse navbar-ex1-collapse no-padding">
                             <ul id="main-menu" class="nav navbar-nav megamenu">
                                 <li class="menu-item-4631" data-id="4631" data-alignsub="left" data-level="1">
-                                    <a href="http://venusdemo.com/unity/demo-1/?post_type=download">Home</a>
+                                    <a href="/">Home</a>
                                 </li>
                                 {% if app.user %}
                                 <li class="menu-item-2496 dropdown parent mega depth-0" data-id="2496"
@@ -152,11 +152,12 @@
                             </ul>
                         </div>
                     </nav>
-
+                    {% if app.user %}
                     <div class="btn-create-campaign hidden-xs hidden-sm">
                         <a class="user-campaign button campaignCreate" href="javascript:;">
                             <i class="fa fa-plus"></i><span class="hidden-sm hidden-md">Create a campaign</span></a>
                     </div>
+                    {% endif %}
 
                 </div>
 

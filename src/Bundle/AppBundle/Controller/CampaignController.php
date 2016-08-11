@@ -40,8 +40,8 @@ class CampaignController extends BaseController
              return $this->isFacebookLogin();
          }
         
-        $campaignList = $this->getDoctrine()->getRepository('BundleAppBundle:Campaign')
-                             ->findBy(array('createdBy'=>$this->getUser(),'organization'=>null));
+        $campaignList = $this->paginate($this->getDoctrine()->getRepository('BundleAppBundle:Campaign')
+                             ->findBy(array('createdBy'=>$this->getUser(),'organization'=>null)));
         $campaignFiles = $this->getDoctrine()
                               ->getRepository('BundleAppBundle:CampaignFile')
                               ->findBy(array('createdBy'=>$this->getUser()));
@@ -215,13 +215,13 @@ class CampaignController extends BaseController
     }
     public function individualCampaignUpdateAction(Request $request , Campaign $campaign)
     {
-
+//var_dump($campaign->getOrganization());die;
         if($this->isFacebookLogin()){
             return $this->isFacebookLogin();
         }
         $organization = $this->checkExistingOrganization($this->getUser());
         
-        $form = $this->createForm(new CampaignType($this->getUser(),null), $campaign);
+        $form = $this->createForm(new CampaignType($this->getUser(),$campaign->getOrganization()), $campaign);
 
         if ('POST' == $request->getMethod()) {
             
@@ -249,7 +249,7 @@ class CampaignController extends BaseController
             array(
                 'form'     => $form->createView(),
                 'user'      => $user,
-                'organization' => $organization,
+                'organization' => $campaign->getOrganization(),
                 'campaign' =>$campaign
             )
         );
@@ -464,12 +464,15 @@ class CampaignController extends BaseController
         $campaignGallary = $this->getDoctrine()
             ->getRepository('BundleAppBundle:CampaignFile')
             ->findBy(array('campaign'=>$campaign));
+
         if(!empty($campaignGallary)){
             $imagePath = $campaignGallary[0]->getPath();
-            $path = 'uploads/campaign/'.$imagePath;
-            return new Response("<img src='$path' class='attachment-thumbnails-crowdfunding wp-post-image' alt=\"campaign-6\">");
+
+            $path = '/uploads/campaign/'.$imagePath;
+
+            return new Response("<img src='$path' class='attachment-thumbnails-crowdfunding wp-post-image'>");
         }else{
-            $path = 'assets/img/people.png';
+            $path = '/assets/img/people.png';
             return new Response("<img src='$path' class='attachment-thumbnails-crowdfunding wp-post-image'>");
         }
         
@@ -492,6 +495,28 @@ class CampaignController extends BaseController
             return new Response("<span class=\"funded\">$roundPercentage%</span>");
         } else{
             return new Response("<span class=\"funded\">0%</span>");
+        }
+
+
+    }
+    public function getCampaignProgressBarPercentageAction(Campaign $campaign){
+
+
+        $recentDonations = $this->getDoctrine()
+            ->getRepository('BundleAppBundle:Donation')
+            ->findBy(array('campaign'=>$campaign),array('id'=>'DESC'));
+
+        if(!empty($recentDonations)) {
+
+            $totalDonationAmount = 0;
+            foreach ($recentDonations as $recentDonation){
+                $totalDonationAmount += $recentDonation->getDonateAmount();
+            }
+            $percentage = ($totalDonationAmount * 100) / $campaign->getAmount();
+            $roundPercentage = round($percentage,2);
+            return new Response("$roundPercentage%");
+        } else{
+            return new Response("0%");
         }
 
 

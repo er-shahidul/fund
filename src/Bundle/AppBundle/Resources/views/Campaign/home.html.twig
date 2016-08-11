@@ -1,23 +1,23 @@
 {% extends "layout.html.twig" %}
 
 {% block body %}
-    <div class="campaign-list">
+    {#<div class="campaign-list">
         <div class="campaign-sidebar">
             <div class="campaign-sub-sidebar">
                 <div class="n cat">
 
-                  {#  <div class="cathead top">MOST COMMON</div>
+                  #}{#  <div class="cathead top">MOST COMMON</div>
 
                     <a href="/2016-Olympic-Games/" class="c23 ">Road to Rio</a>
                     <a href="/alberta-fire-relief/" class="c23 ">Alberta Fires</a>
 
                     <div class="cathead mid">ALL CATEGORIES</div>
 
-                    <a href="/Business-Entrepreneurs/" class="c11 ">Business</a>#}
+                    <a href="/Business-Entrepreneurs/" class="c11 ">Business</a>#}{#
                 </div>
             </div>
         </div>
-        {#<div class="single-campaign">#}
+        #}{#<div class="single-campaign">#}{#
                 {% if campaigns %}
                     {% for campaign in campaigns %}
 
@@ -41,14 +41,100 @@
                     </div>
                 {% endif %}
 
-        {#</div>#}
+        #}{#</div>#}{#
     <script type="text/javascript">
         var tokenPhoneVerify = {{ app.user.Profile.confirmationTokenPhoneVerify| default("undefined") }};
 
         var tokenEmailVerify = {{ app.user.Profile.confirmationTokenEmailVerify|default("undefined") }};
 
     </script>
+    </div>#}
+    <div class="wrapper-breadcrumb">
+
+        <section id="breadcrumb" class="breadcrumb wpo-breadcrumb" style="background: #F0F0F0 url() no-repeat 0 0;">
+            <nav class="container"><a href="/">Home</a>
+                <div class="breadcrumb-name"><span><span class="current">Campaign</span> </span></div>
+            </nav>
+        </section>
     </div>
+    <section id="wpo-mainbody" class="wpo-mainbody clearfix">
+        <div class="container">
+            <div class="container-inner">
+                <div class="row">
+                    <!-- MAIN CONTENT -->
+                    <div id="wpo-content" class="col-xs-12 no-sidebar">
+                        <div class="wpo-content row">
+                           {% if campaigns %}
+                             {% for campaign in campaigns %}
+                               <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                                <div class="item-content item-campaign-wrapper style-2">
+                                    <div class="entry-thumbnail text-center">
+                                        {% render url('campaign_get_image', {'id': campaign.id}) %}
+                                        <div class="donate-now" style="{{ app.user ?'left:30%' :'left:50%' }}">
+                                            <a href="{{ path('donation_create',{id:campaign.id}) }}"  class="btn btn-slide">
+                                                Donate now
+                                            </a> &nbsp;
+                                            {% if app.user %}
+                                            <a href="{{ path('campaign_individual_update',{id:campaign.id}) }}" class="btn btn-slide" style="float: right">Edit</a>
+                                            {% endif %}
+                                        </div>
+
+                                        {% render url('campaign_get_successfull', {'id': campaign.id}) %}
+                                        <div class="entry-date">
+                                            <p class="day">{{ campaign.createdDate|date('d') }}</p>
+                                            <p class="month">{{ campaign.createdDate|date('M') }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="body-inner">
+                                        <div class="entry-title">
+                                            <a href="{{ path('campaign_detail',{id:campaign.id}) }}"
+                                               title="{{ campaign.title }}"><span>{{ campaign.title|default('N/A') }}</span></a>
+                                        </div>
+
+                                        <div class="campaign-main-style-2">
+                                            <div class="process"><span class="processing" style="width: {% render url('campaign_get_progress_bar_percentage', {'id': campaign.id}) %}"></span></div>
+                                            <ul class="campaign-status text-center">
+                                                <li class="campaign-raised">
+                                                    <span class="label">Current</span>
+                                                    <span class="text">&#036;{% render url('campaign_get_target_amount', {'id': campaign.id}) %}</span>
+
+                                                </li>
+                                                <li class="campaign-funded">
+                                                    {% render url('campaign_get_progress_bar', {'id': campaign.id}) %}
+                                                </li>
+                                                <li class="campaign-goal">
+                                                    <span class="label">Backers</span>
+                                                    <span class="text">&#036;{{ campaign.amount|default('') }}</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="clearfix"></div>
+                                        <div class="desciption text-left">
+                                            {{ campaign.description|readmore(path('campaign_detail',{id:campaign.id}),200)}}
+                                        </div>
+                                        <div class="entry-author text-left">
+                                            <span>By</span> <strong> {{ campaign.createdBy.profile.fullName|default('N/A')}}</strong>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                                {% endfor %}
+                            {% else %}
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                        {{ knp_pagination_render(campaigns) }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <!-- //MAIN CONTENT -->
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}
 
  {% block javascriptBlock %}

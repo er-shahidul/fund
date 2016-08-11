@@ -34,6 +34,10 @@ Bundle\AppBundle\Entity\Donation:
 
         donate_amount:
             - NotBlank: { message: "Amount  should not be blank" }
+            - Regex:
+                  pattern: "/^[0-9]+$/i"
+                  htmlPattern: "^[0-9]+$"
+                  message: "Amount should  be Number"
 
         notes:
             - NotBlank: { message: "Notes  should not be blank" }

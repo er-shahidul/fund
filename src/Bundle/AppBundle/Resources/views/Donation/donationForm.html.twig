@@ -3,13 +3,23 @@
 {% block body %}
 
 
-            {#<div class="jumbotron">#}
-    <div class="container">
-        <div class="row">
-                <div class="col-xs-6 col-md-8">
-                    <div class="row3">
+    <div class="wrapper-breadcrumb">
+
+        <section id="breadcrumb" class="breadcrumb wpo-breadcrumb" style="background: #F0F0F0 url() no-repeat 0 0;">
+            <nav class="container"><a href="/">Home</a>
+                <span class="delimiter">/</span>
+                <a href="{{ path('campaign_list') }}">Campaign</a>
+                <div class="breadcrumb-name"><span><span class="current"><span itemprop="name">{{ campaign.title|default }}</span></span> </span>
+                </div>
+            </nav>
+        </section>
+    </div>
+        <div class="container-inner">
+            <div class="row">
+                <div class="col-xs-12 col-md-8 no-sidebar-left">
+                    <div class="single-campaign-content">
                         <form class="form-horizontal" id="form-campaign" enctype="multipart/form-data"
-                              role="form" method="post" action="{{ path('donation_create',{id:campaign.id}) }}">
+                              role="form" method="post" action="{{ path('donation_create',{id:campaign.id}) }}" novalidate>
 
                                 <div class="portlet-body">
 
@@ -18,7 +28,7 @@
 
                                             <label class="col-md-3 col-sm-3 control-label">{{ form_label(form.donate_amount) }}</label>
                                             <div class="col-md-5 col-sm-5">
-                                                {{ form_widget(form.donate_amount,{ 'attr': {'style':'width:425px;height:100px;font-size:68px;'}}) }}
+                                                {{ form_widget(form.donate_amount,{ 'attr': {'style':'width:469px;height:100px;font-size:68px;'}}) }}
                                                 <span class="help-block">{{ form_errors(form.donate_amount) }}</span>
                                             </div>
                                         </div>
@@ -58,7 +68,7 @@
 
                                             <label class="col-md-3 col-sm-3 control-label">{{ form_label(form.notes) }}</label>
                                             <div class="col-md-7 col-sm-7">
-                                                {{ form_widget(form.notes,{ 'attr': {'style':'width:425px;height:122px;'}}) }}
+                                                {{ form_widget(form.notes,{ 'attr': {'style':'width:469;height:122px;'}}) }}
                                                 <span class="help-block">{{ form_errors(form.notes) }}</span>
                                             </div>
                                         </div>
@@ -76,8 +86,10 @@
                                     <div class="form-actions">
                                         <div class="row">
                                             <div class="col-md-offset-3 col-md-9">
+                                                <div class="quick-donate">
+                                                    <button type="submit" id="donation-submit" style="width: 30%" class="btn btn-donate-black">Continue</button>
+                                                </div>
 
-                                                <button type="submit" id="donation-submit" class="btn green">Continue</button>
                                             </div>
                                         </div>
                                     </div>
@@ -88,32 +100,87 @@
                         </form>
                     </div>
                 </div>
-                <div class="col-xs-6 col-md-4">
-                    <div class="row1">
-                        <div class="details round5 processsidebar">
-                            <div class="headbar light-bkgd" style="background-color: #F3F9E4">
-                                <div class="camptitle">{{ campaign.title|default }}</div>
+                <div class="col-xs-12 col-md-4">
+
+                    <div class="sidebar-inner">
+                        <div class="item-campaign">
+
+                            <div class="item-content item-campaign-wrapper">
+                                <div class="entry-thumbnail text-center">
+                                    {% render url('campaign_get_image', {'id': campaign.id}) %}
+                                    {% render url('campaign_get_successfull', {'id': campaign.id}) %}
+                                 </div>
+                                <div class="campaign-main">
+                                    <ul class="campaign-status text-center">
+
+                                        <li class="campaign-raised">
+                                            <span class="label">Current</span>
+                                            <span class="text">&#036; {% render url('campaign_get_target_amount', {'id': campaign.id}) %}</span>
+                                        </li>
+
+                                        <li class="campaign-funded">
+                                            <span class="funded">{% render url('campaign_get_progress_bar', {'id': campaign.id}) %}</span>                                                            </li>
+
+                                        <li class="campaign-backers">
+                                            <span class="label">Backers</span>
+                                            <span class="text">{% render url('campaign_get_backers', {'id': campaign.id}) %}</span>
+                                        </li>
+                                        <li class="campaign-backers">
+                                            <span class="label">Target</span>
+                                            <span class="text">{{ campaign.amount|default }}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="entry-title">
+                                    <a href="/campaign/detail/2" title="1234"><span>1234</span></a>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="desciption text-center">
+                                    dsgsdgs gsgsgsgdfg
+                                </div>
+                                <div class="entry-author text-center">
+                                    <span>By</span> <strong> Mirbahar Nurul Amin</strong>
+                                </div>
+
                             </div>
-                            <div class="detailscontainer">
-                                <div class="photoframe"><img src="{% if campaignPhoto[0] is defined %}
-                                {{ asset('uploads/campaign/') }} {{ campaignPhoto[0].path }}
-                                {% else %}
-                                {{ asset('assets/img/people.png') }}
-                                 {% endif %}"
-                                                             width="264px" height="175px" alt="campaign photo"></div>
-                                <div class="raised mt10 ">{{ campaign.amount|default }}</div>
-                                <hr class="mt20">
-                                <a class="delogo"></a>
+
+                        </div>
+                        <div id="item-campaign" class="widget clearfix widget_campaign_author">
+                            <h3 class="widget-title"><span>Creator</span></h3>
+                            <div class="author-description">
+
+                                <div class="author-info">
+
+                                    <div class="author-avatar">
+                                        <img alt=""
+                                             src="/{{ campaign.createdBy.profile.path|default() }}?s=120&amp;r=g"
+                                             srcset="/{{ campaign.createdBy.profile.path|default() }}?s=240&amp;r=g 2x"
+                                             class="avatar avatar-120 photo" height="120" width="120">
+                                    </div>
+
+                                    <div class="author-stats">
+                                        <h6>{{ campaign.createdBy.profile.fullname|default() }}</h6>
+                                        <p> 11 campaigns </p>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="desc">
+                                    {#<address>#}
+                                    Campaign By {{ campaign.createdBy.profile.fullname|default() }}.<br>
+                                    Created: {{ campaign.createdDate|date('F j, Y') }}<br>
+                                    Category: {{ campaign.category.title|default('N/A') }}<br>
+                                    {{ campaign.location.name|default('N/A') }}<br>
+                                    Bangladesh
+                                    {#</address>#}
+                                </div>
+
                             </div>
                         </div>
                     </div>
-                    <div style="clear: both"></div>
-                    <div class="row3">
-                      <strong>about Organizer</strong>
-                    </div>
                 </div>
         </div>
-    </div>
+        </div>
 {% endblock %}
  {#           #}{#</div>#}{#
     {% stylesheets

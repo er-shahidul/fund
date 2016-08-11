@@ -58,6 +58,10 @@ campaign_get_progress_bar:
     path:     /campaign/progrress-bar/{id}
     defaults: { _controller: BundleAppBundle:Campaign:getCampaignProgressBar }
 
+campaign_get_progress_bar_percentage:
+    path:     /campaign/progrress-bar-percentage/{id}
+    defaults: { _controller: BundleAppBundle:Campaign:getCampaignProgressBarPercentage }
+
 campaign_get_backers:
     path:     /campaign/backers/{id}
     defaults: { _controller: BundleAppBundle:Campaign:getCampaignBackers }

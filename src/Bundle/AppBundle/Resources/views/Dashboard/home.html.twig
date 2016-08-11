@@ -126,47 +126,7 @@
 
                                     </div>
                                 </div>
-                                {#<div class="wpb_column vc_column_container wpb_animate_when_almost_visible wpb_bottom-to-top">
-                                    <div class="wpb_wrapper ">
 
-                                        <div class="widget wpo-social-counter bg-sidebar">
-                                            <h3 class="widget-title visual-title font-size-md separator_align_left">
-                                                <span> <a href="{{ path('bundle_app_homepage') }}">
-                                                        All Categories
-                                                    </a>
-                                                </span>
-                                            </h3>
-
-                                            <div class="widget-content">
-                                                <nav class="sidebar" role="navigation">
-                                                        <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
-                                                            <ul class="nav navbar-nav">
-                                                                {% for category in categories %}
-                                                                    <li>
-                                                                        <a href="{{ path('campaign_category_based',{title:category.title}) }}"
-                                                                           class="{% if categoryTitle.title|default == category.title %}active{% else  %}{% endif %}">
-                                                                            {{ category.title }}
-                                                                        </a>
-                                                                    </li>
-                                                                {% endfor %}
-
-                                                            </ul>
-                                                        </div>
-                                                </nav>
-
-                                            </div>
-                                        </div>
-                                      #}{#  <div class="widget wpo-facebook-fanbox no-padding">
-                                            <h3 class="widget-title visual-title font-size-md separator_align_left">
-                                                <span> Find us on Facebook</span>
-                                            </h3>
-                                            <iframe
-                                                    src="http://www.facebook.com/plugins/likebox.php?href=https://www.facebook.com/BrainOs.LTD&amp;width=369&amp;colorscheme=light&amp;show_faces=true&amp;stream=false&amp;header=false&amp;height=240&amp;force_wall=true&amp;connections=8"
-                                                    style="border:none; overflow:hidden; width:369px; height: 240px;">
-                                            </iframe>
-                                        </div>#}{#
-                                    </div>
-                                </div>#}
                             </div>
                             <div class="col-lg-9 col-md-8 col-sm-6 col-xs-12">
                                 <div class="widget-content">

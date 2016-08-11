@@ -40,7 +40,7 @@
                     <div class="form-actions">
                         <div class="row">
                             <div class="col-md-offset-3 col-md-9">
-                                <button type="submit" id="organization-submit" data-target="#myModal2" class="btn green">Next</button>
+                                <button type="submit" id="organization-submit" style="width: 30%" class="btn btn-donate-black">Next</button>
                                 {#<input type="button" class="btn btn-primary" data-target="#myModal2"  data-toggle="modal"  value="Skip">#}
                             </div>
                         </div>
@@ -50,7 +50,12 @@
         </div>
     </form>
 </div>
+<script type="text/javascript">
 
+    $('#organization-submit').click( function () {
+        organizationAjaxValidation();
+    });
+</script>
  {% block javascriptBlock %}
 
      {% javascripts

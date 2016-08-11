@@ -5,6 +5,7 @@ namespace Bundle\AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 class DonationType extends AbstractType
@@ -24,8 +25,9 @@ class DonationType extends AbstractType
                 'required' => false,
                 'attr' => array('class' => 'form-control input-large'),
             ))
-            ->add('email', 'text', array(
-                'required' => false,
+            ->add('email', 'email', array(
+                'required' => true,
+                'invalid_message' => 'Email is not valid',
                 'attr' => array('class' => 'form-control input-large'),
                 
             )) 
