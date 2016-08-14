@@ -394,7 +394,7 @@ class CampaignController extends BaseController
                              ->getRepository('BundleAppBundle:Category')
                              ->findAll();
 
-        return $this->render('BundleAppBundle:Dashboard:home.html.twig',array(
+        return $this->render('BundleAppBundle:Dashboard:categoryBasedHome.html.twig',array(
             'campaigns'=>$campaignList,
             'categories'=>$categoryList,
             'categoryTitle'=>$category,

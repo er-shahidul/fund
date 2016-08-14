@@ -24,7 +24,7 @@ class CampaignSearchType extends AbstractType
             ->add('search', 'text', array(
                 'required' => false,
                 'mapped'=>false,
-                'attr' => array('class' => 'form-control input-large')
+                'attr' => array('class' => 'col-md-3 col-sm-3 form-control input-large')
             ));
     }
     

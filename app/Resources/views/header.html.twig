@@ -73,6 +73,11 @@
                                     <a href="/">Home</a>
                                 </li>
                                 {% if app.user %}
+                                <li class="menu-item-4631" data-id="4631" data-alignsub="left" data-level="1">
+                                <a href="{{ path('organization_list') }}">Organization</a>
+                                </li>
+                                {% endif %}
+                                {% if app.user %}
                                 <li class="menu-item-2496 dropdown parent mega depth-0" data-id="2496"
                                     data-alignsub="left" data-level="1"><a
                                         href="http://venusdemo.com/unity/demo-1/?post_type=tribe_events"

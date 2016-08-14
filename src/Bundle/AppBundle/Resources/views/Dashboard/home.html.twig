@@ -1,10 +1,12 @@
 {% extends "layout.html.twig" %}
 
 {% block body %}
+
     <div class="row">
         <!-- MAIN CONTENT -->
         <div id="wpo-content" class="col-xs-12 no-sidebar">
             <article id="post-2837" class="clearfix post-2837 page type-page status-publish hentry">
+
                 <section class="wpb-container vc_custom_1421986226710">
                     <div class="wpb-inner container">
                         <div class="row">
@@ -16,80 +18,80 @@
                                                  data-ride="carousel">
                                                 <div class="carousel-inner" role="listbox">
                                                     {% for index, campaign in campaigns %}
-                                                    <div class="item {{ index == 0 ? 'active' :''  }}">
-                                                        <div class="item-campaign row item-layout-1">
-                                                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                                                <div class="entry-thumbnail">
-                                                                    {% render url('campaign_get_image', {'id': campaign.id}) %}
+                                                        <div class="item {{ index == 0 ? 'active' :''  }}">
+                                                            <div class="item-campaign row item-layout-1">
+                                                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                                                    <div class="entry-thumbnail">
+                                                                        {% render url('campaign_get_image', {'id': campaign.id}) %}
+                                                                    </div>
+                                                                    <div class="campaign-title">
+                                                                        <a href="{{ path('campaign_detail',{id:campaign.id}) }}"
+                                                                           title="{{ campaign.title }}"><span>{{ campaign.title|default('N/A') }}</span></a>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="campaign-title">
-                                                                    <a href="{{ path('campaign_detail',{id:campaign.id}) }}"
-                                                                       title="{{ campaign.title }}"><span>{{ campaign.title|default('N/A') }}</span></a>
+                                                                <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12">
+                                                                    <div class="entry-description">
+                                                                        <p>
+                                                                            {{ campaign.description|readmore(path('campaign_detail',{id:campaign.id}),200)}}
+                                                                        </p>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12">
-                                                                <div class="entry-description">
-                                                                    <p>
-                                                                        {{ campaign.description|readmore(path('campaign_detail',{id:campaign.id}),200)}}
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12">
-                                                                <div class="row">
-                                                                    <div class="barometer-main">
-                                                                        <div
-                                                                                class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                                            <div class="barometer"
-                                                                                 data-progress="40"
-                                                                                 data-width="148"
-                                                                                 data-height="148"
-                                                                                 data-strokewidth="11"
-                                                                                 data-stroke="#FFF"
-                                                                                 data-progress-stroke="#FED857">
+                                                                <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12">
+                                                                    <div class="row">
+                                                                        <div class="barometer-main">
+                                                                            <div
+                                                                                    class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                                                <div class="barometer"
+                                                                                     data-progress="40"
+                                                                                     data-width="148"
+                                                                                     data-height="148"
+                                                                                     data-strokewidth="11"
+                                                                                     data-stroke="#FFF"
+                                                                                     data-progress-stroke="#FED857">
                                                                                 <span>
                                                                                     {% render url('campaign_get_progress_bar', {'id': campaign.id}) %}
                                                                                 </span>
+                                                                                </div>
+                                                                                <div
+                                                                                        class="campaign-time-left text-center">
+                                                                                    <span class="title">Expired on<br/>0</span><span> days left</span>
+                                                                                </div>
                                                                             </div>
-                                                                            <div
-                                                                                    class="campaign-time-left text-center">
-                                                                                <span class="title">Expired on<br/>0</span><span> days left</span>
+
+                                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 xs-text-center">
+
+                                                                                <ul class="campaign-status text-center">
+
+                                                                                    <li class="campaign-raised">
+                                                                                        <span class="label">Current</span><div class="clearfix"></div>
+                                                                                        <span class="text">&#036;{% render url('campaign_get_target_amount', {'id': campaign.id}) %}</span>
+                                                                                    </li>
+
+                                                                                    <li class="campaign-goal">
+                                                                                        <p class="label">Target</p>
+                                                                                        <p class="text">&#036;{{ campaign.amount|default('') }}</p>
+                                                                                    </li>
+
+                                                                                    <li class="campaign-backers">
+                                                                                        <span class="label">Backers</span>
+                                                                                        <span class="text">{% render url('campaign_get_backers', {'id': campaign.id}) %}</span>
+                                                                                    </li>
+                                                                                </ul>
+
                                                                             </div>
-                                                                        </div>
 
-                                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 xs-text-center">
-
-                                                                            <ul class="campaign-status text-center">
-
-                                                                                <li class="campaign-raised">
-                                                                                    <span class="label">Current</span><div class="clearfix"></div>
-                                                                                    <span class="text">&#036;{% render url('campaign_get_target_amount', {'id': campaign.id}) %}</span>
-                                                                                </li>
-
-                                                                                <li class="campaign-goal">
-                                                                                    <p class="label">Target</p>
-                                                                                    <p class="text">&#036;{{ campaign.amount|default('') }}</p>
-                                                                                </li>
-
-                                                                                <li class="campaign-backers">
-                                                                                    <span class="label">Backers</span>
-                                                                                    <span class="text">{% render url('campaign_get_backers', {'id': campaign.id}) %}</span>
-                                                                                </li>
-                                                                            </ul>
-
-                                                                        </div>
-
-                                                                        <div class="col-xs-12">
-                                                                            <div class = "text-center quick-donate">
+                                                                            <div class="col-xs-12">
+                                                                                <div class = "text-center quick-donate">
                                                                                     <a href="{{ path('donation_create',{id:campaign.id}) }}" class="btn btn-donate-black">
                                                                                         Donate now
                                                                                     </a>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
                                                     {% endfor %}
 
                                                 </div>
@@ -100,6 +102,32 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="wpb-container vc_custom_1421986226710">
+                    <div class="wpb-inner container">
+                        <div class="row">
+                            <form action="{% if categoryTitle.id is not defined %}
+                            {{ path('campaign_search') }}
+                            {% else %}
+                            {{ path('campaign_search_category_wise',{id:categoryTitle.id}) }}
+                            {% endif %}" class="form-horizontal" role="form" method="post">
+                                {#{{ form_widget(form.search, { 'attr': {'class': 'search_field_short blink search-term-left',
+                                    'placeholder': 'Search by name, keyword, or city...'} }) }}#}
+                                {#<input type="submit" class="btn btn-default blue" value="Search">#}
+                                <div class="form-group">
+                                    <div class="col-sm-10">
+                                        {{ form_widget(form.search, { 'attr': {'class': 'form-control',
+                                            'placeholder': 'Search by name, keyword, or city...'} }) }}
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button type="submit" style="line-height: 22px" class="btn btn-donate-black">Submit</button>
+                                    </div>
+                                </div>
+
+                            </form>
+
                         </div>
                     </div>
                 </section>
