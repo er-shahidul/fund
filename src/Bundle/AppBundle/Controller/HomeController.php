@@ -10,7 +10,7 @@ class HomeController extends BaseController
 {
     public function indexAction(Request $request)
     {
-   
+
         $campaignList = $this->paginate($this->getDoctrine()->getRepository('BundleAppBundle:Campaign')->findAll());
         $categoryList = $this->getDoctrine()->getRepository('BundleAppBundle:Category')->findAll();
 

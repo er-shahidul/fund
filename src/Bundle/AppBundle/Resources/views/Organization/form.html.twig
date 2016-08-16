@@ -1,11 +1,20 @@
-{% extends "base.html.twig" %}
+{% extends "layout.html.twig" %}
 
 {% block body %}
+
+    <div class="wrapper-breadcrumb">
+
+        <section id="breadcrumb" class="breadcrumb wpo-breadcrumb" style="background: #F0F0F0 url() no-repeat 0 0;">
+            <nav class="container"><a href="/">Home</a>
+                <span class="delimiter">/</span>
+                <a href="{{ path('organization_list') }}">Organization</a>
+
+            </nav>
+        </section>
+    </div>
     {% include 'flash.html.twig' %}
-<fieldset>
-    <legend>Organization</legend>
     <div class="row">
-        <form class="form-horizontal" id="form-organization" role="form" method="post" action="{{ path('organization_create') }}">
+        <form class="form-horizontal" id="form-organization" enctype="multipart/form-data" role="form" method="post" action="{{ path('organization_create') }}">
 
             <div class="col-md-12">
                 <div class="portlet-body">
@@ -26,6 +35,13 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-md-3 col-sm-3 control-label">{{ form_label(form.aboutOrganization) }}</label>
+                            <div class="col-md-5 col-sm-5">
+                                {{ form_widget(form.aboutOrganization) }}
+                                <span class="help-block">{{ form_errors(form.aboutOrganization) }}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-md-3 col-sm-3 control-label">{{ form_label(form.mobileNumber) }}</label>
                             <div class="col-md-5 col-sm-5">
                                 {{ form_widget(form.mobileNumber) }}
@@ -39,22 +55,28 @@
                                 <span class="help-block"></span>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-sm-3 control-label">{{ form_label(form.file) }}</label>
+                            <div class="col-md-5 col-sm-5">
+                                {{ form_widget(form.file) }}
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
                     </div>
                     {{ form_row(form._token) }}
                     <div class="form-actions">
                         <div class="row">
                             <div class="col-md-offset-3 col-md-9">
-                                <button type="submit" id="organization-submit" class="btn green">Save</button>
+                                <button type="submit" id="organization-submit" style="width: 30%" class="btn btn-donate-black">Save</button>
                             </div>
                         </div>
-                    </div>
+                    </div><br/>
 
                 </div>
             </div>
 
         </form>
     </div>
- </fieldset>
 <script type="text/javascript">
 
 </script>

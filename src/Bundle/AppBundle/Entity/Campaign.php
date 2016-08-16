@@ -147,7 +147,14 @@ class Campaign
      *
      * @ORM\Column(name="status", type="boolean", length=15)
      */
-    private $status = false;
+    private $status = false;    
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="feature", type="boolean", length=15)
+     */
+    private $feature = false;
     
 
     /**
@@ -475,5 +482,21 @@ class Campaign
     public function setDonationDetails($donationDetails)
     {
         $this->donationDetails = $donationDetails;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isFeature()
+    {
+        return $this->feature;
+    }
+
+    /**
+     * @param boolean $feature
+     */
+    public function setFeature($feature)
+    {
+        $this->feature = $feature;
     }
 }

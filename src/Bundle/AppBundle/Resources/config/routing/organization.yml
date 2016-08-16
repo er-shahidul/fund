@@ -29,3 +29,9 @@ organization_status:
     defaults: { _controller: BundleAppBundle:Organization:changeStatus }
     requirements:
         id:  \d+
+
+organization_detail:
+    path:     /organization/detail/{id}
+    defaults: { _controller: BundleAppBundle:Organization:organizationDetail }
+    requirements:
+        id:  \d+

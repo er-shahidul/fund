@@ -1,14 +1,122 @@
-{% extends "base.html.twig" %}
+{% extends "layout.html.twig" %}
 
 {% block body %}
+    <div class="wrapper-breadcrumb">
+
+        <section id="breadcrumb" class="breadcrumb wpo-breadcrumb" style="background: #F0F0F0 url() no-repeat 0 0;">
+            <nav class="container"><a href="/">Home</a>
+                <span class="delimiter">/</span>
+                <a href="{{ path('organization_list') }}">Organization</a>
+            </nav>
+            <span>Organization List</span>
+        </section>
+    </div>
 
     {% include 'flash.html.twig' %}
+    <div class="row">
 
-    <div class="container">
-        <h2>Organization</h2>
-        <p>All Organization List</p>
-        <p><a href="{{ path('organization_create') }}" class="btn btn-default">Create Organization</a></p>
+        <!-- MAIN CONTENT -->
+        <div id="wpo-content" class="col-xs-12 no-sidebar">
+            <article id="post-2533" class="clearfix post-2533 page type-page status-publish hentry">
+                <section class="wpb-container vc_custom_1416901888546"><div class="wpb-inner container"><div class="row">
+                            <div class="col-sm-12 wpb_column vc_column_container">
+                                <div class="wpb_wrapper ">
 
+                                    <div class="widget wpb_grid wpo-portfolio ">
+                                        <div class="teaser_grid_container">
+                                            <div class="wpb_filtered_grid teaser_grid_container">
+
+                                                <!-- filters category -->
+                                                {#<div id="filters" class="isotope-filter">
+                                                    <ul class="nav nav-tabs wpo-portfolio-filters categories_filter">
+                                                        <li><a href="javascript:void(0)" title="" data-filter=".all"
+                                                               class="active">All</a></li>
+                                                        <li><a href="javascript:void(0)" title=""
+                                                               data-filter=".web-design">web design</a></li>
+                                                        <li><a href="javascript:void(0)" title="" data-filter=".logo">Logo</a>
+                                                        </li>
+                                                        <li><a href="javascript:void(0)" title=""
+                                                               data-filter=".app">App</a></li>
+                                                        <li><a href="javascript:void(0)" title=""
+                                                               data-filter=".illustrator">Illustrator</a></li>
+                                                    </ul>
+                                                </div>#}
+
+                                                <!-- end filters -->
+
+                                                <div class="isotope-list row wpb_thumbnails wpb_thumbnails-fluid clearfix list-unstyled" data-isotope-duration="400" id="isotope-IyX1n" style="position: relative; height: 1068px;">
+                                                    {% for organization in organizationsList %}
+                                                    <div class="isotope-item col-lg-4 col-md-4 col-sm-4 item all web-design ">
+
+                                                        <div class="wpo-portfolio-content thumbnail text-center">
+                                                            <div class="ih-item square colored effect7">
+                                                                <a href="{{ path('organization_detail',{id:organization.id}) }}">
+                                                                    {% if organization.path is not null %}
+                                                                    <div class="img">
+                                                                        <img src="{{ asset('uploads/organization/') }}{{ organization.path|default }}" class="attachment-blog-thumbnails wp-post-image">
+                                                                    </div>
+
+                                                                    {% else %}
+                                                                        <img src="{{ asset('assets/img/people.png') }}" class="attachment-brand-logo wp-post-image">
+                                                                    {% endif %}
+                                                                    <div class="info">
+                                                                        <h3>{{ organization.name }}</h3>
+                                                                        Status: {{ organization.status|default }}
+                                                                        <p>{{ organization.aboutOrganization|default('Dont Describe to about Organization') }}</p>
+                                                                    </div>
+
+                                                                    {#<div class="t">
+                                                                        {% if is_granted("ROLE_ADMIN") %}
+                                                                            {% if organization.status != 'Active' %}
+                                                                                <a href="{{ path('organization_status',{id:organization.id}) }}">Approve</a>
+                                                                            {% endif %}
+                                                                            {% if organization.status != 'Inactive' %}
+                                                                                <a href="{{ path('organization_status',{id:organization.id}) }}">Inactive</a>
+                                                                            {% endif %}
+                                                                        {% endif %}
+                                                                    </div>#}
+                                                                </a>
+
+                                                                {% if is_granted("ROLE_ADMIN") %}
+                                                                    {% if organization.status != 'Active' %}
+                                                                        <a href="{{ path('organization_status',{id:organization.id}) }}">Approve</a>
+                                                                    {% endif %}
+                                                                    {% if organization.status != 'Inactive' %}
+                                                                        <a href="{{ path('organization_status',{id:organization.id}) }}">Inactive</a>
+                                                                    {% endif %}
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+
+                                                  {% endfor %}
+
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+                                                    {{ knp_pagination_render(organizationsList) }}
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <script>
+
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div></section>
+            </article>
+            <!-- #post -->
+        </div>
+        <!-- //MAIN CONTENT -->
+
+    {#<div class="container">
+    <p><a href="{{ path('organization_create') }}" style="width: 30%" class="btn btn-donate-black">Create Organization</a></p>
         <table class="table table-bordered">
             <thead>
             <tr>
@@ -42,5 +150,5 @@
            {% endfor %}
             </tbody>
         </table>
-    </div>
+    </div>#}
 {% endblock %}

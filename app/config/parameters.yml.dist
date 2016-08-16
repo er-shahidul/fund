@@ -17,5 +17,5 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
-    facebook_client_id: 258017052112
-    facebook_client_secret: c043da76acab0942c5f651bbab53eb1c
+    facebook_client_id: 1107285459319764
+    facebook_client_secret: 2861563a892a806347f0b0b9bbb32314

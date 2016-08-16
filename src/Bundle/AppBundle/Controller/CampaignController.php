@@ -26,8 +26,8 @@ class CampaignController extends BaseController
              return $this->isFacebookLogin();
          }
         
-        $campaignList= $this->getDoctrine()->getRepository('BundleAppBundle:Campaign')
-                             ->findBy(array('createdBy'=>$this->getUser()));
+        $campaignList= $this->paginate($this->getDoctrine()->getRepository('BundleAppBundle:Campaign')
+                             ->findBy(array('createdBy'=>$this->getUser())));
         
         return $this->render('BundleAppBundle:Campaign:home.html.twig',array(
             'campaigns'=>$campaignList,
@@ -61,8 +61,8 @@ class CampaignController extends BaseController
         $organization = $this->getDoctrine()->getRepository('BundleAppBundle:Organization')
                                             ->findBy(array('createdBy'=>$this->getUser()));
         
-        $campaignList= $this->getDoctrine()->getRepository('BundleAppBundle:Campaign')
-                             ->findBy(array('createdBy'=>$this->getUser(),'organization'=>$organization));
+        $campaignList= $this->paginate($this->getDoctrine()->getRepository('BundleAppBundle:Campaign')
+                             ->findBy(array('createdBy'=>$this->getUser(),'organization'=>$organization)));
 
         return $this->render('BundleAppBundle:Campaign:home.html.twig',array(
             'campaigns'=>$campaignList,

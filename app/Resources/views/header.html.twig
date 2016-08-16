@@ -6,8 +6,8 @@
                 <!-- LOGO -->
                 <div class="logo-in-theme pull-left">
                     <div class="logo logo-theme">
-                        <a href="http://venusdemo.com/unity/demo-1/">
-                            <img src="http://venusdemo.com/unity/demo-1/wp-content/themes/unity/images/logo.png"
+                        <a href="/">
+                            <img src="{{ asset('assets/img/logo.png') }}"
                                  alt="Unity Theme"/>
                         </a>
                     </div>
@@ -111,7 +111,7 @@
                                         </div>
                                     </div>
                                 </li>
-{%  endif %}
+                                {%  endif %}
                                 {#<li class="menu-item-395 dropdown parent mega depth-0 aligned-left" data-id="395"
                                     data-alignsub="left" data-level="1"><a
                                         href="http://venusdemo.com/unity/demo-1/?page_id=22" class="dropdown-toggle">Category
@@ -134,23 +134,35 @@
                                     </div>
                                 </li>#}
                                 {% if is_granted("ROLE_ADMIN") %}
-                                    <li class="menu-item-4688 dropdown parent mega depth-0 aligned-fullwidth">
-                                        <a data-hover="megamenu-dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;">
-                                            ADMIN <i class="fa fa-angle-down"></i>
-                                        </a>
+                                    <li class="menu-item-2496 dropdown parent mega depth-0" data-id="2496"
+                                        data-alignsub="left" data-level="1"><a
+                                                href="http://venusdemo.com/unity/demo-1/?post_type=tribe_events"
+                                                class="dropdown-toggle">Admin <b class="caret"></b></a>
+                                        <div class="dropdown-menu">
+                                            <div class="dropdown-menu-inner">
+                                                <div class="row">
+                                                    <div class="mega-col col-md-12 " data-type="menu">
+                                                        <div class="mega-col-inner">
+                                                            <ul class="megamenu-items">
+                                                                <li class="menu-item-4732" data-id="4732"
+                                                                    data-alignsub="left" data-level="2"><a
+                                                                            href="{{ path('organization_list') }}">Organization
+                                                                    </a>
+                                                                </li>
+                                                                <li class="menu-item-4734" data-id="4734" data-alignsub="left" data-level="2">
+                                                                    <a href="{{ path('category_list') }}">Category</a>
+                                                                </li>
+                                                                <li class="menu-item-4733" data-id="4733"
+                                                                    data-alignsub="left" data-level="2">
+                                                                    <a href="{{ path('location_list') }}">Location</a>
+                                                                </li>
 
-                                        <ul class="dropdown-menu pull-left">
-                                            <li class="">
-                                                <a href="{{ path('organization_list') }}">Organization</a>
-                                            </li>
-                                            <li class="">
-                                                <a href="{{ path('category_list') }}">Category</a>
-                                            </li>
-                                            <li class="">
-                                                <a href="{{ path('location_list') }}">Location</a>
-                                            </li>
-                                        </ul>
-
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </li>
                                 {% endif %}
 

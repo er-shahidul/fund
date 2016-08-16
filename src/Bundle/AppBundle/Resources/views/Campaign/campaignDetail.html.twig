@@ -282,13 +282,9 @@
                                         <!--<div class="widget wpo-social-counter bg-sidebar">-->
                                         <div class="widget-content">
                                             <ul class="wpo-social-count">
-                                                <li class="diverz facebook">
-                                                    <div class="fb-like" data-href="{{ app.request.getUri }}"
-                                                         data-layout="standard" data-action="like"
-                                                         data-show-faces="true"
-                                                         data-share="false">
-                                                    </div>
-                                                </li>
+                                               {# <li class="diverz facebook">
+                                                    <div id ="shareBtn" data-href="{{ app.request.getUri }}"></div>
+                                                </li>#}
 
                                                 {#<li class="diverz twitter">
                                                     <a href="https://www.twitter.com/opalwordpress">
@@ -322,11 +318,16 @@
                                                 </li>#}
                                             </ul>
                                             <br/><br/>
-
-                                            <div id="shareBtn" style="width: 100%"
+                                            {#<div class="fb-share-button btn btn-donate-black clearfix"
+                                                 data-href="{{ app.request.getUri }}"
+                                                 data-layout="button_count">
+                                            </div>#}
+                                            <a href="{{ app.request.getUri }}" class="btnShare btn btn-donate-black clearfix"> Share On Facebook</a>
+                                            {#<div id="shareBtn" data-href="{{ app.request.getUri }}"  style="width: 100%"
                                                  class="btn btn-donate-black clearfix">
                                                 Share On Facebook
-                                            </div>
+                                            </div>#}
+
                                             <br/>
                                             <br/>
                                             {#<div id="shareBtnTwitter" style="width: 100%"

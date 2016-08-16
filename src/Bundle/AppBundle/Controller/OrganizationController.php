@@ -8,21 +8,27 @@ use Bundle\AppBundle\Form\CampaignType;
 use Bundle\AppBundle\Form\OrganizationType;
 use Bundle\UserBundle\Form\Type\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class OrganizationController extends Controller
+class OrganizationController extends BaseController
 {
     public function indexAction()
     {
+        if($this->isFacebookLogin()) {
+
+            return $this->isFacebookLogin();
+        }
+
         if($this->getUser()->hasRole('ROLE_ADMIN')) {
-        $organizationList = $this->getDoctrine()
+        $organizationList = $this->paginate($this->getDoctrine()
                                  ->getRepository('BundleAppBundle:Organization')
-                                 ->findAll();
+                                 ->findAll());
         }else {
-            $organizationList = $this->getDoctrine()
+            $organizationList = $this->paginate($this->getDoctrine()
                 ->getRepository('BundleAppBundle:Organization')
-                ->findBy(array('createdBy'=>$this->getUser(),'status'=>'Active'));
+                ->findBy(array('createdBy'=>$this->getUser(),'status'=>'Active')));
         }
         return $this->render('BundleAppBundle:Organization:home.html.twig',array(
             'organizationsList' =>$organizationList
@@ -30,16 +36,21 @@ class OrganizationController extends Controller
     } 
     public function createAction(Request $request)
     {
+        if($this->isFacebookLogin()){
+            return $this->isFacebookLogin();
+        }
 
         $organization = new Organization();
 
         $form = $this->createForm(new OrganizationType(), $organization);
 
         if ('POST' == $request->getMethod()) {
+
             $form->handleRequest($request);
-
+      
             if ($form->isValid()) {
-
+                /** @var UploadedFile $file */
+                $organization->upload();
                 if($this->checkDuplicateOrganization($organization)){
 
                     $massage = 'Organization already Exist';
@@ -213,6 +224,18 @@ class OrganizationController extends Controller
          $this->getDoctrine()->getRepository('BundleAppBundle:Organization')->persist($organization);
 
         return $this->redirect($this->generateUrl('organization_list'));
+    }
+    public function organizationDetailAction(Organization $organization){
+
+        $campaignList= $this->getDoctrine()->getRepository('BundleAppBundle:Campaign')
+            ->findBy(array('organization'=>$organization));
+        
+        return $this->render(
+            'BundleAppBundle:Organization:detailOrganization.html.twig',array(
+            'campaigns'=>$campaignList,
+            'organization' => $organization
+        ));
+
     }
     
 }

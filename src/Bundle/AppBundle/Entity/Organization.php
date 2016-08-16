@@ -5,12 +5,14 @@ namespace Bundle\AppBundle\Entity;
 use Bundle\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Organization
  *
  * @ORM\Table(name="organization")
  * @ORM\Entity(repositoryClass="Bundle\AppBundle\Repository\OrganizationRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Organization
 {
@@ -36,6 +38,13 @@ class Organization
      * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
     private $address;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="about_organization", type="text", nullable=true)
+     */
+    private $aboutOrganization;
 
     /**
      * @var string
@@ -86,6 +95,33 @@ class Organization
      * @ORM\Column(name="createdDate", type="datetime")
      */
     private $createdDate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="file_name", type="string", length=255, nullable=true)
+     */
+    private $fileName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="file_type", type="text", nullable= true )
+     */
+    private $fileType;
+
+    /**
+     * @Assert\File(maxSize="6000000")
+     */
+
+    public $file;
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $path;
+
+
+    public $temp;
 
 
     /**
@@ -275,5 +311,159 @@ class Organization
     public function setValidateOrganization($validateOrganization)
     {
         $this->validateOrganization = $validateOrganization;
+    }
+
+    /**
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
+     */
+    public function upload()
+    {
+
+        if (null === $this->getFile()) {
+            return;
+        }
+        $this->preUpload();
+
+        $this->getFile()->move($this->getUploadRootDir(), $this->path);
+
+        $this->file = null;
+    }
+
+    protected function getUploadRootDir()
+    {
+
+        // the absolute directory path where uploaded
+        // documents should be saved
+        return __DIR__ . '/../../../../web/' . $this->getUploadDir();
+    }
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function preUpload()
+    {
+
+        if (null !== $this->getFile()) {
+            // do whatever you want to generate a unique name
+            $filename = sha1(uniqid(mt_rand(), true));
+
+            $this->path = $filename . '.' . $this->getFile()->guessExtension();
+
+        }
+
+    }
+
+    protected function getUploadDir()
+    {
+
+        // get rid of the __DIR__ so it doesn't screw up
+        // when displaying uploaded doc/image in the view.
+        return 'uploads/organization/';
+    }
+
+    /**
+     * @ORM\PostRemove()
+     */
+    public function removeUpload()
+    {
+        if ($file = $this->getAbsolutePath()) {
+            unlink($file);
+        }
+    }
+
+    public function getAbsolutePath()
+    {
+
+        return null === $this->path
+            ? null
+            : $this->getUploadRootDir() . '/' . $this->path;
+    }
+
+    public function getWebPath()
+    {
+        return null === $this->path
+            ? null
+            : $this->getUploadDir() . '/' . $this->path;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFileName()
+    {
+        return $this->fileName;
+    }
+
+    /**
+     * @param string $fileName
+     */
+    public function setFileName($fileName)
+    {
+        $this->fileName = $fileName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFileType()
+    {
+        return $this->fileType;
+    }
+
+    /**
+     * @param string $fileType
+     */
+    public function setFileType($fileType)
+    {
+        $this->fileType = $fileType;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * @param mixed $file
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
+     * @param mixed $path
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAboutOrganization()
+    {
+        return $this->aboutOrganization;
+    }
+
+    /**
+     * @param string $aboutOrganization
+     */
+    public function setAboutOrganization($aboutOrganization)
+    {
+        $this->aboutOrganization = $aboutOrganization;
     }
 }

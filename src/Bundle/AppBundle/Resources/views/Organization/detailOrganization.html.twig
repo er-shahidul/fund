@@ -1,0 +1,138 @@
+{% extends "layout.html.twig" %}
+
+{% block body %}
+    <div class="wrapper-breadcrumb">
+
+        <section id="breadcrumb" class="breadcrumb wpo-breadcrumb" style="background: #F0F0F0 url() no-repeat 0 0;">
+            <nav class="container"><a href="/">Home</a>
+                <span class="delimiter">/</span>
+                <a href="{{ path('organization_list') }}">Organization</a>
+                <div class="breadcrumb-name"><span><span class="current"><span
+                                    itemprop="name">{{ organization.name|default }}</span></span> </span>
+                </div>
+            </nav>
+        </section>
+    </div>
+    <div class="row">
+        <!-- MAIN CONTENT -->
+        <div id="wpo-content" class="col-xs-12 no-sidebar">
+            <article id="post-2837" class="clearfix post-2837 page type-page status-publish hentry">
+                <section class="wpb-container">
+                    <div class="wpb-inner container">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+                                <div class="widget-content">
+                                    {% if campaigns %}
+                                        {% for campaign in campaigns %}
+                                            <div class="item-campaign col-lg-4 col-md-4 col-sm-6 col-xs-12">
+
+                                                <div class="item-content item-campaign-wrapper">
+                                                    <div class="entry-thumbnail text-center">
+                                                        {% render url('campaign_get_image', {'id': campaign.id}) %}
+                                                        <div class="donate-now">
+                                                            <a href="{{ path('donation_create',{id:campaign.id}) }}" class="btn btn-slide">
+                                                                Donate now
+                                                            </a>
+                                                        </div>
+                                                        {% render url('campaign_get_successfull', {'id': campaign.id}) %}
+                                                    </div>
+                                                    <div class="campaign-main">
+                                                        <ul class="campaign-status text-center">
+
+                                                            <li class="campaign-raised">
+                                                                <span class="label">Current</span>
+                                                                <span class="text">&#036;{{ campaign.amount|default('') }}</span>
+                                                            </li>
+
+                                                            <li class="campaign-funded">
+                                                                {% render url('campaign_get_progress_bar', {'id': campaign.id}) %}
+                                                            </li>
+
+                                                            <li class="campaign-backers">
+                                                                <span class="label">Backers</span>
+                                                                <span class="text">{% render url('campaign_get_backers', {'id': campaign.id}) %}</span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                    <div class="entry-title">
+                                                        <a href="{{ path('campaign_detail',{id:campaign.id}) }}"
+                                                           title="{{ campaign.title }}"><span>{{ campaign.title|default('N/A') }}</span></a>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                    <div class="desciption text-center">
+                                                        {{ campaign.description|readmore(path('campaign_detail',{id:campaign.id}),40)}}
+                                                    </div>
+                                                    <div class="entry-author text-center">
+                                                        <span>By</span> <strong> {{ campaign.createdBy.profile.fullName|default('N/A')}}</strong>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        {% endfor %}
+
+                                    {% else %}
+                                        <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+                                            First create Campaign for this organization <a href="{{ path('campaign_organization_create',{organizationVal:organization.id}) }}">here</a>
+                                        </div>
+                                    {% endif %}
+                                    <div style="clear: both;"></div>
+                                    {#<div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+                                        {{ knp_pagination_render(campaigns) }}
+                                    </div>#}
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-2 col-xs-4">
+                                <div class="wpo-sidebar wpo-sidebar-right">
+                                    <div class="sidebar-inner">
+                                        <aside id="campaign_author-2" class="widget clearfix widget_campaign_author">
+                                            <h3 class="widget-title"><span>Organization</span></h3>
+                                            <div class="author-description">
+
+                                                <div class="author-info">
+                                                    {% if organization.path is not null %}
+                                                    <div class="author-avatar">
+                                                        <img src="{{ asset('uploads/organization/') }}{{ organization.path }}" width="200" height="200">
+                                                    </div>
+                                                    {% else %}
+                                                        <div class="author-avatar">
+                                                            <img src="{{ asset('assets/img/people.png') }}" width="100" height="100">
+                                                        </div>
+                                                    {% endif %}
+                                                    <div class="author-stats">
+                                                        <h6>{{ organization.name }}</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <div class="desc">
+                                                    {#<address>#}
+                                                    Organization By <strong>{{ organization.createdBy.profile.fullname|default() }}</strong><br>
+                                                     {{ organization.address|default('address not available') }}<br>
+                                                    Created: <strong>{{ organization.createdDate|date('F j, Y') }}</strong><br>
+
+                                                    {#</address>#}
+                                                </div>
+                                                <div class="desc">
+                                                    {{ organization.aboutOrganization|default('') }}
+                                                </div>
+
+                                            </div>
+                                        </aside>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+                <!--banner post-->
+                <!--end banner post-->
+            </article><!-- #post -->
+        </div>
+        <!-- //MAIN CONTENT -->
+    </div>
+
+{% endblock %}

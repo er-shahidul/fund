@@ -24,6 +24,10 @@ class OrganizationType extends AbstractType
             ->add('address', 'textarea', array(
                 'required' => false,
                 'attr' => array('class' => 'form-control input-large')
+            ))  
+            ->add('aboutOrganization', 'textarea', array(
+                'required' => false,
+                'attr' => array('class' => 'form-control input-large')
             ))
             ->add('mobileNumber', 'text', array(
                 'required' => false,
@@ -32,8 +36,10 @@ class OrganizationType extends AbstractType
             ->add('email', 'text', array(
                 'required' => false,
                 'attr' => array('class' => 'form-control input-large')
+            ))
+            ->add('file','file', array(
+                'required' => false
             ));
-
     }
     
     /**

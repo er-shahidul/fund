@@ -85,6 +85,7 @@
                                                                                     <a href="{{ path('donation_create',{id:campaign.id}) }}" class="btn btn-donate-black">
                                                                                         Donate now
                                                                                     </a>
+
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -165,10 +166,13 @@
                                                 <div class="item-content item-campaign-wrapper">
                                                     <div class="entry-thumbnail text-center">
                                                         {% render url('campaign_get_image', {'id': campaign.id}) %}
-                                                        <div class="donate-now">
+                                                        <div class="donate-now" style="{{ is_granted("ROLE_ADMIN") ?'left:30%' :'left:50%' }}">
                                                             <a href="{{ path('donation_create',{id:campaign.id}) }}" class="btn btn-slide">
                                                                 Donate now
-                                                            </a>
+                                                            </a>&nbsp;
+                                                           {# {% if is_granted("ROLE_ADMIN") %}
+                                                                <a href="{{ path('campaign_individual_update',{id:campaign.id}) }}" class="btn btn-slide" style="float: right">Edit</a>
+                                                            {% endif %}#}
                                                         </div>
                                                         {% render url('campaign_get_successfull', {'id': campaign.id}) %}
                                                     </div>
