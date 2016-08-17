@@ -51,4 +51,9 @@ class CampaignRepository extends EntityRepository
 
         return $query->getQuery()->getSingleScalarResult();
     }
+     public function flashData($data){
+         $this->_em->persist($data);
+         $this->_em->flush();
+         return $data;
+     }
 }

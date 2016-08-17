@@ -469,11 +469,11 @@ class CampaignController extends BaseController
             $imagePath = $campaignGallary[0]->getPath();
 
             $path = '/uploads/campaign/'.$imagePath;
+            return new Response($path);
+        } else {
 
-            return new Response("<img src='$path' class='attachment-thumbnails-crowdfunding wp-post-image'>");
-        }else{
             $path = '/assets/img/people.png';
-            return new Response("<img src='$path' class='attachment-thumbnails-crowdfunding wp-post-image'>");
+            return new Response($path);
         }
         
     }
@@ -491,7 +491,7 @@ class CampaignController extends BaseController
                 $totalDonationAmount += $recentDonation->getDonateAmount();
             }
             $percentage = ($totalDonationAmount * 100) / $campaign->getAmount();
-            $roundPercentage = round($percentage,2);
+            $roundPercentage = round($percentage);
             return new Response("<span class=\"funded\">$roundPercentage%</span>");
         } else{
             return new Response("<span class=\"funded\">0%</span>");
@@ -513,7 +513,7 @@ class CampaignController extends BaseController
                 $totalDonationAmount += $recentDonation->getDonateAmount();
             }
             $percentage = ($totalDonationAmount * 100) / $campaign->getAmount();
-            $roundPercentage = round($percentage,2);
+            $roundPercentage = round($percentage);
             return new Response("$roundPercentage%");
         } else{
             return new Response("0%");
@@ -592,6 +592,24 @@ class CampaignController extends BaseController
             return new Response("0");
         }
 
+
+    }
+    public function campaignFeaturedAction(Request $request){
+
+        $campaign = $this->getDoctrine()
+            ->getRepository('BundleAppBundle:Campaign')
+            ->find($request->request->all()['campaign']);
+        if($campaign->isFeature() == false) {
+
+            $campaign->setFeature(true);
+            $msg = 'Featured';
+        } else {
+            $campaign->setFeature(false);
+            $msg = 'Un-featured';
+        }
+        $campaignRepo = $this->getDoctrine()->getRepository("BundleAppBundle:Campaign");
+        $campaignRepo->flashData($campaign);
+        return new Response($msg);
 
     }
 

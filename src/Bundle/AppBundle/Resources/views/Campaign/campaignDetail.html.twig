@@ -14,235 +14,278 @@
         </section>
     </div>
     <section id="wpo-mainbody" class=" wpo-mainbody single-campaign">
-
         <div class="wrapper-content">
             <div class="container">
                 <div class="container-inner">
                     <div class="row">
                         <div id="wpo-content" class="col-xs-12 col-md-8 no-sidebar-left">
                             <div class="single-campaign-content">
-										<span itemscope="" itemtype="http://schema.org/Product">
 
-        <!-- Active campaign -->
-        <section class="active-campaign current-campaign cf ">
+                                <!-- Active campaign -->
+                                <section class="active-campaign current-campaign cf ">
 
-            <div class="shadow-wrapper">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <div class="thumbnail" id="loadImage">
-                            {% render url('campaign_get_image', {'id': campaign.id}) %}
-                            {% render url('campaign_get_successfull', {'id': campaign.id}) %}
+                                    <div class="shadow-wrapper">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                <div class="thumbnail" id="loadImage">
+                                                    <img src='{% render url('campaign_get_image', {'id': campaign.id}) %}'
+                                                         class='attachment-thumbnails-crowdfunding  resizeimage'>
 
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 xs-text-center">
-                        <div class="campaign-summary cf">
+                                                    {#{% render url('campaign_get_successfull', {'id': campaign.id}) %}#}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 xs-text-center">
+                                                <a href="javascript:;" rel="{{ campaign.id }}" class="feature featurei"><i
+                                                            class="icon-post fa fa-picture-o"></i></a>
+                                                {#<a href="javascript:;" rel="{{ campaign.id }}" class="feature un-feature"><i class="edd-icon-ok"></i></a>#}
+                                                <div class="campaign-summary cf">
 
-                            <div class="barometer-main barometer-added">
-                                <div class="barometer" data-progress="868" data-width="148" data-height="148"
-                                     data-strokewidth="11" data-stroke="#DEDEDE" data-progress-stroke="#FED857">
-                                    <svg height="148" version="1.1" width="148" xmlns="http://www.w3.org/2000/svg"
-                                         style="overflow: hidden; position: relative;">
-                                        <desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with
-                                            Raphaël 2.1.0
-                                        </desc>
-                                        <defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs>
-                                    </svg>
+                                                    <div class="barometer-main barometer-added">
+                                                        <div class="barometer"
+                                                             data-progress="{% render url('campaign_get_progress_bar_percentage', {'id': campaign.id}) %}"
+                                                             data-width="148" data-height="148"
+                                                             data-strokewidth="11" data-stroke="#DEDEDE"
+                                                             data-progress-stroke="#FED857">
+                                                            <svg height="148" version="1.1" width="148"
+                                                                 xmlns="http://www.w3.org/2000/svg"
+                                                                 style="overflow: hidden; position: relative;">
+                                                                <desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                                                                    Created with
+                                                                    Raphaël 2.1.0
+                                                                </desc>
+                                                                <defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs>
+                                                            </svg>
                                         <span style="opacity: 1;">
-                                            <span class="funded" style="opacity: 1;">868<sup>%</sup></span>
+                                            <span class="funded"
+                                                  style="opacity: 1;">{% render url('campaign_get_progress_bar_percentage', {'id': campaign.id}) %}
+                                                <sup></sup></span>
                                         </span>
-                                </div>
-                                <div class="campaign-time-left text-center"><span
-                                            class="title">Expired on<br>0</span><span> days left</span></div>
-                            </div>
+                                                        </div>
+                                                        <div class="campaign-time-left text-center"><span
+                                                                    class="title">Expired on<br>0</span><span> days left</span>
+                                                        </div>
+                                                    </div>
 
-                            <div class="text-barometer">
-                                <ul>
-                                    <li class="campaign-raised">
-                                        <p class="label">Current</p>
-                                        <p class="text">
-                                            &#036; {% render url('campaign_get_target_amount', {'id': campaign.id}) %}</p>
-                                    </li>
-                                    <li class="campaign-goal">
-                                        <p class="label">Target</p>
-                                        <p class="text">&#036;{{ campaign.amount|default('') }}</p>
-                                    </li>
-                                    <li class="campaign-backers">
-                                        <p class="label">Backers</p>
-                                        <p class="text">{% render url('campaign_get_backers', {'id': campaign.id}) %}</p>
-                                    </li>
-                                </ul>
-                                <div class="social">
+                                                    <div class="text-barometer">
+                                                        <ul>
+                                                            <li class="campaign-raised">
+                                                                <p class="label">Current</p>
+                                                                <p class="text">
+                                                                    &#036; {% render url('campaign_get_target_amount', {'id': campaign.id}) %}</p>
+                                                            </li>
+                                                            <li class="campaign-goal">
+                                                                <p class="label">Target</p>
+                                                                <p class="text">
+                                                                    &#036;{{ campaign.amount|default('') }}</p>
+                                                            </li>
+                                                            <li class="campaign-backers">
+                                                                <p class="label">Backers</p>
+                                                                <p class="text">{% render url('campaign_get_backers', {'id': campaign.id}) %}</p>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="social">
 
-                                </div>
-                            </div>
+                                                        </div>
+                                                    </div>
 
-                        </div>
+                                                </div>
 
-                        <div class="quick-donate">
-                            <a href="{{ path('donation_create',{id:campaign.id}) }}" class="btn btn-donate-black">
-                                Donate now
-                            </a>
-                        </div>
+                                                <div class="quick-donate">
+                                                    <a href="{{ path('donation_create',{id:campaign.id}) }}"
+                                                       class="btn btn-donate-black">
+                                                        Donate now
+                                                    </a>
+                                                </div>
 
-                    </div>
-                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-sx-12">
+                                                <div class="campaign-img-contain">
+                                                    <!--<div class="row2">-->
+                                                    {% for gallary in  campaignGallary %}
+                                                        <div class="campaign-img-contain detailPageThumbnailImage">
+                                                            <img class="thumbnail"
+                                                                 onclick="loadImage('{{ asset('uploads/campaign/') }}{{ gallary.path }}')"
+                                                                 src="{{ asset('uploads/campaign/') }}{{ gallary.path }}">
+                                                        </div>
+                                                    {% endfor %}
+                                                    <!--</div>-->
+                                                </div>
+                                            </div>
+                                        </div>
 
-                <div class="row">
-                    <div class="campaign-img-contain">
-                        <!--<div class="row2">-->
-                        {% for gallary in  campaignGallary %}
-                            <div class="campaign-img-contain">
-                                <img class="thumbnail"
-                                     onclick="loadImage('{{ asset('uploads/campaign/') }}{{ gallary.path }}')"
-                                     style="float: left;width: 100px ;height: 100px;"
-                                     src="{{ asset('uploads/campaign/') }}{{ gallary.path }}">
-                            </div>
-                        {% endfor %}
-                        <!--</div>-->
-                    </div>
-                </div>
-            </div>
-        </section>
-                                            <!-- End active campaign -->
-                                            <!-- Campaign content -->
-        <div class="clearfix"></div>
-
-        <div id="campaign-4617"
-             class="campaign-content post-4617 type-download status-publish has-post-thumbnail hentry download_category-donate-program edd-download edd-download-cat-donate-program">
-            <div class="entry-description">
-                <div class="row3">
-
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active"><a href="#story" aria-controls="home" role="tab"
-                                                                  data-toggle="tab">Story</a></li>
-                        <li role="presentation"><a href="#update" aria-controls="update" role="tab" data-toggle="tab">Update</a>
-                        </li>
-                    </ul>
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active text-justify" id="story">
-                            {{ campaign.description }}
-                            <div>
-                                {% set videoUrl = campaign.campaignVideoUrl |split('/') %}
-                                {% if videoUrl[3] is defined %}
-                                    <iframe width="420" height="345"
-                                            src="https://www.youtube.com/embed/{{ videoUrl[3] }}">
-                                    </iframe>
-                                {% endif %}
-                            </div>
-                        </div>
-                        <div role="tabpanel" class="tab-pane text-justify" id="update">
-
-                            {% for index , campaignDetailInfo in campaignDetailList %}
-                                <div class="divider">
-                                    <label><strong>Update</strong> {{ campaignDetailInfo.id }}</label>
-
-                                    {% if app.user != null %}
-                                        <span style="float: right"><a
-                                                    href="{{ path('campaign_detail_update',{id:campaignDetailInfo.id}) }}"
-                                                     class="btn btn-donate-black">Edit</a>
-                                        </span>
-                                    {% endif %}
-                                    <address>
-                                        <strong>Created At</strong>: {{ campaignDetailInfo.createdDate|date('Y M d') }}
-                                        <br>
-                                    </address>
-                                    {{ campaignDetailInfo.notes }}
-
-                                    <div class="campaign-img-contain" id="loadImage">
-                                        {% if campaignDetailInfo.path is not null %}
-
-                                            <img class="campaign-img defaultLoadImage" width="300" height="350"
-                                                 src="{{ asset('uploads/campaign/') }}{{ campaignDetailInfo.path }}">
-                                        {% endif %}
                                     </div>
+                                </section>
+                                <!-- End active campaign -->
+                                <!-- Campaign content -->
+                                <div class="clearfix"></div>
+                                <!-- End campaign content -->
 
-                                    {% set detailVideoUrl = campaignDetailInfo.campaignDetailVideoUrl |split('/') %}
-                                    {% if detailVideoUrl[3] is defined %}
-                                        <iframe width="420" height="345"
-                                                src="https://www.youtube.com/embed/{{ detailVideoUrl[3] }}">
-                                        </iframe>
-                                    {% endif %}
-                                </div>
-                                <hr/>
-                            {% endfor %}
-                            {% if app.user %}
-                                <fieldset>
-                                    <legend>New Update Post:</legend>
-                                    <form class="form-horizontal" id="form-campaign" enctype="multipart/form-data"
-                                          role="form" method="post"
-                                          action="{{ path('campaign_detail_create',{id:campaign.id}) }}">
 
-                                        <div class="col-md-8" style="margin-left: -72px">
-                                            <div class="portlet-body">
+                            </div></br>
+                            <div class="single-campaign-content">
 
-                                                <div class="form-body">
-                                                    <div class="form-group">
+                                <!-- Active campaign -->
+                                <div id="campaign-4617"
+                                     class="campaign-content post-4617 type-download status-publish has-post-thumbnail hentry download_category-donate-program edd-download edd-download-cat-donate-program">
+                                    <div class="entry-description tabs-campaign">
+                                        <div class="row3">
 
-                                                        <label class="col-md-3 col-sm-3 control-label">{{ form_label(form.notes) }}</label>
-                                                        <div class="col-md-5 col-sm-5">
-                                                            {{ form_widget(form.notes,{ 'attr': {'style':'width:665px;height:122px;'}}) }}
-                                                            <span class="help-block">{{ form_errors(form.notes) }}</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-md-3 col-sm-3 control-label">Url</label>
-                                                        <div class="col-md-5 col-sm-5">
-                                                            {{ form_widget(form.campaignDetailVideoUrl,{ 'attr': {'style':'width:665px;'}}) }}
-                                                            <span class="help-block">{{ form_errors(form.campaignDetailVideoUrl) }}</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-md-3 col-sm-3 control-label">{{ form_label(form.file) }}</label>
-                                                        <div class="col-md-5 col-sm-5">
-                                                            {{ form_widget(form.file) }}
-                                                            <span class="help-block"></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                {{ form_row(form._token) }}
-                                                <div class="form-actions">
+                                            <!-- Nav tabs -->
+                                            <ul class="nav nav-tabs" role="tablist">
+                                                <li role="presentation" class="active"><a href="#story"
+                                                                                          aria-controls="home"
+                                                                                          role="tab"
+                                                                                          data-toggle="tab">Story</a>
+                                                </li>
+                                                <li role="presentation"><a href="#update" aria-controls="update"
+                                                                           role="tab" data-toggle="tab">Update</a>
+                                                </li>
+                                            </ul>
+                                            </br>
+                                            <!-- Tab panes -->
+                                            <div class="tab-content">
+                                                <div role="tabpanel" class="tab-pane active text-justify" id="story">
                                                     <div class="row">
-                                                        <div class="col-md-offset-3 col-md-9">
-
-                                                            <button type="submit" id="campaign-detail-submit"
-                                                                    class="btn green">Save
-                                                            </button>
+                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                            {% set videoUrl = campaign.campaignVideoUrl |split('/') %}
+                                                            {% if videoUrl[3] is defined %}
+                                                                <iframe width="343" height="300" src="https://www.youtube.com/embed/{{ videoUrl[3] }}"></iframe>
+                                                            {% endif %}
                                                         </div>
+                                                        <div class="">
+                                                            {{ campaign.description }}
+                                                        </div>
+
                                                     </div>
-                                                </div>
 
+                                                </div>
+                                                <div role="tabpanel" class="tab-pane text-justify" id="update">
+
+                                                    {% for index , campaignDetailInfo in campaignDetailList %}
+                                                        <div class="divider">
+                                                            <label><strong>Update</strong> {{ campaignDetailInfo.id }}
+                                                            </label>
+
+                                                            {% if app.user != null %}
+                                                                <span style="float: right"><a
+                                                                            href="{{ path('campaign_detail_update',{id:campaignDetailInfo.id}) }}"
+                                                                            class="btn btn-donate-black">Edit</a>
+                                        </span>
+                                                            {% endif %}
+                                                            <address>
+                                                                <strong>Created
+                                                                    At</strong>: {{ campaignDetailInfo.createdDate|date('Y M d') }}
+                                                                <br>
+                                                            </address>
+                                                            {{ campaignDetailInfo.notes }}
+
+                                                            <div class="campaign-img-contain" id="loadImage">
+                                                                {% if campaignDetailInfo.path is not null %}
+
+                                                                    <img class="campaign-img defaultLoadImage"
+                                                                         width="300" height="350"
+                                                                         src="{{ asset('uploads/campaign/') }}{{ campaignDetailInfo.path }}">
+                                                                {% endif %}
+                                                            </div>
+
+                                                            {% set detailVideoUrl = campaignDetailInfo.campaignDetailVideoUrl |split('/') %}
+                                                            {% if detailVideoUrl[3] is defined %}
+                                                                <iframe width="420" height="345"
+                                                                        src="https://www.youtube.com/embed/{{ detailVideoUrl[3] }}">
+                                                                </iframe>
+                                                            {% endif %}
+                                                        </div>
+                                                        <hr/>
+                                                    {% endfor %}
+                                                    {% if app.user %}
+                                                        <fieldset>
+                                                            <legend>New Update Post:</legend>
+                                                            <form class="form-horizontal" id="form-campaign"
+                                                                  enctype="multipart/form-data"
+                                                                  role="form" method="post"
+                                                                  action="{{ path('campaign_detail_create',{id:campaign.id}) }}">
+
+                                                                <div class="col-md-8" style="margin-left: -72px">
+                                                                    <div class="portlet-body">
+
+                                                                        <div class="form-body">
+                                                                            <div class="form-group">
+
+                                                                                <label class="col-md-3 col-sm-3 control-label">{{ form_label(form.notes) }}</label>
+                                                                                <div class="col-md-5 col-sm-5">
+                                                                                    {{ form_widget(form.notes,{ 'attr': {'style':'width:665px;height:122px;'}}) }}
+                                                                                    <span class="help-block">{{ form_errors(form.notes) }}</span>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label class="col-md-3 col-sm-3 control-label">Url</label>
+                                                                                <div class="col-md-5 col-sm-5">
+                                                                                    {{ form_widget(form.campaignDetailVideoUrl,{ 'attr': {'style':'width:665px;'}}) }}
+                                                                                    <span class="help-block">{{ form_errors(form.campaignDetailVideoUrl) }}</span>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label class="col-md-3 col-sm-3 control-label">{{ form_label(form.file) }}</label>
+                                                                                <div class="col-md-5 col-sm-5">
+                                                                                    {{ form_widget(form.file) }}
+                                                                                    <span class="help-block"></span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        {{ form_row(form._token) }}
+                                                                        <div class="form-actions">
+                                                                            <div class="row">
+                                                                                <div class="col-md-offset-3 col-md-9">
+
+                                                                                    <button type="submit"
+                                                                                            id="campaign-detail-submit"
+                                                                                            class="btn green">Save
+                                                                                    </button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+                                                            </form>
+                                                        </fieldset>
+                                                    {% endif %}
+
+                                                </div>
                                             </div>
                                         </div>
 
-                                    </form>
-                                </fieldset>
-                            {% endif %}
+                                    </div>
+                                </div>
+                                <!-- End campaign content -->
 
-                        </div>
-                    </div>
-                </div>
 
-            </div>
-        </div>
-                                            <!-- End campaign content -->
-
-										<div id="comments" class="comments">
-                                            <div class="row5">
-                                                <div class="fb-comments"
-                                                     data-href="{{ app.request.getUri }}"
-                                                     data-numposts="5">
-
-                                                </div>
-                                            </div>
-                                            <!-- end commentform -->
-                                        </div>
-                                            <!-- end comments -->
-									</span>
                             </div>
+                            </br>
+                            <div class="single-campaign-content">
+
+                                <!-- Active campaign -->
+                                <!-- End active campaign -->
+                                <!-- Campaign content -->
+                                <div class="clearfix"></div>
+
+                                <div id="comments" class="comments">
+                                    <div class="row5">
+                                        <div class="fb-comments"
+                                             data-href="{{ app.request.getUri }}"
+                                             data-numposts="5">
+
+                                        </div>
+                                    </div>
+                                    <!-- end commentform -->
+                                </div>
+                                <!-- end comments -->
+
+                            </div>
+
                         </div>
+
                         <div class="col-xs-12 col-md-4">
                             <div class="wpo-sidebar wpo-sidebar-right">
                                 <div class="sidebar-inner">
@@ -282,9 +325,9 @@
                                         <!--<div class="widget wpo-social-counter bg-sidebar">-->
                                         <div class="widget-content">
                                             <ul class="wpo-social-count">
-                                               {# <li class="diverz facebook">
-                                                    <div id ="shareBtn" data-href="{{ app.request.getUri }}"></div>
-                                                </li>#}
+                                                {# <li class="diverz facebook">
+                                                     <div id ="shareBtn" data-href="{{ app.request.getUri }}"></div>
+                                                 </li>#}
 
                                                 {#<li class="diverz twitter">
                                                     <a href="https://www.twitter.com/opalwordpress">
@@ -322,7 +365,8 @@
                                                  data-href="{{ app.request.getUri }}"
                                                  data-layout="button_count">
                                             </div>#}
-                                            <a href="{{ app.request.getUri }}" class="btnShare btn btn-donate-black clearfix"> Share On Facebook</a>
+                                            <a href="{{ app.request.getUri }}"
+                                               class="btnShare btn btn-donate-black clearfix"> Share On Facebook</a>
                                             {#<div id="shareBtn" data-href="{{ app.request.getUri }}"  style="width: 100%"
                                                  class="btn btn-donate-black clearfix">
                                                 Share On Facebook
@@ -490,213 +534,9 @@
                 </div>
             </div>
         </div>
-
     </section>
 
-    {#<div class="jumbotron">#}
-    {# <div class="container">
-         <div class="row">
-                 <div class="col-xs-6 col-md-8">
-                     <div class="row1">
 
-                         <div class="campaign-img-contain" id="loadImage">
-
-                                  {% if campaignGallary[0] is defined %}
-                                      <img class="campaign-img defaultLoadImage" width="300" height="400"
-                                  src="{{ asset('uploads/campaign/') }}{{ campaignGallary[0].path }}">
-                                 {% else %}
-                                     <img class="campaign-img defaultLoadImage" width="300" height="400"
-                                          src="{{ asset('assets/img/people.png') }}">
-                                 {% endif %}
-                         </div>
-                         <h1>{{ campaign.title|default }}</h1>
-
-                     </div>
-                     <div class="row2">
-                         {% for gallary in  campaignGallary  %}
-                             <div class="campaign-img-contain">
-                                 <img class="thumbnail"
-                                      onclick="loadImage('{{ asset('uploads/campaign/') }}{{ gallary.path }}')"
-                                      style="float: left;width: 150px ;height: 150px;" src="{{ asset('uploads/campaign/') }}{{ gallary.path }}">
-                             </div>
-                         {% endfor %}
-                     </div>
-                     <div style="clear: both"></div>
-                     <div class="row3">
-
-                         <!-- Nav tabs -->
-                         <ul class="nav nav-tabs" role="tablist">
-                             <li role="presentation" class="active"><a href="#story" aria-controls="home" role="tab" data-toggle="tab">Story</a></li>
-                             <li role="presentation"><a href="#update" aria-controls="update" role="tab" data-toggle="tab">Update</a></li>
-                         </ul>
-                         <!-- Tab panes -->
-                         <div class="tab-content">
-                             <div role="tabpanel" class="tab-pane active text-justify" id="story" >
-                                 {{ campaign.description }}
-                                <div>
-                                    {% set videoUrl = campaign.campaignVideoUrl |split('/') %}
-                                    {% if videoUrl[3] is defined %}
-                                        <iframe width="420" height="345" src="https://www.youtube.com/embed/{{ videoUrl[3] }}">
-                                        </iframe>
-                                    {% endif %}
-                                </div>
-                             </div>
-                             <div role="tabpanel" class="tab-pane text-justify" id="update">
-                                 {% for index , campaignDetailInfo in campaignDetailList %}
-                                     <div class="divider">
-                                         <label><strong>Update</strong> {{ campaignDetailInfo.id }}</label>
-
-                                         {% if app.user != null %}
-                                         <span style="float: right"><a href="{{ path('campaign_detail_update',{id:campaignDetailInfo.id}) }}"
-                                                  class="title btn btn-default">Edit</a>
-                                         </span>
-                                         {% endif %}
-                                         <address>
-                                             <strong>Created At</strong>: {{ campaignDetailInfo.createdDate|date('Y M d') }}<br>
-                                         </address>
-                                         {{ campaignDetailInfo.notes }}
-
-                                         <div class="campaign-img-contain" id="loadImage">
-                                             {% if campaignDetailInfo.path is not null %}
-
-                                                 <img class="campaign-img defaultLoadImage" width="300" height="350"
-                                                      src="{{ asset('uploads/campaign/') }}{{ campaignDetailInfo.path }}">
-                                             {% endif %}
-                                         </div>
-
-                                         {% set detailVideoUrl = campaignDetailInfo.campaignDetailVideoUrl |split('/') %}
-                                         {% if detailVideoUrl[3] is defined %}
-                                             <iframe width="420" height="345" src="https://www.youtube.com/embed/{{ detailVideoUrl[3] }}">
-                                             </iframe>
-                                         {% endif %}
-                                     </div>
-                                     <hr/>
-                                 {% endfor %}
-                                 {% if app.user %}
-                                 <fieldset>
-                                     <legend>New Update Post: </legend>
-                                 <form class="form-horizontal" id="form-campaign" enctype="multipart/form-data"
-                                       role="form" method="post" action="{{ path('campaign_detail_create',{id:campaign.id}) }}">
-
-                                     <div class="col-md-8" style="margin-left: -72px">
-                                         <div class="portlet-body">
-
-                                             <div class="form-body">
-                                                 <div class="form-group">
-
-                                                     <label class="col-md-3 col-sm-3 control-label">{{ form_label(form.notes) }}</label>
-                                                     <div class="col-md-5 col-sm-5">
-                                                         {{ form_widget(form.notes,{ 'attr': {'style':'width:665px;height:122px;'}}) }}
-                                                         <span class="help-block">{{ form_errors(form.notes) }}</span>
-                                                     </div>
-                                                 </div>
-                                                 <div class="form-group">
-                                                     <label class="col-md-3 col-sm-3 control-label">Url</label>
-                                                     <div class="col-md-5 col-sm-5">
-                                                         {{ form_widget(form.campaignDetailVideoUrl,{ 'attr': {'style':'width:665px;'}}) }}
-                                                         <span class="help-block">{{ form_errors(form.campaignDetailVideoUrl) }}</span>
-                                                     </div>
-                                                 </div>
-                                                 <div class="form-group">
-                                                     <label class="col-md-3 col-sm-3 control-label">{{ form_label(form.file) }}</label>
-                                                     <div class="col-md-5 col-sm-5">
-                                                         {{ form_widget(form.file) }}
-                                                         <span class="help-block"></span>
-                                                     </div>
-                                                 </div>
-                                             </div>
-                                             {{ form_row(form._token) }}
-                                             <div class="form-actions">
-                                                 <div class="row">
-                                                     <div class="col-md-offset-3 col-md-9">
-
-                                                         <button type="submit" id="campaign-detail-submit" class="btn green">Save</button>
-                                                     </div>
-                                                 </div>
-                                             </div>
-
-                                         </div>
-                                     </div>
-
-                                 </form>
-                                     </fieldset>
-                                 {% endif %}
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row4">
-                         <div class="fb-like" data-href="{{ app.request.getUri }}"
-                              data-layout="standard" data-action="like" data-show-faces="true"
-                              data-share="false">
-                         </div>
-                     </div>
-                     <div class="row5">
-                         <div class="fb-comments"
-                              data-href="{{ app.request.getUri }}"
-                              data-numposts="5">
-
-                         </div>
-                     </div>
-                 </div>
-                 <div class="col-xs-6 col-md-4">
-                     {% set totalDonationAmount = 0 %}
-                     {% set count = 0 %}
-                     {% for index , recentDonation in recentDonations %}
-                         {% set count = count + index %}
-                         {% set totalDonationAmount = totalDonationAmount + recentDonation.donateAmount %}
-                     {% endfor %}
-                     <div class="row1">
-                         <strong>{{ totalDonationAmount }} BDT</strong> of {{ campaign.amount }} BDT goal
-                         <p></p>
-                         <div class="progress">
-                             <div class="progress-bar" role="progressbar" aria-valuenow="70"
-                                  aria-valuemin="0" aria-valuemax="100"
-                                  style="width:{{ (totalDonationAmount * 100)/campaign.amount }}%">
-                             </div>
-
-                         </div>
-                         <div class="raisedBy">Raised by {{ count }} people in 3 days</div>
-                         <div style="clear: both"></div>
-                     </div>
-
-                     <div class="row3">
-                         <a href="{{ path('donation_create',{id:campaign.id}) }}">
-                         <div id="DonateBtn" style="width: 100%" class="btn btn-primary">
-                             Donate Now
-                         </div>
-                         </a>
-                     </div>
-                     <div style="clear: both"><br/></div>
-                     <div class="row2">
-                     <div id="shareBtn" style="width: 100%" class="btn btn-primary clearfix">Share On Facebook</div>
-                     </div>
-                     <div style="clear: both"><br/></div>
-                     <div class="row3">
-                         <address>
-                             Campaign By {{ campaign.createdBy.profile.fullname|default() }}.<br>
-                             Created: {{ campaign.createdDate|date('F j, Y') }}<br>
-                             Category: {{ campaign.category.title|default('N/A') }}<br>
-                             {{ campaign.location.name|default('N/A')}}<br>
-                             Bangladesh
-                         </address>
-                     </div>
-                     <div class="link-bar row3">
-                         Recent Donation
-                     </div>
-                     {% for recentDonation in recentDonations %}
-                         <div class="row4">
-                             <h3><p>{{ recentDonation.donateAmount|default }} BDT</p></h3>
-                             <p>{% if recentDonation.anonymous == 1 %}Anonymous{% else %}
-                                     {{ recentDonation.firstName|default }} {{ recentDonation.lastName|default }}{% endif %}</p>
-                             <p>{{ recentDonation.notes|default }}</p>
-                         </div>
-                         <hr/>
-                     {% endfor %}
-
-                 </div>
-         </div>
-     </div>#}
-    {#</div>#}
     {% stylesheets
 
     '@FOSCommentBundle/Resources/assets/css/comments.css' %}

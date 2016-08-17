@@ -1,7 +1,18 @@
 {% extends "layout.html.twig" %}
 
 {% block body %}
+    <div class="wrapper-breadcrumb">
 
+        <section id="breadcrumb" class="breadcrumb wpo-breadcrumb" style="background: #F0F0F0 url() no-repeat 0 0;">
+            <nav class="container"><a href="/">Home</a>
+                <span class="delimiter">/</span>
+                <a href="{{ path('campaign_list') }}">Campaign</a>
+                <div class="breadcrumb-name"><span><span class="current"><span
+                                    itemprop="name">{{ campaign.title|default }}</span></span> </span>
+                </div>
+            </nav>
+        </section>
+    </div>
     <div class="row">
         <!-- MAIN CONTENT -->
         <div id="wpo-content" class="col-xs-12 no-sidebar">
@@ -22,7 +33,8 @@
                                                             <div class="item-campaign row item-layout-1">
                                                                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                                                     <div class="entry-thumbnail">
-                                                                        {% render url('campaign_get_image', {'id': campaign.id}) %}
+
+                                                                        <img src='{% render url('campaign_get_image', {'id': campaign.id}) %}'  class='attachment-thumbnails-crowdfunding wp-post-image'>
                                                                     </div>
                                                                     <div class="campaign-title">
                                                                         <a href="{{ path('campaign_detail',{id:campaign.id}) }}"
@@ -117,13 +129,13 @@
                                 {#{{ form_widget(form.search, { 'attr': {'class': 'search_field_short blink search-term-left',
                                     'placeholder': 'Search by name, keyword, or city...'} }) }}#}
                                 {#<input type="submit" class="btn btn-default blue" value="Search">#}
-                                <div class="form-group">
+                                <div class="form-group" style="margin-left:0px;">
                                     <div class="col-sm-10">
-                                        {{ form_widget(form.search, { 'attr': {'class': 'form-control',
+                                        {{ form_widget(form.search, { 'attr': {'class': 'form-control','style':'border-radius:13px',
                                             'placeholder': 'Search by name, keyword, or city...'} }) }}
                                     </div>
                                     <div class="col-sm-2">
-                                        <button type="submit" style="line-height: 22px" class="btn btn-donate-black">Submit</button>
+                                        <button type="submit" style="line-height: 22px; width: 91%" class="btn btn-donate-black">Submit</button>
                                     </div>
                                 </div>
 
@@ -131,6 +143,7 @@
 
                         </div>
                     </div>
+
                 </section>
                 <section class="wpb-container">
                     <div class="wpb-inner container">
@@ -165,7 +178,8 @@
 
                                                 <div class="item-content item-campaign-wrapper">
                                                     <div class="entry-thumbnail text-center">
-                                                        {% render url('campaign_get_image', {'id': campaign.id}) %}
+                                                        <img src='{% render url('campaign_get_image', {'id': campaign.id}) %}'  class='attachment-thumbnails-crowdfunding wp-post-image'>
+
                                                         <div class="donate-now" style="{{ is_granted("ROLE_ADMIN") ?'left:30%' :'left:50%' }}">
                                                             <a href="{{ path('donation_create',{id:campaign.id}) }}" class="btn btn-slide">
                                                                 Donate now

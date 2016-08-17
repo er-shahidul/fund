@@ -77,3 +77,9 @@ campaign_get_target_amount:
 campaign_count_categories_wise:
     path:     /campaign/count-categories-wise/{id}
     defaults: { _controller: BundleAppBundle:Campaign:getCountCampaignByCategoriesWise }
+
+campaign_featured:
+    path:     /campaign/featured
+    defaults: { _controller: BundleAppBundle:Campaign:campaignFeatured }
+    options:
+                expose: true
