@@ -1,35 +1,15 @@
-# Bootstrap
-app/bootstrap*
-
-# Symfony directories
-vendor/*
-*/logs/*
-*/cache/*
-web/uploads/*
-web/uploads/profile/*
-web/bundles/*
-
-web/css/*
-web/img/*
-web/js/*
-web/assets
-web/fonts/*
-
-bin/*
-
-# Configuration files
-app/config/parameters.ini
-app/config/parameters.yml
-
-# Composer
-composer.phar
-
-# IDE
-.idea/*
-.nbproject/*
-
-# OS
-.DS_Store
-Thumbs.db
-
-web/.htaccess
+/app/bootstrap.php.cache
+/app/cache/*
+!app/cache/.gitkeep
+/app/config/parameters.yml
+/app/logs/*
+!app/logs/.gitkeep
+/app/phpunit.xml
+/bin/
+/composer.phar
+/vendor/
+/web/bundles/
+/web/css/
+/web/js/
+/.idea
+/web/uploads

@@ -22,8 +22,12 @@
                     <div class="wpb-inner container">
                         <div class="row">
                             <div class="col-sm-12 wpb_column vc_column_container wpb_animate_when_almost_visible wpb_bottom-to-top">
+
                                 <div class="wpb_wrapper  vc_custom_1425354912163">
                                     <div class="widget campaigns-tab-featured">
+                                        <h3 class="widget-title font-size-md separator_align_left ">
+                                            <span>FEATURED CAMPAIGN</span>
+                                        </h3>
                                         <div class="widget-content">
                                             <div class="carousel slide" id="carousel-vJu4D"
                                                  data-ride="carousel">
@@ -126,9 +130,6 @@
                             {% else %}
                             {{ path('campaign_search_category_wise',{id:categoryTitle.id}) }}
                             {% endif %}" class="form-horizontal" role="form" method="post">
-                                {#{{ form_widget(form.search, { 'attr': {'class': 'search_field_short blink search-term-left',
-                                    'placeholder': 'Search by name, keyword, or city...'} }) }}#}
-                                {#<input type="submit" class="btn btn-default blue" value="Search">#}
                                 <div class="form-group" style="margin-left:0px;">
                                     <div class="col-sm-10">
                                         {{ form_widget(form.search, { 'attr': {'class': 'form-control','style':'border-radius:13px',
@@ -233,7 +234,7 @@
                                         </div>
                                     {% endif %}
                                     <div style="clear: both;"></div>
-                                    <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+                                    <div class="col-lg-9 col-md-8 col-sm-6 col-xs-12">
                                     {{ knp_pagination_render(campaigns) }}
                                     </div>
                                 </div>
