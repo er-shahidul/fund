@@ -387,138 +387,37 @@
                                     <aside id="campaign_backers_widget-2" class="widget clearfix widget_campaign_backers_widget">
                                         <h3 class="widget-title">
                                             <span>Donaters</span></h3>
-                                        <ul class="row">
 
-
-                                            <li class="campaign-backer col-lg-4 col-md-4 col-sm-12 col-xs-12">
-
-                                                <img alt="kdkk kdkdk"
-                                                     src="http://1.gravatar.com/avatar/a5c43b30e8fd84cc3b0abfb2b3061285?s=115&amp;r=g"
-                                                     srcset="http://1.gravatar.com/avatar/a5c43b30e8fd84cc3b0abfb2b3061285?s=230&amp;r=g 2x"
-                                                     class="avatar avatar-115 photo" height="115" width="115">
-                                                <div class="if-tiny-hide">
-
-                                                    <h6>kdkk kdkdk</h6>
-
-
-                                                    <p>
-
-
-                                                        $5,500.00
-
-
-                                                    </p>
-
-                                                </div>
-
-                                            </li>
-
-
-                                            <li class="campaign-backer col-lg-4 col-md-4 col-sm-12 col-xs-12">
-
-                                                <img alt="hgggree tttt"
-                                                     src="http://0.gravatar.com/avatar/6bd4aaeb6945d0f41740bbecde78aad0?s=115&amp;r=g"
-                                                     srcset="http://0.gravatar.com/avatar/6bd4aaeb6945d0f41740bbecde78aad0?s=230&amp;r=g 2x"
-                                                     class="avatar avatar-115 photo" height="115" width="115">
-                                                <div class="if-tiny-hide">
-
-                                                    <h6>hgggree tttt</h6>
-
-
-                                                    <p>
-
-
-                                                        $5,000.00
-
-
-                                                    </p>
-
-                                                </div>
-
-                                            </li>
-
-
-                                            <li class="campaign-backer col-lg-4 col-md-4 col-sm-12 col-xs-12">
-
-                                                <img alt="hooom cooom"
-                                                     src="http://1.gravatar.com/avatar/73188999e6a77c473741953f5cf1617a?s=115&amp;r=g"
-                                                     srcset="http://1.gravatar.com/avatar/73188999e6a77c473741953f5cf1617a?s=230&amp;r=g 2x"
-                                                     class="avatar avatar-115 photo" height="115" width="115">
-                                                <div class="if-tiny-hide">
-
-                                                    <h6>hooom cooom</h6>
-
-
-                                                    <p>
-
-
-                                                        $30.00
-
-
-                                                    </p>
-
-                                                </div>
-
-                                            </li>
-
-
-                                            <li class="campaign-backer col-lg-4 col-md-4 col-sm-12 col-xs-12">
-
-                                                <img alt="froz real"
-                                                     src="http://0.gravatar.com/avatar/9551dc5496d7143d41c38bbe53eda02d?s=115&amp;r=g"
-                                                     srcset="http://0.gravatar.com/avatar/9551dc5496d7143d41c38bbe53eda02d?s=230&amp;r=g 2x"
-                                                     class="avatar avatar-115 photo" height="50" width="50">
-                                                <div class="if-tiny-hide">
-
-                                                    <h6>froz real</h6>
-
-
-                                                    <p>
-
-
-                                                        $500.00
-
-
-                                                    </p>
-
-                                                </div>
-
-                                            </li>
-
-
-                                            <li class="campaign-backer col-lg-4 col-md-4 col-sm-12 col-xs-12">
-
-                                                <img alt="Chi Chi"
-                                                     src="http://0.gravatar.com/avatar/9d23986a986a9f275f37853ab32a0727?s=115&amp;r=g"
-                                                     srcset="http://0.gravatar.com/avatar/9d23986a986a9f275f37853ab32a0727?s=230&amp;r=g 2x"
-                                                     class="avatar avatar-115 photo" height="115" width="115">
-                                                <div class="if-tiny-hide">
-
-                                                    <h6>Chi Chi</h6>
-
-
-                                                    <p>
-
-
-                                                        $5,000.00
-
-
-                                                    </p>
-
-                                                </div>
-
-                                            </li>
-
-
-                                        </ul>
                                         <div class="campaign-backer col-lg-4 col-md-4 col-sm-12 col-xs-12">
 
                                             {% for recentDonation in recentDonations %}
-                                                <div class="row4">
-                                                    <h3><p>{{ recentDonation.donateAmount|default }} BDT</p></h3>
-                                                    <p>{% if recentDonation.anonymous == 1 %}Anonymous{% else %}
-                                                            {{ recentDonation.firstName|default }} {{ recentDonation.lastName|default }}{% endif %}</p>
-                                                    <p>{{ recentDonation.notes|default }}</p>
+                                                <div class="row">
+                                                    <div class="col-lg-4 donationPhoto">
+                                                        {% if recentDonation.anonymous == 0 %}
+
+                                                            {% if recentDonation.createdBy.profile.path is defined %}
+                                                            <img src="/{{ recentDonation.createdBy.profile.path|default }}">
+                                                            {% else  %}
+                                                                <div class="avatar-contain donationPhotoText">
+                                                                    <div class="avatar-no-pic media-round thumbnail">
+                                                                        {{ recentDonation.firstName|first|upper }}{{ recentDonation.lastName|first|upper }}
+                                                                    </div>
+                                                                </div>
+                                                            {% endif %}
+
+                                                        {% else  %}
+                                                        <img src="{{ asset('assets/img/people.png') }}">
+                                                        {% endif %}
+                                                    </div>
+                                                    <div class="col-lg-8 donationDetail">
+                                                        <h3><p>{{ recentDonation.donateAmount|default }} BDT</p></h3>
+                                                        <p>{% if recentDonation.anonymous == 1 %}Anonymous{% else %}
+                                                                {{ recentDonation.firstName|default }} {{ recentDonation.lastName|default }}{% endif %}</p>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                    <div class="col-lg-11 donationDescription">
+                                                        <p>{{ recentDonation.notes|default }}</p>
+                                                    </div>
                                                 </div>
                                                 <hr/>
                                             {% endfor %}

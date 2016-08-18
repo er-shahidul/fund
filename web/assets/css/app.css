@@ -1,0 +1,113 @@
+img.wp-smiley,
+img.emoji {
+    display: inline !important;
+    border: none !important;
+    box-shadow: none !important;
+    height: 1em !important;
+    width: 1em !important;
+    margin: 0 .07em !important;
+    vertical-align: -0.1em !important;
+    background: none !important;
+    padding: 0 !important;
+}
+.widget-content .item-campaign .item-campaign-wrapper{
+   min-height: 440px;
+}
+.help-block ul li{
+    display: block;
+    margin-left: -38px;
+    color: darkred;
+    list-style: none;
+}
+
+.cat-active{
+    color: #fed857;
+}
+.vc_custom_1425354912163 {
+    padding-right: 35px !important;
+    padding-left: 35px !important;
+    background-color: #f4f4f4 !important;
+}
+.resizeimage{
+
+    min-height:245px;
+}
+.wp-post-image{
+
+    min-height:200px;
+}
+.detailPageThumbnailImage{
+
+    margin-top: -54px;
+}
+.detailPageThumbnailImage .thumbnail{
+
+    display: block;
+    padding: 3px 3px 3px 3px;
+    margin-bottom: 10px;
+    line-height: 1.6;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 0px;
+    float: left;
+    width: 20% ;
+    height: 60px;
+}
+.tabs-campaign .nav-tabs > li > a{
+    border: 1px solid #999999!important;
+}
+.tabs-campaign .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
+    border-bottom: 1px solid #999999!important;
+}
+.tabs-campaign .nav-tabs > li > a:before {
+    content: " " !important;
+    position: absolute;
+    right: 0px;
+    top: -1px;
+    font-size: 15px;
+    font-weight: 400;
+}
+.tabs-campaign .nav-tabs{
+    border-bottom: 1px solid #999999!important;
+    display: block !important;
+}
+.tabs-campaign .nav {
+    padding-left: 0!important;
+    margin-bottom: 0 !important;
+    list-style: none !important;
+}
+.tabs-campaign .nav-tabs>li {
+    float: left !important;
+    margin-bottom: -1px!important;
+}
+.pagination{
+    margin-left: 40%!important;
+}
+.donationPhoto{
+    margin-top:-16px;
+    margin-left:-14px;
+    width: 100%;
+
+}
+.donationPhotoText{
+    width: 100%;
+}
+.donationDetail {
+    margin:-29px -70px;
+    line-height: 0.6;
+}
+.donationDescription {
+
+    margin-left: 69px;
+    text-align: left;
+    margin-top: -12px;
+
+}
+.campaign-backer hr{
+    margin-left: -15px;
+}
+
+.avatar-contain {
+    height: 6.8125rem;
+    width: 100%;
+}

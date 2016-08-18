@@ -1,0 +1,69 @@
+/*
+Theme Name: Unity
+Theme URI: http://venusdemo.com/wpopal/unity/
+Author: the WPOpal team
+Author URI: http://wpopal.com/
+Description: The Unity Multi Purpose theme for WordPress is a fully responsive theme that looks great on any device. Features include a front page template with its own widgets, an optional display font, styling for post formats on both index and single views, and an optional no-sidebar page template. Make it yours with a custom menu, header image, and background.
+Version: 1.1 Release 27-02-2015
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags: light, gray, white, fluid-layout, responsive-layout, custom-background, custom-header, custom-menu, editor-style, featured-images, flexible-header, full-width-template, microformats, post-formats, rtl-language-support, sticky-post, theme-options, translation-ready
+Text Domain: Unity
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+*/
+
+.wp-caption{}
+
+.wp-caption-text{}
+
+.sticky{}
+
+.gallery-caption{}
+
+.bypostauthor{}
+
+.alignright{}
+
+.alignleft{}
+
+.aligncenter{}
+
+.single.single-download .entry-description form{
+   margin-top: 60px;
+} 
+
+.edit-single-campaign p, .edit-single-campaign h3 {
+   width: 100%;
+   float: left;
+}
+
+.atcf-submit-campaign-rewards > div{
+   width: 100%;
+   float: left;
+}
+
+@media(max-width: 700px){
+	.page.edd-checkout #edd_checkout_cart td{
+		padding: 0!important;
+		font-size: 14px!important;
+	}
+	.page.edd-checkout #edd_checkout_cart span{
+		padding: 0!important;
+		font-size: 14px!important;
+	}
+	.page.edd-checkout #edd_checkout_cart .edd_cart_item_image{
+		display: block;
+		padding: 0!important;
+		font-size: 14px!important;
+	}
+	.page.edd-checkout #edd_checkout_cart .edd_cart_item_image:before,.page.edd-checkout #edd_checkout_cart .edd_cart_item_image:after{
+		content: " ";
+       display: table;
+	}
+	.page.edd-checkout #edd_checkout_cart .edd_cart_item_image:after{
+		clear: both;
+	}
+	
+}

@@ -1,0 +1,88 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+
+
+ <div id="wrapper" style="background-color: #fdf8f8">
+    <div class="col-xs-6 col-md-12">
+        <div class="row1">
+            <form action="{% if categoryTitle.id is not defined %}
+                            {{ path('campaign_search') }}
+                            {% else %}
+                            {{ path('campaign_search_category_wise',{id:categoryTitle.id}) }}
+                            {% endif %}"
+                  method="post">
+                <div class="search_short cnt mb30" id="search_input_wrapper">
+                    <div class="search_icon_update"></div>
+                    {{ form_widget(form.search, { 'attr': {'class': 'search_field_short blink search-term-left',
+                        'placeholder': 'Search by name, keyword, or city...'} }) }}
+                    <input type="submit" class="btn btn-default blue" value="Search">
+
+                </div>
+
+            </form>
+
+        </div>
+     </div>
+
+    <div class="col-xs-6 col-md-12">
+        <div class="row1">
+            <div class="campaign-sidebar">
+                <div id="sidebar-wrapper">
+                    <ul class="sidebar-nav">
+                        <li class="sidebar-brand">
+                            <a href="{{ path('bundle_app_homepage') }}">
+                                All Categories
+                            </a>
+                        </li>
+                        {% for category in categories %}
+                            <li>
+                                <a href="{{ path('campaign_category_based',{title:category.title}) }}"
+                                   class="{% if categoryTitle.title|default == category.title %}active{% else  %}{% endif %}">
+                                    {{ category.title }}
+                                </a></li>
+                        {% endfor %}
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row2">
+        {#<div class="single-campaign">#}
+        {% if campaigns %}
+            {% for campaign in campaigns %}
+
+                <div class="tile mb20 mr20">
+
+                    <a href="{{ path('campaign_detail',{id:campaign.id}) }}" class="pho">
+                        {% render url('campaign_get_image', {'id': campaign.id}) %}
+                    </a>
+                    <a href="{{ path('campaign_detail',{id:campaign.id}) }}" class="amt">${{ campaign.amount }}</a>
+
+                    <a href="{{ path('campaign_detail',{id:campaign.id}) }}" class="pro">
+                        {#<span class="fill" style="width: 90%;"></span>#}
+                        {% render url('campaign_get_progress_bar', {'id': campaign.id}) %}
+                    </a>
+                    <a href="{{ path('campaign_detail',{id:campaign.id}) }}" class="title">{{ campaign.title }}</a>
+                    <a href="{{ path('campaign_detail',{id:campaign.id}) }}" class="title" style="text-transform: uppercase">{{ campaign.location.name|default('N/A') }}</a>
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+            <div class="jumbotron">
+               First create Campaign
+            </div>
+        {% endif %}
+        </div>
+        <div style="clear: both"></div>
+        <div class="row3">{{ knp_pagination_render(campaigns) }}</div>
+    </div>
+</div>
+        </div>
+    </div>
+{% endblock %}
+

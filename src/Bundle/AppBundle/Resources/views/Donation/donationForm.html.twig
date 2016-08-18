@@ -107,7 +107,8 @@
 
                             <div class="item-content item-campaign-wrapper">
                                 <div class="entry-thumbnail text-center">
-                                    {% render url('campaign_get_image', {'id': campaign.id}) %}
+                                    {#{% render url('campaign_get_image', {'id': campaign.id}) %}#}
+                                    <img src='{% render url('campaign_get_image', {'id': campaign.id}) %}'  class='attachment-thumbnails-crowdfunding wp-post-image'>
                                     {% render url('campaign_get_successfull', {'id': campaign.id}) %}
                                  </div>
                                 <div class="campaign-main">

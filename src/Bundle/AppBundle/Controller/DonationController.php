@@ -32,7 +32,7 @@ class DonationController extends BaseController
         $campaignGallary = $this->getDoctrine()
             ->getRepository('BundleAppBundle:CampaignFile')
             ->findBy(array('campaign'=>$campaign));
-        
+
         $donation  = new Donation();
         $form = $this->createForm(new DonationType(), $donation);
         
@@ -60,6 +60,10 @@ class DonationController extends BaseController
     }
     public  function saveDonation(Donation $donation , Campaign $campaign) {
 
+        if($this->getUser()){
+
+            $donation->setCreatedBy($this->getUser());
+        }
         $donation->setCreatedDate(new \DateTime(date('Y-m-d h:i:s')));
         $donation->setCampaign($campaign);
         $donationRepo = $this->getDoctrine()->getRepository("BundleAppBundle:Donation");
