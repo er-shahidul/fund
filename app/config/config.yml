@@ -130,3 +130,7 @@ fos_comment:
         model:
             comment: Bundle\AppBundle\Entity\CampaignComment
             thread: Bundle\AppBundle\Entity\Thread
+
+twig:
+    globals:
+        facebookClientId: '%facebook_client_id%'
