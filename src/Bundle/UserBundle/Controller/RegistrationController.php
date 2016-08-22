@@ -314,13 +314,13 @@ class RegistrationController extends BaseController
         $phone->getProfile()->setConfirmationTokenPhone($verificationCode);
         $phone->getProfile()->setPhoneNumber($phoneNumber);
         $phone->getProfile()->setVerificationDateDuration(new \DateTime());
-
+        $this->getDoctrine()->getRepository('BundleUserBundle:User')->update($phone);
         $message = 'your confirmation code is '.' '.$verificationCode;
         $this->get('sms.transporter')->setClient()
                                      ->setPhoneNumber($phoneNumber)
                                      ->setMessage($message)
                                      ->send();
-        $this->getDoctrine()->getRepository('BundleUserBundle:User')->update($phone);
+
 
     }
 
