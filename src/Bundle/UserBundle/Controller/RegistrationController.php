@@ -315,6 +315,7 @@ class RegistrationController extends BaseController
         $phone->getProfile()->setPhoneNumber($phoneNumber);
         $phone->getProfile()->setVerificationDateDuration(new \DateTime());
         $this->getDoctrine()->getRepository('BundleUserBundle:User')->update($phone);
+        
         $message = 'your confirmation code is '.' '.$verificationCode;
         $this->get('sms.transporter')->setClient()
                                      ->setPhoneNumber($phoneNumber)
