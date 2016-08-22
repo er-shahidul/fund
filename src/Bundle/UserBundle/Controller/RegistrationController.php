@@ -202,14 +202,16 @@ class RegistrationController extends BaseController
 
     public function campaignUserVerifyAction(Request $request) {
 
-        /*$tokenVerify  = $this->getUser()->getProfile()->getConfirmationTokenEmailVerify();
+        $tokenVerify  = $this->getUser()->getProfile()->getConfirmationTokenEmailVerify();
  
         if($tokenVerify == null) {
             $email = $request->request->get('fos_user_registration')['email'];
             $this->verificationEmail($email);
         }
+        
         $phoneNumber = $request->request->get('fos_user_registration')['profile']['PhoneNumber'];
-        $this->verificationPhone($phoneNumber);*/
+
+        $this->verificationPhone($phoneNumber);
         
         $user = $this->getDoctrine()
             ->getRepository('BundleUserBundle:User')
@@ -245,6 +247,7 @@ class RegistrationController extends BaseController
                 return new Response($return, 203, array('Content-Type' => 'application/json'));
             }
         }
+
         if($request->request->all()['phone'] == $user->getProfile()->getConfirmationTokenPhone()) {
 
             $user->getProfile()->setConfirmationTokenPhoneVerify(true);
@@ -302,15 +305,21 @@ class RegistrationController extends BaseController
      */
     private function verificationPhone($phoneNumber)
     {
+
         $phone            = $this->getDoctrine()->getRepository('BundleUserBundle:User')->findOneBy(
             array('id' => $this->getUser()->getId())
         );
+//var_dump($phone);die;
         $verificationCode = $this->generateNumber();
         $phone->getProfile()->setConfirmationTokenPhone($verificationCode);
         $phone->getProfile()->setPhoneNumber($phoneNumber);
         $phone->getProfile()->setVerificationDateDuration(new \DateTime());
-        $smsService = $this->get('sms.transporter');
-        $smsService->send($phoneNumber,'your confirmation code is '.' '.$verificationCode);
+
+        $message = 'your confirmation code is '.' '.$verificationCode;
+        $this->get('sms.transporter')->setClient()
+                                     ->setPhoneNumber($phoneNumber)
+                                     ->setMessage($message)
+                                     ->send();
         $this->getDoctrine()->getRepository('BundleUserBundle:User')->update($phone);
 
     }

@@ -26,10 +26,10 @@
         "hwi/oauth-bundle": "^0.4.1",
         "friendsofsymfony/jsrouting-bundle": "^1.6",
         "vresh/twilio-bundle": "^1.0",
-        "guzzle/guzzle": "^3.9",
         "vich/uploader-bundle": "^0.14.0",
         "friendsofsymfony/comment-bundle": "^2.0",
-        "knplabs/knp-paginator-bundle": "^2.5"
+        "knplabs/knp-paginator-bundle": "^2.5",
+        "guzzlehttp/guzzle": "~6.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~3.0",
@@ -54,10 +54,7 @@
         ]
     },
     "config": {
-        "bin-dir": "bin",
-        "platform": {
-            "php": "5.3.9"
-        }
+        "bin-dir": "bin"
     },
     "extra": {
         "symfony-app-dir": "app",

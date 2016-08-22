@@ -100,7 +100,7 @@ function onLoadOrganizationCreate() {
                 success.show();
                 error.hide();
                 var datastring = $("#form-user-profile").serialize();
-                console.log('execute!!!');
+       
                 $.ajax({
                     type: "post",
                     url: Routing.generate('campaign_user-verify'),

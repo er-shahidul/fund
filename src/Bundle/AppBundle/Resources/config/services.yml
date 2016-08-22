@@ -4,4 +4,5 @@ services:
         arguments: [@session,@fos_user.user_manager,{facebook: facebook}]
     sms.transporter:
             class: Bundle\AppBundle\Service\SMSTransporter
-            arguments: [%sms_api_endpoint%, %sms_api_username%, %sms_api_password%]
+
+
