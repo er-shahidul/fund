@@ -227,9 +227,26 @@ class RegistrationController extends BaseController
             )
         );
     }
+    public function campaignUserConfirmationCodeAction() {
+
+        $user = $this->getDoctrine()
+            ->getRepository('BundleUserBundle:User')
+            ->find($this->getUser()->getId());
+
+        $form = $this->createForm(new UserType(null), $user);
+
+        return $this->render(
+            'BundleUserBundle:Profile:confirmationCode.html.twig',
+            array(
+                'form'     => $form->createView(),
+                'user'     => $user
+            )
+        );
+    }
+
     public function campaignUserVerifiedAction(Request $request){
 
-
+        
         $user = $this->getDoctrine()->getRepository('BundleUserBundle:User')->findOneBy(
             array('id' => $this->getUser()->getId())
         );
@@ -309,11 +326,12 @@ class RegistrationController extends BaseController
         $phone            = $this->getDoctrine()->getRepository('BundleUserBundle:User')->findOneBy(
             array('id' => $this->getUser()->getId())
         );
-//var_dump($phone);die;
+
         $verificationCode = $this->generateNumber();
         $phone->getProfile()->setConfirmationTokenPhone($verificationCode);
         $phone->getProfile()->setPhoneNumber($phoneNumber);
         $phone->getProfile()->setVerificationDateDuration(new \DateTime());
+
         $this->getDoctrine()->getRepository('BundleUserBundle:User')->update($phone);
         
         $message = 'your confirmation code is '.' '.$verificationCode;

@@ -13,6 +13,11 @@ campaign_user-verify:
     defaults: { _controller: BundleUserBundle:Registration:campaignUserVerify }
     options:
                 expose: true
+campaign_user-confirmation-code:
+    path:     /campaign/user-confirmation
+    defaults: { _controller: BundleUserBundle:Registration:campaignUserConfirmationCode }
+    options:
+                expose: true
 
 campaign_user-verified:
     path:     /campaign/user-verified

@@ -107,23 +107,13 @@ function onLoadOrganizationCreate() {
                     data: datastring,
                     dataType: 'html',
                     success: function (msg) {
-                        console.log(msg);
-                        var $url = Routing.generate('campaign_user-verify');
+
+                        var $url = Routing.generate('campaign_user-confirmation-code');
 
                         $('.modal-body').load($url,function(result) {
 
                             $('#ajax').modal({show:true,backdrop: 'static', keyboard: false });
                         });
-                       /* if (msg.responseCode == 202) {
-
-                            $('.verify-profile-for-campaign').hide();
-                            $('.verified-profile-for-campaign').show();
-
-                            $('#verify-profile').hide();
-                            $('#verified-profile').show();
-
-
-                        }*/
                     }
                 });
 
