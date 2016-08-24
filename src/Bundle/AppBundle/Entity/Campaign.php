@@ -499,4 +499,12 @@ class Campaign
     {
         $this->feature = $feature;
     }
+
+    public function getRemainingDays(){
+
+        
+        $days =   date_diff(new \DateTime(), new \DateTime($this->getEndOfCampaignDate()->format('Y-m-d')));
+        return $days->days;
+
+    }
 }

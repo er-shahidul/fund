@@ -70,7 +70,7 @@
                                                                                 </div>
                                                                                 <div
                                                                                         class="campaign-time-left text-center">
-                                                                                    <span class="title">Expired on<br/>0</span><span> days left</span>
+                                                                                    <span class="title">Expired on<br/>{{ campaign.remainingDays }}</span><span> days left</span>
                                                                                 </div>
                                                                             </div>
 
@@ -153,7 +153,7 @@
                                 <div class="wpo-sidebar wpo-sidebar-left">
                                     <div class="sidebar-inner">
 
-                                        <aside id="categories-9" class="widget  clearfix widget_categories"><h3 class="widget-title">CATEGORIES</h3>
+                                        <aside id="categories-9" class="widget  clearfix widget_categories"><h3 class="widget-title">GENERAL CATEGORIES</h3>
                                             <ul>
                                                 {% for category in categories %}
                                                     <li class="cat-item">
@@ -161,8 +161,12 @@
                                                            class="{% if categoryTitle.title|default == category.title %}active{% else  %}{% endif %}">
                                                             {{ category.title }} ( {% render url('campaign_count_categories_wise', {'id': category.id}) %} )
                                                         </a>
+
                                                     </li>
                                                 {% endfor %}
+                                                <li class="cat-item">
+                                                    <a href="{{ path('campaign_featured_based') }}"class="">Feature ( {% render url('feature_campaign_count') %} )</a>
+                                                </li>
                                             </ul>
 
                                         </aside>

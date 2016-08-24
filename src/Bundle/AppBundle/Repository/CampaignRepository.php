@@ -51,6 +51,17 @@ class CampaignRepository extends EntityRepository
 
         return $query->getQuery()->getSingleScalarResult();
     }
+    public function countFeatureCampaign()
+    {
+
+        $query = $this->createQueryBuilder('cam');
+        $query->select('COUNT(cam.id) as camCount');
+        $query->leftJoin('cam.category', 'c');
+        $query->leftJoin('cam.location', 'l');
+        $query->andWhere('cam.feature = 1');
+
+        return $query->getQuery()->getSingleScalarResult();
+    }
      public function flashData($data){
          $this->_em->persist($data);
          $this->_em->flush();

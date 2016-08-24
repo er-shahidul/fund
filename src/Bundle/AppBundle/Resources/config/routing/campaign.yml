@@ -42,6 +42,10 @@ campaign_category_based:
     path:     /campaign/category-based/{title}
     defaults: { _controller: BundleAppBundle:Campaign:categoryBasedCampaignList }
 
+campaign_featured_based:
+    path:     /campaign/feature-based
+    defaults: { _controller: BundleAppBundle:Campaign:featuresCampaignList }
+
 campaign_search:
     path:     /campaign/search
     defaults: { _controller: BundleAppBundle:Campaign:campaignSearch }
@@ -77,6 +81,10 @@ campaign_get_target_amount:
 campaign_count_categories_wise:
     path:     /campaign/count-categories-wise/{id}
     defaults: { _controller: BundleAppBundle:Campaign:getCountCampaignByCategoriesWise }
+
+feature_campaign_count:
+    path:     /campaign/count-feature-campaign
+    defaults: { _controller: BundleAppBundle:Campaign:getCountFeature }
 
 campaign_featured:
     path:     /campaign/featured

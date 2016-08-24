@@ -402,6 +402,22 @@ class CampaignController extends BaseController
 
         ));
     }
+    public function featuresCampaignListAction()
+    {
+        $campaignList = $this->paginate($this->getDoctrine()
+                             ->getRepository('BundleAppBundle:Campaign')
+                             ->findBy(array('feature'=>1)));
+        $categoryList = $this->getDoctrine()
+            ->getRepository('BundleAppBundle:Category')
+            ->findAll();
+
+        return $this->render('BundleAppBundle:Dashboard:featureBasedHome.html.twig',array(
+            'campaigns'=>$campaignList,
+            'categories'=>$categoryList,
+            'status' => 'feature'
+
+        ));
+    }
      public function campaignSearchAction(Request $request)
     {
 
@@ -588,6 +604,21 @@ class CampaignController extends BaseController
         if(!empty($countCampaignByCategories)) {
 
             return new Response("$countCampaignByCategories");
+        } else{
+            return new Response("0");
+        }
+
+
+    }
+    public function getCountFeatureAction(){
+        
+        $countFeatureCampaign = $this->getDoctrine()
+            ->getRepository('BundleAppBundle:Campaign')
+            ->countFeatureCampaign();
+
+        if(!empty($countFeatureCampaign)) {
+
+            return new Response("$countFeatureCampaign");
         } else{
             return new Response("0");
         }
