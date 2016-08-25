@@ -266,5 +266,18 @@ class Donation
     {
         $this->anonymous = $anonymous;
     }
+
+    public function getRemainingTime(){
+
+        $days =   date_diff(new \DateTime(), new \DateTime($this->getCreatedDate()->format('Y-m-d H:i:s')));
+        if($days->d <= 1 ){
+            $hour = ($days->h)  ? $days->h .' hours ' : '';
+            $min  = $days->i ? $days->i.' min':'';
+            return  $hour.$min;
+
+        } else {
+            return  $days->d.' days';
+        }
+    }
     
 }

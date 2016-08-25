@@ -1,6 +1,9 @@
 {% extends "layout.html.twig" %}
 
+
+
 {% block body %}
+
     <div class="wrapper-breadcrumb">
 
         <section id="breadcrumb" class="breadcrumb wpo-breadcrumb" style="background: #F0F0F0 url() no-repeat 0 0;">
@@ -368,9 +371,22 @@
                                             </div>#}
                                             <a href="{{ app.request.getUri }}"
                                                class="btnShare btn btn-donate-black clearfix"> Share On Facebook</a>
-                                            {#<div id="shareBtn" data-href="{{ app.request.getUri }}"  style="width: 100%"
-                                                 class="btn btn-donate-black clearfix">
-                                                Share On Facebook
+                                            </br>
+
+                                           {# <a class="btn btn-donate-black clearfix twitter-share-button"
+                                               href="https://twitter.com/share"
+                                               data-url="{{ app.request.getUri }}"
+                                               data-text="{{ campaign.title|default }}">
+                                                Tweet
+                                            </a>#}
+                                            {#<a class="btn btn-donate-black clearfix twitter-share-button"
+                                               href="{{ app.request.getUri }}"
+                                               data-size="large">
+                                                Tweet</a>#}
+
+                                           {# <div id="" data-url="{{ app.request.getUri }}"   style="width: 100%"
+                                                 class="twitter-share-button btn btn-donate-black clearfix">
+                                                Share On Twitter
                                             </div>#}
 
                                             <br/>
@@ -391,32 +407,41 @@
                                         <div class="campaign-backer col-lg-4 col-md-4 col-sm-12 col-xs-12">
 
                                             {% for recentDonation in recentDonations %}
-                                                <div class="row">
-                                                    <div class="col-lg-4 donationPhoto">
-                                                        {% if recentDonation.anonymous == 0 %}
+                                                <div class="row" style="margin-left: -49px;">
+                                                    <div class="col-lg-12">
+                                                        <div class="col-lg-3">
+                                                            {% if recentDonation.anonymous == 0 %}
 
-                                                            {% if recentDonation.createdBy.profile.path is defined %}
-                                                            <img src="/{{ recentDonation.createdBy.profile.path|default }}">
-                                                            {% else  %}
-                                                                <div class="avatar-contain donationPhotoText">
-                                                                    <div class="avatar-no-pic media-round thumbnail">
-                                                                        {{ recentDonation.firstName|first|upper }}{{ recentDonation.lastName|first|upper }}
+                                                                {% if recentDonation.createdBy.profile.path is defined %}
+                                                                    <img src="/{{ recentDonation.createdBy.profile.path|default }}">
+                                                                {% else  %}
+                                                                    <div class="avatar-contain donationPhotoText">
+                                                                        <div class="avatar-no-pic media-round thumbnail">
+                                                                            {{ recentDonation.firstName|first|upper }}{{ recentDonation.lastName|first|upper }}
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                            {% endif %}
+                                                                {% endif %}
 
-                                                        {% else  %}
-                                                        <img src="{{ asset('assets/img/people.png') }}">
-                                                        {% endif %}
-                                                    </div>
-                                                    <div class="col-lg-8 donationDetail">
-                                                        <h3><p>{{ recentDonation.donateAmount|default }} BDT</p></h3>
-                                                        <p>{% if recentDonation.anonymous == 1 %}Anonymous{% else %}
-                                                                {{ recentDonation.firstName|default }} {{ recentDonation.lastName|default }}{% endif %}</p>
+                                                            {% else  %}
+                                                                <img src="{{ asset('assets/img/people.png') }}">
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="col-lg-9" style="margin-top: -4px;">
+                                                            <div style="float: left;margin-left: -16px;" >
+                                                                <div class="supporter-amount">{{ recentDonation.donateAmount|default }} BDT</div>
+
+                                                                </br>
+                                                                <div class="supporter-name">
+                                                                    {% if recentDonation.anonymous == 1 %}Anonymous{% else %}
+                                                                        {{ recentDonation.firstName|default }} {{ recentDonation.lastName|default }}{% endif %}
+                                                                </div>
+                                                                <div class="">{{ recentDonation.remainingTime|default('jj') }} ago</div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <div class="clearfix"></div>
-                                                    <div class="col-lg-11 donationDescription">
-                                                        <p>{{ recentDonation.notes|default }}</p>
+                                                    <div class="col-lg-12 donationDescription">
+                                                        <p class="col-lg-offset-3">{{ recentDonation.notes|default }}</p>
                                                     </div>
                                                 </div>
                                                 <hr/>

@@ -268,7 +268,7 @@ class CampaignController extends BaseController
 
         $recentDonations = $this->getDoctrine()
             ->getRepository('BundleAppBundle:Donation')
-            ->findBy(array('campaign'=>$campaign),array('id'=>'DESC'));
+            ->findBy(array('campaign'=>$campaign),array('id'=>'DESC'),10);
 
         $campaignDetail = new CampaignDetails();
 

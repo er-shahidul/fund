@@ -98,9 +98,8 @@ img.emoji {
 }
 .donationDescription {
 
-    margin-left: 69px;
-    text-align: left;
-    margin-top: -12px;
+    text-align: justify;
+    margin-top: 0px;
 
 }
 .campaign-backer hr{
@@ -108,6 +107,16 @@ img.emoji {
 }
 
 .avatar-contain {
-    height: 6.8125rem;
+    height: 3.8125rem;
     width: 100%;
+}
+.supporter-amount {
+    font-weight: 900;
+    float: left;
+}
+.supporter-name {
+    font-weight: 100;
+    float: left;
+    width: 100%;
+    color:darkolivegreen;
 }

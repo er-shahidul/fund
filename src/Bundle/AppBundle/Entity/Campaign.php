@@ -503,8 +503,10 @@ class Campaign
     public function getRemainingDays(){
 
         
-        $days =   date_diff(new \DateTime(), new \DateTime($this->getEndOfCampaignDate()->format('Y-m-d')));
-        return $days->days;
+      //  $days =   date_diff(new \DateTime(), new \DateTime($this->getEndOfCampaignDate()->format('Y-m-d')));
+        $days =   date_diff(new \DateTime('2016-08-25 10:30:00'), new \DateTime('2016-08-25 12:30:00'));
+        var_dump($days);
+        //return $days->days;
 
     }
 }

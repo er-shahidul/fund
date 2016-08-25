@@ -29,7 +29,8 @@
         "vich/uploader-bundle": "^0.14.0",
         "friendsofsymfony/comment-bundle": "^2.0",
         "knplabs/knp-paginator-bundle": "^2.5",
-        "guzzlehttp/guzzle": "~6.0"
+        "guzzlehttp/guzzle": "~6.0",
+        "omnipay/paypal": "~2.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~3.0",
