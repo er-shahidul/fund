@@ -12,3 +12,9 @@ services:
          public: false
          tags:
             - { name: twig.extension }
+
+     app.twig_date_extension:
+         class: Twig_Extensions_Extension_Date
+         public: false
+         tags:
+            - { name: twig.extension }

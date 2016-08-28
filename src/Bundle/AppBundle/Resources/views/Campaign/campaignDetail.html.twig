@@ -435,13 +435,13 @@
                                                                     {% if recentDonation.anonymous == 1 %}Anonymous{% else %}
                                                                         {{ recentDonation.firstName|default }} {{ recentDonation.lastName|default }}{% endif %}
                                                                 </div>
-                                                                <div class="">{{ recentDonation.remainingTime|default('jj') }} ago</div>
+                                                                <div class="">{{ recentDonation.createdDate|time_diff }}</div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="clearfix"></div>
                                                     <div class="col-lg-12 donationDescription">
-                                                        <p class="col-lg-offset-3">{{ recentDonation.notes|default }}</p>
+                                                        <p class="col-lg-offset-3" style="margin-top: 15px;">{{ recentDonation.notes|default }}</p>
                                                     </div>
                                                 </div>
                                                 <hr/>
