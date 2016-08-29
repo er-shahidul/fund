@@ -28,7 +28,8 @@
 
                                                 <div class="item-content item-campaign-wrapper">
                                                     <div class="entry-thumbnail text-center">
-                                                        {% render url('campaign_get_image', {'id': campaign.id}) %}
+                                                        <img src='{% render url('campaign_get_image', {'id': campaign.id}) %}'  class='attachment-thumbnails-crowdfunding wp-post-image'>
+                                                        {#{% render url('campaign_get_image', {'id': campaign.id}) %}#}
                                                         <div class="donate-now">
                                                             <a href="{{ path('donation_create',{id:campaign.id}) }}" class="btn btn-slide">
                                                                 Donate now

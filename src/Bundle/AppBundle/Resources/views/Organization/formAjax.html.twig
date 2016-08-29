@@ -1,6 +1,6 @@
 <div class="row">
 
-    <form class="form-horizontal" id="form-organization" role="form" method="post" action="{{ path('organization_create_ajax') }}">
+    <form class="form-horizontal" enctype="multipart/form-data" id="form-organization" role="form" method="post" action="{{ path('organization_create_ajax') }}">
 
         <div class="col-md-12">
             <div class="portlet-body">
@@ -31,6 +31,14 @@
                         <label class="col-md-3 col-sm-3 control-label">{{ form_label(form.email) }}</label>
                         <div class="col-md-5 col-sm-5">
                             {{ form_widget(form.email) }}
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 col-sm-3 control-label">{{ form_label(form.file) }}</label>
+                        <div class="col-md-5 col-sm-5">
+                            {{ form_widget(form.file) }}
                             <span class="help-block"></span>
                         </div>
                     </div>

@@ -94,7 +94,8 @@ class OrganizationController extends BaseController
                     $this->get('session')->getFlashBag()->add('error', $massage);
                     return $this->redirect($this->generateUrl('organization_create'));
                 } else {
-
+                    /** @var UploadedFile $file */
+                    $organization->upload();
                     $this->saveOrganization($organization);
                     $massage = 'Organization Successfully Inserted';
                     $this->get('session')->getFlashBag()->add('success', $massage);
