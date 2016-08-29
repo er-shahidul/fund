@@ -1,11 +1,10 @@
  // Socialite.load();
-
  (function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
         js = d.createElement(s); js.id = id;
         name: 'Facebook Dialogs';
-        js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.7&appId=1107285459319764";
+        js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.7&appId="+facebookClientId;
 
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
@@ -15,13 +14,13 @@
      var js, fjs = d.getElementsByTagName(s)[0];
      if (d.getElementById(id)) return;
      js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.7&appId=1107285459319764";
+     js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.7&appId="+facebookClientId;
      fjs.parentNode.insertBefore(js, fjs);
  }(document, 'script', 'facebook-jssdk'));
 
  window.fbAsyncInit = function(){
      FB.init({
-         appId: '1107285459319764', status: true, cookie: true, xfbml: true });
+         appId: facebookClientId, status: true, cookie: true, xfbml: true });
  };
  (function(d, debug){var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
      if(d.getElementById(id)) {return;}

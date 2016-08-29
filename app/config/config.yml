@@ -37,6 +37,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    globals:
+        facebookClientId: '%facebook_client_id%'
 
 assetic:
     debug:          '%kernel.debug%'
@@ -130,7 +132,3 @@ fos_comment:
         model:
             comment: Bundle\AppBundle\Entity\CampaignComment
             thread: Bundle\AppBundle\Entity\Thread
-
-twig:
-    globals:
-        facebookClientId: '%facebook_client_id%'
