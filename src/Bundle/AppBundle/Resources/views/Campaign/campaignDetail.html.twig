@@ -1,8 +1,17 @@
 {% extends "layout.html.twig" %}
 
+{% block head %}
 
+    <meta property="og:url"           content="{{ app.request.uri }}" />
+    <meta property="og:type"          content="campaign" />
+    <meta property="og:title"         content="{{ campaign.title|default }}" />
+    <meta property="og:description"   content="{{ campaign.description|default }}" />
+    <meta property="og:image"         content="{% render url('campaign_get_image', {'id': campaign.id}) %}" />
+
+{% endblock %}
 
 {% block body %}
+
 
 <div class="wrapper-breadcrumb">
 
@@ -330,15 +339,18 @@
                             <!--<div class="widget wpo-social-counter bg-sidebar">-->
                             <div class="widget-content">
                                 <br/><br/>
-                                <a href="{{ app.request.getUri }}"
-                                   class="btnShare btn btn-donate-black clearfix"> Share On Facebook</a>
+                                <a href="{{ app.request.getUri }}" class="btnShare btn btn-donate-black clearfix"> Share On Facebook</a>
+                                {#<div class="btnShare btn btn-donate-black clearfix"
+                                     data-href="{{ app.request.uri }}"
+                                     data-layout="button_count">
+                                </div>#}
                                 </br></br></br>
 
-                                {#<a href="https://twitter.com/intent/tweet?text={{ campaign.title|default }}&tw_p=tweetbutton&url={{ app.request.uri }}"
-                                   class="btn btn-donate-black clearfix"> Share On Twitter</a>#}
                                 <a href="https://twitter.com/intent/tweet?hashtags=demo&original_referer={{ app.request.uri }}%2Fweb%2Ftweet-button&ref_src=twsrc%5Etfw&related=twitterapi%2Ctwitter&text={{ campaign.title|default }}&tw_p=tweetbutton&url={{ app.request.uri }}"
                                    class="btn btn-donate-black clearfix"> Share On Twitter</a>
+
                                 </br></br></br>
+
                                 <a class="btn btn-donate-black clearfix"
                                    href="https://plus.google.com/share?url={{ app.request.uri }}"
                                    onclick="javascript:window.open(this.href,'',

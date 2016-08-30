@@ -9,6 +9,9 @@
 <html lang="en-US">
 <!--<![endif]-->
 <head>
+    {% block head %}
+
+    {% endblock %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <script
@@ -21,14 +24,6 @@
             -webkit-border-radius: 16px;
         }
     </style>
-    <link rel="alternate" type="application/rss+xml" title="Unity Theme &raquo; Feed"
-          href="http://venusdemo.com/unity/demo-1/?feed=rss2"/>
-    <link rel="alternate" type="application/rss+xml" title="Unity Theme &raquo; Comments Feed"
-          href="http://venusdemo.com/unity/demo-1/?feed=comments-rss2"/>
-    <link rel="alternate" type="text/calendar" title="Unity Theme &raquo; iCal Feed"
-          href="http://venusdemo.com/unity/demo-1?post_type=tribe_events/?ical=1"/>
-    <link rel="alternate" type="application/rss+xml" title="Unity Theme &raquo; Home (Default) Comments Feed"
-          href="http://venusdemo.com/unity/demo-1/?feed=rss2&#038;page_id=2837"/>
 
     {% block stylesheets %}
         {% stylesheets

@@ -12606,7 +12606,7 @@ textarea, select {
 }
 /* line 1098, ../sass/template/_visual-composer.scss */
 .wpo-portfolio img {
-  width: 100%;
+  /*width: 100%;*/
 }
 /* line 1104, ../sass/template/_visual-composer.scss */
 .wpo-portfolio .col-sm-3 .entry-title::before {
