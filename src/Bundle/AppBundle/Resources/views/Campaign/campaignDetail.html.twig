@@ -20,7 +20,7 @@
     <span class="delimiter">/</span>
     <a href="{{ path('campaign_list') }}">Campaign</a>
     <div class="breadcrumb-name"><span><span class="current"><span
-                        itemprop="name">{{ campaign.title|default }}</span></span> </span>
+                        itemprop="name" id="page-title">{{ campaign.title|default }}</span></span> </span>
     </div>
 </nav>
 </section>
@@ -42,17 +42,16 @@
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <div class="thumbnail" id="loadImage">
                                         <img src='{% render url('campaign_get_image', {'id': campaign.id}) %}'
-                                             class='attachment-thumbnails-crowdfunding  resizeimage'>
+                                             class='attachment-thumbnails-crowdfunding  resizeimage' width="315" height="600" id="page-image">
 
                                         {#{% render url('campaign_get_successfull', {'id': campaign.id}) %}#}
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 xs-text-center">
-                                    <a href="javascript:;" rel="{{ campaign.id }}" class="feature featurei"><i
-                                                class="icon-post fa fa-picture-o"></i></a>
-                                    {#<a href="javascript:;" rel="{{ campaign.id }}" class="feature un-feature"><i class="edd-icon-ok"></i></a>#}
-                                    <div class="campaign-summary cf">
+                                    <a href="javascript:;" rel="{{ campaign.id }}" class="feature featurei">
+                                        <i class="icon-post fa fa-picture-o " {%  if campaign.feature == 1 %} style="color: darkgreen" {% else %} {% endif %} ></i></a>
 
+                                    <div class="campaign-summary cf">
 
                                         <div class="barometer-main barometer-added">
                                             <div class="barometer"
@@ -166,8 +165,8 @@
                                                     <iframe width="343" height="300" src="https://www.youtube.com/embed/{{ videoUrl[3] }}"></iframe>
                                                 {% endif %}
                                             </div>
-                                            <div class="">
-                                                {{ campaign.description }}
+                                            <div class="" id="page-detail">
+                                                {{ campaign.description|default }}
                                             </div>
 
                                         </div>
@@ -339,18 +338,15 @@
                             <!--<div class="widget wpo-social-counter bg-sidebar">-->
                             <div class="widget-content">
                                 <br/><br/>
-                                <a href="{{ app.request.getUri }}" class="btnShare btn btn-donate-black clearfix"> Share On Facebook</a>
+                                <a href="{{ app.request.getUri }}"  class="btnShare btn btn-donate-black clearfix"> Share On Facebook</a>
                                 {#<div class="btnShare btn btn-donate-black clearfix"
                                      data-href="{{ app.request.uri }}"
                                      data-layout="button_count">
                                 </div>#}
                                 </br></br></br>
-
                                 <a href="https://twitter.com/intent/tweet?hashtags=demo&original_referer={{ app.request.uri }}%2Fweb%2Ftweet-button&ref_src=twsrc%5Etfw&related=twitterapi%2Ctwitter&text={{ campaign.title|default }}&tw_p=tweetbutton&url={{ app.request.uri }}"
                                    class="btn btn-donate-black clearfix"> Share On Twitter</a>
-
                                 </br></br></br>
-
                                 <a class="btn btn-donate-black clearfix"
                                    href="https://plus.google.com/share?url={{ app.request.uri }}"
                                    onclick="javascript:window.open(this.href,'',
@@ -442,7 +438,6 @@ var facebookClientId = {{ facebookClientId|default('undefined') }}
 {{ parent() }}
 
 {% javascripts
-'@BundleAppBundle/Resources/public/js/facebook/socialite.js'
 '@BundleAppBundle/Resources/public/js/facebook/fbCustom.js'
 '@BundleAppBundle/Resources/public/js/image.js' %}
 <script type="text/javascript" src="{{ asset_url }}"></script>

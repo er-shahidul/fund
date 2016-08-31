@@ -29,14 +29,24 @@
      js.async = true;js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
      ref.parentNode.insertBefore(js, ref);}(document, /*debug*/ false));
 
+
+
  function postToFeed(title, desc, url, image){
-     var obj = {method: 'feed',link: url, picture: 'http://www.url.com/images/'+image,name: title,description: desc};
+     console.log(title);
+         var obj = {
+                        method: 'share',
+                        href: url,
+                        picture: image,
+                        caption: title,
+                        description: desc
+                    };
      function callback(response){}
      FB.ui(obj, callback);
+
  }
+
  $('.btnShare').click(function(){
      elem = $(this);
-     postToFeed(elem.data('title'), elem.data('desc'), elem.prop('href'), elem.data('image'));
-
+     postToFeed($('#page-title').text(), $('#page-detail').text(), elem.prop('href'), $('#page-image').prop('src'));
      return false;
  });
