@@ -154,7 +154,14 @@ class Campaign
      *
      * @ORM\Column(name="feature", type="boolean", length=15)
      */
-    private $feature = false;
+    private $feature = false;  
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="verify", type="boolean", length=15, nullable=true)
+     */
+    private $verify = true;
     
 
     /**
@@ -503,5 +510,21 @@ class Campaign
     public function getRemainingDays(){
         $days =   date_diff(new \DateTime(), new \DateTime($this->getEndOfCampaignDate()->format('Y-m-d')));
         return $days->days;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isVerify()
+    {
+        return $this->verify;
+    }
+
+    /**
+     * @param boolean $verify
+     */
+    public function setVerify($verify)
+    {
+        $this->verify = $verify;
     }
 }

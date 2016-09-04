@@ -101,9 +101,13 @@
                                                                 data-alignsub="left" data-level="2">
                                                                 <a href="{{ path('organizational_campaign_list') }}">Organizational Campaign</a>
                                                             </li>
+                                                            {% if app.user and not is_granted("ROLE_ADMIN")  %}
+
                                                             <li class="menu-item-4733">
                                                                 <a href="javascript:;" class="campaignCreate">Create Campaign</a>
                                                             </li>
+
+                                                            {% endif %}
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -146,9 +150,15 @@
                                                             <ul class="megamenu-items">
                                                                 <li class="menu-item-4732" data-id="4732"
                                                                     data-alignsub="left" data-level="2"><a
+                                                                            href="{{ path('campaign_list_admin') }}">Campaign
+                                                                    </a>
+                                                                </li>
+                                                                <li class="menu-item-4732" data-id="4732"
+                                                                    data-alignsub="left" data-level="2"><a
                                                                             href="{{ path('organization_list') }}">Organization
                                                                     </a>
                                                                 </li>
+
                                                                 <li class="menu-item-4734" data-id="4734" data-alignsub="left" data-level="2">
                                                                     <a href="{{ path('category_list') }}">Category</a>
                                                                 </li>
@@ -169,7 +179,7 @@
                             </ul>
                         </div>
                     </nav>
-                    {% if app.user %}
+                    {% if app.user and not is_granted("ROLE_ADMIN")  %}
                     <div class="btn-create-campaign hidden-xs hidden-sm">
                         <a class="user-campaign button campaignCreate" href="javascript:;">
                             <i class="fa fa-plus"></i><span class="hidden-sm hidden-md">Create a campaign</span>

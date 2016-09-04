@@ -1,0 +1,102 @@
+{% extends "layout.html.twig" %}
+
+{% block body %}
+
+    {% include 'flash.html.twig' %}
+
+    <div class="container">
+        {#<div class="span12">#}
+        <h2>Campaign</h2>
+        <p>All Campaign List</p>
+            </br>
+            <form action="{{ path('campaign_list_admin') }}" method="get" name="campaign_search" id="campaign_search">
+                <div class="portlet-body flip-scroll">
+                    <table id="table_project_cost" class="table-striped table-condensed flip-content">
+                        <tbody>
+                        <tr class="numeric">
+                            <td>
+                                <div class="input-group input-small date date-picker" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+                                    <span class="input-group-btn"></span>
+                                    {{ form_widget(form.start_date, { 'attr': {'class': 'form-control datepicker'} }) }}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="input-group input-small date date-picker" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+                                    <span class="input-group-btn"></span>
+                                    {{ form_widget(form.end_date, { 'attr': {'class': 'form-control datepicker'} }) }}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="input-group input-medium">
+                                    {{ form_widget(form.category, { 'attr': {'class': 'form-control select2me fontColorBlack'} }) }}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="input-group input-medium">
+                                    {{ form_widget(form.organization, { 'attr': {'class': 'form-control select2me fontColorBlack'} }) }}
+                                </div>
+                            </td>
+                            <td>
+                                <input type="submit" value="Search" class="btn blue" style="margin-left: 50px;">
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        {#</div>#}
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Created Date</th>
+                <th>End of Campaign  Date</th>
+                <th>Days Left</th>
+                <th>Name</th>
+                <th>Amount</th>
+                <th>Category</th>
+                <th>Organization</th>
+                <th>IsFeature</th>
+                <th>Status</th>
+                <th>Action</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for campaign in campaigns %}
+                <tr>
+                    <td>{{ campaign.createdDate|date('Y-m-d') }}</td>
+                    <td>{{ campaign.endOfCampaignDate|date('Y-m-d') }}</td>
+                    <td>{{ campaign.endOfCampaignDate|time_diff }}</td>
+                    <td>{{ campaign.title|default }}</td>
+                    <td>{{ campaign.amount|number_format(2,',') }}</td>
+                    <td>{{ campaign.category.title|default }}</td>
+                    <td>{{ campaign.organization ? campaign.organization.name :'Individual Campaign' }}</td>
+                    {% if campaign.feature %}
+                    <td style="color: darkgreen">feature Campaign</td>
+                      {% else %}
+                     <td>general Campaign</td>
+                       {% endif %}
+
+                     {% if campaign.status %}
+                    <td style="color: darkgreen">active</td>
+                      {% else %}
+                     <td>Inactive</td>
+                       {% endif %}
+
+                        {% if campaign.verify %}
+                            <td><a href="{{ path('change_verify_admin',{id:campaign.id}) }}">Unverified</a></td>
+                            {% else %}
+                            <td><a href="{{ path('change_verify_admin',{id:campaign.id}) }}">Verify</a></td>
+                        {% endif %}
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="clearfix"></div>
+        <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+            {{ knp_pagination_render(campaigns) }}
+        </div>
+    </div>
+{% endblock %}

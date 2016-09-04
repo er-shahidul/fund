@@ -7,7 +7,7 @@ use Bundle\AppBundle\Entity\CampaignDetails;
 use Bundle\AppBundle\Entity\CampaignFile;
 use Bundle\AppBundle\Entity\Category;
 use Bundle\AppBundle\Form\CampaignDetailType;
-use Bundle\AppBundle\Form\CampaignSearchType;
+use Bundle\AppBundle\Form\Search\CampaignSearchType;
 use Bundle\AppBundle\Form\CampaignType;
 use Bundle\UserBundle\Entity\User;
 use Bundle\UserBundle\Form\UserType;
@@ -33,6 +33,51 @@ class CampaignController extends BaseController
             'campaigns'=>$campaignList,
             'user' =>$this->getUser()->getProfile()
         ));
+    } 
+    public function campaignListAdminAction(Request $request)
+    {
+        list($form, $data) = $this->campaignSearchForm($request);
+
+        $form = $this->createForm($form);
+        $form->submit($data);
+        if(empty($data)){
+        $campaignList= $this->paginate($this->getDoctrine()->getRepository('BundleAppBundle:Campaign')
+                             ->findAll());
+        }else {
+            $campaignList = $this->paginate($this->getDoctrine()->getRepository('BundleAppBundle:Campaign')
+                ->getCampaignList($data));  
+        }
+        return $this->render('BundleAppBundle:Campaign:campaignListAdmin.html.twig',array(
+            'campaigns'=>$campaignList,
+            'form' => $form->createView(),
+        ));
+    }
+    
+    public function campaignSearchForm($request)
+    {
+        $form = new CampaignSearchType();
+        $data = $request->get($form->getName());
+        return array($form, $data);
+    }
+    
+    public function campaignVerifyAction(Campaign $campaign){
+
+
+        if($campaign->isVerify()){
+            $campaign->setVerify(false);
+            $campaign->setStatus(false);
+
+            $massage = 'Campaign Successfully disabled';
+            $this->get('session')->getFlashBag()->add('success', $massage);
+        } else {
+            $campaign->setVerify(true);
+            $campaign->setStatus(true);
+            $massage = 'Campaign Successfully Verified';
+            $this->get('session')->getFlashBag()->add('success', $massage);
+        }
+        $this->getDoctrine()->getRepository('BundleAppBundle:Campaign')->persist($campaign);
+
+        return $this->redirect($this->generateUrl('campaign_list_admin'));
     }
     public function individualCampaignListAction()
     {

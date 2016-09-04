@@ -2,6 +2,16 @@ campaign_list:
     path:     /campaign
     defaults: { _controller: BundleAppBundle:Campaign:index }
 
+campaign_list_admin:
+    path:     /campaign-admin
+    defaults: { _controller: BundleAppBundle:Campaign:campaignListAdmin }
+
+change_verify_admin:
+    path:     /campaign-verify/{id}
+    defaults: { _controller: BundleAppBundle:Campaign:campaignVerify }
+    requirements:
+            id:  \d+
+
 individula_campaign_list:
     path:     /campaign/individula
     defaults: { _controller: BundleAppBundle:Campaign:individualCampaignList }
