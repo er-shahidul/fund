@@ -527,4 +527,5 @@ class Campaign
     {
         $this->verify = $verify;
     }
+    
 }

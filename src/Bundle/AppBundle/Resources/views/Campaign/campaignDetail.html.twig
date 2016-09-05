@@ -338,19 +338,15 @@
                             <!--<div class="widget wpo-social-counter bg-sidebar">-->
                             <div class="widget-content">
                                 <br/><br/>
-                                <a href="{{ app.request.getUri }}"  class="btnShare btn btn-donate-black clearfix"> Share On Facebook</a>
-                                {#<div class="btnShare btn btn-donate-black clearfix"
-                                     data-href="{{ app.request.uri }}"
-                                     data-layout="button_count">
-                                </div>#}
+                                <a href="{{ app.request.getUri }}"  class="btnShare btn btn-donate-black clearfix"><i class="fa fa-facebook-official" aria-hidden="true"></i> Share On Facebook</a>
                                 </br></br></br>
                                 <a href="https://twitter.com/intent/tweet?hashtags=demo&original_referer={{ app.request.uri }}%2Fweb%2Ftweet-button&ref_src=twsrc%5Etfw&related=twitterapi%2Ctwitter&text={{ campaign.title|default }}&tw_p=tweetbutton&url={{ app.request.uri }}"
-                                   class="btn btn-donate-black clearfix"> Share On Twitter</a>
+                                   class="btn btn-donate-black clearfix"> <i class="fa fa-twitter" aria-hidden="true"></i> Share On Twitter</a>
                                 </br></br></br>
                                 <a class="btn btn-donate-black clearfix"
                                    href="https://plus.google.com/share?url={{ app.request.uri }}"
                                    onclick="javascript:window.open(this.href,'',
-                                    'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">google plus</a>
+                                    'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><i class="fa fa-google-plus" aria-hidden="true"></i> google plus</a>
                             </div>
                             <!--</div>-->
                             <div class="widget wpo-social-counter bg-sidebar">
@@ -424,7 +420,7 @@
 {{ parent () }}
 <link rel="stylesheet" href="{{ asset_url }}" type="text/css"/>
 {% endstylesheets %}
-
+    {#<script src="https://use.fontawesome.com/4e96de267e.js"></script>#}
 <script type="text/javascript">
 var shareUrl = '{{ app.request.getUri }}'
 var facebookClientId = {{ facebookClientId|default('undefined') }}
@@ -439,6 +435,7 @@ var facebookClientId = {{ facebookClientId|default('undefined') }}
 
 {% javascripts
 '@BundleAppBundle/Resources/public/js/facebook/fbCustom.js'
+'@BundleAppBundle/Resources/public/js/facebook/fbIcon.js'
 '@BundleAppBundle/Resources/public/js/image.js' %}
 <script type="text/javascript" src="{{ asset_url }}"></script>
 {% endjavascripts %}
