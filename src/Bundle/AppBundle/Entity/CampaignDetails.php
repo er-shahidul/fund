@@ -54,7 +54,7 @@ class CampaignDetails
     private $createdBy;
 
     /**
-     * @var Campaign
+     * @var CampaignDetails
      *
      * @ORM\ManyToOne(targetEntity="Bundle\AppBundle\Entity\Campaign", inversedBy="campaignDetails", cascade={"persist"})
      * @ORM\JoinColumn(name="campaign", nullable=true)

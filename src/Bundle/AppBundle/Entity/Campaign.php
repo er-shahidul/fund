@@ -109,7 +109,7 @@ class Campaign
     /**
      * @var Organization
      *
-     * @ORM\ManyToOne(targetEntity="Bundle\AppBundle\Entity\Organization")
+     * @ORM\ManyToOne(targetEntity="Bundle\AppBundle\Entity\Organization",inversedBy="campaign")
      * @ORM\JoinColumn(name="organization", nullable=true)
      */
     private $organization;
@@ -117,23 +117,18 @@ class Campaign
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Bundle\AppBundle\Entity\CampaignDetails", mappedBy="Campaign", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Bundle\AppBundle\Entity\CampaignDetails", mappedBy="campaign", cascade={"persist"})
      */
     private $campaignDetails;
     
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Bundle\AppBundle\Entity\Donation", mappedBy="Campaign", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Bundle\AppBundle\Entity\Donation", mappedBy="campaign", cascade={"persist"})
      */
     private $donationDetails;
 
-    /**
-     * @var ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="Bundle\AppBundle\Entity\CampaignComment", mappedBy="Campaign", cascade={"persist"})
-     */
-    private $campaignComments;
+
 
     /**
      * @var ArrayCollection

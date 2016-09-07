@@ -45,9 +45,9 @@ class CampaignComment extends BaseComment
     private $createdBy;
 
     /**
-     * @var Campaign
+     * @var campaignComment
      *
-     * @ORM\ManyToOne(targetEntity="Bundle\AppBundle\Entity\Campaign", inversedBy="campaignDetails", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Bundle\AppBundle\Entity\Campaign",inversedBy="campaignComment", cascade={"persist"})
      * @ORM\JoinColumn(name="campaign", nullable=true)
      */
     protected $campaign;

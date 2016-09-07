@@ -85,7 +85,7 @@ class Organization
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Bundle\AppBundle\Entity\Campaign", mappedBy="Organization", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Bundle\AppBundle\Entity\Campaign", mappedBy="organization", cascade={"persist"})
      */
     private $campaign;
 
