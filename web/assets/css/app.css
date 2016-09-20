@@ -39,6 +39,7 @@ img.emoji {
 .detailPageThumbnailImage{
 
     margin-top: -54px;
+    cursor: pointer;
 }
 .detailPageThumbnailImage .thumbnail{
 

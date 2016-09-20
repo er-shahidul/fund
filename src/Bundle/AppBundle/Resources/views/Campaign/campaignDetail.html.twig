@@ -42,7 +42,7 @@
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <div class="thumbnail" id="loadImage">
                                         <img src='{% render url('campaign_get_image', {'id': campaign.id}) %}'
-                                             class='attachment-thumbnails-crowdfunding  resizeimage' width="315" height="600" id="page-image">
+                                             class='attachment-thumbnails-crowdfunding  resizeimage' width="100%" height="auto" id="page-image">
 
                                         {#{% render url('campaign_get_successfull', {'id': campaign.id}) %}#}
                                     </div>
@@ -159,12 +159,14 @@
                                 <div class="tab-content">
                                     <div role="tabpanel" class="tab-pane active text-justify" id="story">
                                         <div class="row">
+                                            {% if campaign.campaignVideoUrl is not null %}
                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                 {% set videoUrl = campaign.campaignVideoUrl |split('/') %}
                                                 {% if videoUrl[3] is defined %}
                                                     <iframe width="343" height="300" src="https://www.youtube.com/embed/{{ videoUrl[3] }}"></iframe>
                                                 {% endif %}
                                             </div>
+                                            {% endif %}
                                             <div class="" id="page-detail">
                                                 {{ campaign.description|default }}
                                             </div>
