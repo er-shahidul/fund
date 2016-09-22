@@ -44,7 +44,7 @@ class OAuthUserProvider extends BaseClass
         $userByEmailAddress = $this->userManager->findUserByEmail($email);
 
 
-        if(empty($email) && empty($user)){
+        if(empty($email) && empty($user)) {
 
             $this->session->set('profileImg',$response->getProfilepicture());
             $this->session->set('username', $username);
@@ -54,7 +54,8 @@ class OAuthUserProvider extends BaseClass
         }
 
         if($userByEmailAddress){
-            $user = $this->updateProviderData($userByEmailAddress);
+
+            $user = $this->updateProviderData($userByEmailAddress,$response);
             return $user;
         }
         if(empty($user)){
@@ -69,7 +70,7 @@ class OAuthUserProvider extends BaseClass
 
         $entity = new User();
         $profile = new Profile();
-        $filePath =  $this->UploadFacebookImage($profilePic, $entity);
+        $filePath =  $this->UploadFacebookImage($profilePic);
         $profile->setPath($filePath);
         $profile->setFullName($nickname);
         $profile->setAddressLine('not now');
@@ -90,11 +91,14 @@ class OAuthUserProvider extends BaseClass
         $this->userManager->updateUser($entity);
         return $entity;
     }
-    public function updateProviderData(User  $userByEmailAddress){
-        $entity = $userByEmailAddress;
- 
-        $facebook = $userByEmailAddress->getUsername();
+    public function updateProviderData(User  $userByEmailAddress,UserResponseInterface $response){
 
+        $entity = $userByEmailAddress;
+        $filePath =  $this->UploadFacebookImage($response->getProfilePicture());
+        $entity->getProfile()->setPath($filePath);
+        $entity->setUsername($response->getUsername());
+        $entity->setEmail($response->getEmail());
+        $entity->getProfile()->setFullName($response->getNickname());
         $entity->getProfile()->setIpAddress($this->getClientIpAddress());
         $entity->setEnabled(true);
         $this->userManager->updateUser($entity);
@@ -118,7 +122,7 @@ class OAuthUserProvider extends BaseClass
      * @param $entity
      * @return array
      */
-    public function UploadFacebookImage($profilepicture, $entity)
+    public function UploadFacebookImage($profilepicture)
     {
         $imageUrl = explode('?', $profilepicture);
         $imageUrl = explode('/', $imageUrl[0]);

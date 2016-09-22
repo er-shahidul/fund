@@ -28,6 +28,9 @@ hwi_oauth_connect:
 facebook_login:
     path: /login/check-facebook
 
+twitter_login:
+    path: /login/check-twitter
+
 fos_comment_api:
     type: rest
     resource: "@FOSCommentBundle/Resources/config/routing.yml"

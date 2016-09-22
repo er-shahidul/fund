@@ -121,6 +121,12 @@ hwi_oauth:
             paths:
                 email:          email
                 profilepicture: picture.data.url
+        twitter:
+            type:                twitter
+            client_id:           'J5YJQwMhYCVpkG2T2x1pe9JS1'
+            client_secret:       '0jMPgjywemSAecHN5EDA0GMW0lByP29puDpn1o2H6q3hIfUIVF'
+            options:
+                include_email: true
     fosub:
             username_iterations: 30
             properties:
