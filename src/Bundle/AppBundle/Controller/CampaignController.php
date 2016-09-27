@@ -36,6 +36,7 @@ class CampaignController extends BaseController
     } 
     public function campaignListAdminAction(Request $request)
     {
+
         list($form, $data) = $this->campaignSearchForm($request);
 
         $form = $this->createForm($form);
@@ -55,6 +56,7 @@ class CampaignController extends BaseController
     
     public function campaignSearchForm($request)
     {
+
         $form = new CampaignSearchType();
         $data = $request->get($form->getName());
         return array($form, $data);

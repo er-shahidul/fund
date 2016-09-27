@@ -17,6 +17,7 @@ class OAuthUserProvider extends BaseClass
 
     private $session;
     protected $userManager;
+    protected $properties;
 
 
     /**
@@ -26,6 +27,7 @@ class OAuthUserProvider extends BaseClass
     public function __construct(Session $session,UserManager $userManager, $properties)
     {
         $this->session = $session;
+        $this->properties = $properties;
         parent::__construct($userManager, $properties);
     }
 
@@ -35,34 +37,15 @@ class OAuthUserProvider extends BaseClass
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
 
-
         $username = $response->getUsername();
         $email = $response->getEmail();
-
-
         $user = $this->userManager->findUserBy(array($this->getProperty($response) => $username));
         $userByEmailAddress = $this->userManager->findUserByEmail($email);
 
-
-        if(empty($email) && empty($user)) {
-
-            $this->session->set('profileImg',$response->getProfilepicture());
-            $this->session->set('username', $username);
-            $this->session->set('email',$email);
-            $this->session->set('nickName',$response->getNickname());
-            return false;
-        }
-
-        if($userByEmailAddress){
-
-            $user = $this->updateProviderData($userByEmailAddress,$response);
-            return $user;
-        }
-        if(empty($user)){
-            $user = $this->storeProviderData($response->getUsername(),$response->getEmail(),$response->getProfilePicture(),$response->getNickname());
-        }
-
-        return $user;
+     /* if($response->getResourceOwner()->getName() == 'twitter'){
+        return $this->twitterLogin($response, $email, $user, $username, $userByEmailAddress);
+      }*/
+        return $this->facebookLogin($response, $email, $user, $username, $userByEmailAddress);
 
     }
 
@@ -86,6 +69,30 @@ class OAuthUserProvider extends BaseClass
             $profile->setConfirmationTokenEmailVerify(true);
         }
         
+        $entity->setProfile($profile);
+
+        $this->userManager->updateUser($entity);
+        return $entity;
+    }
+    public function storeTwitterProviderData($username, $email = null, $profilePic = null, $nickname= null){
+
+        $entity = new User();
+        $profile = new Profile();
+        $filePath =  $this->UploadFacebookImage($profilePic);
+        $profile->setPath($filePath);
+        $profile->setFullName($nickname);
+        $profile->setAddressLine('not now');
+
+        $entity->setUsername($username);
+        $entity->setEmail($email);
+        $entity->setTwitter($username);
+        $entity->setEnabled(true);
+        $entity->setPassword(false);
+        $profile->setIpAddress($this->getClientIpAddress());
+        if(!empty($email)){
+            $profile->setConfirmationTokenEmailVerify(true);
+        }
+
         $entity->setProfile($profile);
 
         $this->userManager->updateUser($entity);
@@ -130,6 +137,58 @@ class OAuthUserProvider extends BaseClass
         $filePath = 'uploads/profile/' . $imagePath;
         file_put_contents($filePath, file_get_contents($profilepicture));
         return $filePath;
+    }
+
+    /**
+     * @param UserResponseInterface $response
+     * @param $email
+     * @param $user
+     * @param $username
+     * @param $userByEmailAddress
+     * @return bool|User
+     */
+    public function facebookLogin(UserResponseInterface $response, $email, $user, $username, $userByEmailAddress)
+    {
+      /*  if (empty($email) && empty($user)) {
+
+            $this->session->set('profileImg', $response->getProfilepicture());
+            $this->session->set('username', $username);
+            $this->session->set('email', $email);
+            $this->session->set('nickName', $response->getNickname());
+            return false;
+        }*/
+
+        if ($userByEmailAddress) {
+            $user = $this->updateProviderData($userByEmailAddress, $response);
+            return $user;
+        }
+        if (empty($user)) {
+            $user = $this->storeProviderData($response->getUsername(), $response->getEmail(), $response->getProfilePicture(), $response->getNickname());
+        }
+
+        return $user;
+    }
+    /**
+     * @param UserResponseInterface $response
+     * @param $email
+     * @param $user
+     * @param $username
+     * @param $userByEmailAddress
+     * @return bool|User
+     */
+    public function twitterLogin(UserResponseInterface $response, $email, $user, $username, $userByEmailAddress)
+    {
+
+        if ($userByEmailAddress) {
+            $user = $this->updateProviderData($userByEmailAddress, $response);
+            return $user;
+        }
+        if (empty($user)) {
+
+            $user = $this->storeTwitterProviderData($response->getUsername(), $response->getEmail(), $response->getProfilePicture(), $response->getNickname());
+        }
+
+        return $user;
     }
 
 }

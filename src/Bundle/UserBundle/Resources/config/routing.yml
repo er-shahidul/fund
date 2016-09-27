@@ -20,3 +20,12 @@ campaign_user-verified:
     defaults: { _controller: BundleUserBundle:Registration:campaignUserVerified }
     options:
                 expose: true
+user-update:
+    path:     /campaign/user-update/{id}
+    defaults: { _controller: BundleUserBundle:Registration:userUpdate }
+
+password_changed:
+    path:     /campaign/user-password-changed/{id}
+    defaults: { _controller: BundleUserBundle:Registration:changePassword }
+    requirements:
+          id: \d+

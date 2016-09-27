@@ -33,12 +33,13 @@
                                                  data-ride="carousel">
                                                 <div class="carousel-inner" role="listbox">
                                                     {% for index, campaign in featureCampaigns %}
-                                                        <div class="item {{ index == 0 ? 'active' :''  }}">
+                                                        <div class="item {{ index == 0 ? 'active' :'' }}">
                                                             <div class="item-campaign row item-layout-1">
                                                                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                                                     <div class="entry-thumbnail">
 
-                                                                        <img src='{% render url('campaign_get_image', {'id': campaign.id}) %}'  class='attachment-thumbnails-crowdfunding wp-post-image'>
+                                                                        <img src='{% render url('campaign_get_image', {'id': campaign.id}) %}'
+                                                                             class='attachment-thumbnails-crowdfunding wp-post-image'>
                                                                     </div>
                                                                     <div class="campaign-title">
                                                                         <a href="{{ path('campaign_detail',{id:campaign.id}) }}"
@@ -48,7 +49,7 @@
                                                                 <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12">
                                                                     <div class="entry-description">
                                                                         <p>
-                                                                            {{ campaign.description|readmore(path('campaign_detail',{id:campaign.id}),200)}}
+                                                                            {{ campaign.description|readmore(path('campaign_detail',{id:campaign.id}),200) }}
                                                                         </p>
                                                                     </div>
                                                                 </div>
@@ -64,9 +65,9 @@
                                                                                      data-strokewidth="11"
                                                                                      data-stroke="#FFF"
                                                                                      data-progress-stroke="#FED857">
-                                                                                <span>
-                                                                                    {% render url('campaign_get_progress_bar', {'id': campaign.id}) %}
-                                                                                </span>
+                    <span>
+                        {% render url('campaign_get_progress_bar', {'id': campaign.id}) %}
+                    </span>
                                                                                 </div>
                                                                                 <div
                                                                                         class="campaign-time-left text-center">
@@ -79,13 +80,15 @@
                                                                                 <ul class="campaign-status text-center">
 
                                                                                     <li class="campaign-raised">
-                                                                                        <span class="label">Current</span><div class="clearfix"></div>
+                                                                                        <span class="label">Current</span>
+                                                                                        <div class="clearfix"></div>
                                                                                         <span class="text">&#036;{% render url('campaign_get_target_amount', {'id': campaign.id}) %}</span>
                                                                                     </li>
 
                                                                                     <li class="campaign-goal">
                                                                                         <p class="label">Target</p>
-                                                                                        <p class="text">&#036;{{ campaign.amount|default('') }}</p>
+                                                                                        <p class="text">
+                                                                                            &#036;{{ campaign.amount|default('') }}</p>
                                                                                     </li>
 
                                                                                     <li class="campaign-backers">
@@ -97,8 +100,9 @@
                                                                             </div>
 
                                                                             <div class="col-xs-12">
-                                                                                <div class = "text-center quick-donate">
-                                                                                    <a href="{{ path('donation_create',{id:campaign.id}) }}" class="btn btn-donate-black">
+                                                                                <div class="text-center quick-donate">
+                                                                                    <a href="{{ path('donation_create',{id:campaign.id}) }}"
+                                                                                       class="btn btn-donate-black">
                                                                                         Donate now
                                                                                     </a>
 
@@ -126,17 +130,19 @@
                     <div class="wpb-inner container">
                         <div class="row">
                             <form action="{% if categoryTitle.id is not defined %}
-                            {{ path('campaign_search') }}
-                            {% else %}
-                            {{ path('campaign_search_category_wise',{id:categoryTitle.id}) }}
-                            {% endif %}" class="form-horizontal" role="form" method="post">
+{{ path('campaign_search') }}
+{% else %}
+{{ path('campaign_search_category_wise',{id:categoryTitle.id}) }}
+{% endif %}" class="form-horizontal" role="form" method="post">
                                 <div class="form-group" style="margin-left:0px;">
                                     <div class="col-sm-10">
                                         {{ form_widget(form.search, { 'attr': {'class': 'form-control','style':'border-radius:13px',
                                             'placeholder': 'Search by name, keyword, or city...'} }) }}
                                     </div>
                                     <div class="col-sm-2">
-                                        <button type="submit" style="line-height: 22px; width: 91%" class="btn btn-donate-black">Submit</button>
+                                        <button type="submit" style="line-height: 22px; width: 91%"
+                                                class="btn btn-donate-black">Submit
+                                        </button>
                                     </div>
                                 </div>
 
@@ -153,19 +159,23 @@
                                 <div class="wpo-sidebar wpo-sidebar-left">
                                     <div class="sidebar-inner">
 
-                                        <aside id="categories-9" class="widget  clearfix widget_categories"><h3 class="widget-title">GENERAL CATEGORIES</h3>
+                                        <aside id="categories-9" class="widget  clearfix widget_categories"><h3
+                                                    class="widget-title">GENERAL CATEGORIES</h3>
                                             <ul>
                                                 {% for category in categories %}
                                                     <li class="cat-item">
                                                         <a href="{{ path('campaign_category_based',{title:category.title}) }}"
-                                                           class="{% if categoryTitle.title|default == category.title %}active{% else  %}{% endif %}">
-                                                            {{ category.title }} ( {% render url('campaign_count_categories_wise', {'id': category.id}) %} )
+                                                           class="{% if categoryTitle.title|default == category.title %}active{% else %}{% endif %}">
+                                                            {{ category.title }}
+                                                            ( {% render url('campaign_count_categories_wise', {'id': category.id}) %}
+                                                            )
                                                         </a>
 
                                                     </li>
                                                 {% endfor %}
                                                 <li class="cat-item">
-                                                    <a href="{{ path('campaign_featured_based') }}"class="">Feature ( {% render url('feature_campaign_count') %} )</a>
+                                                    <a href="{{ path('campaign_featured_based') }}" class="">Feature
+                                                        ( {% render url('feature_campaign_count') %} )</a>
                                                 </li>
                                             </ul>
 
@@ -183,13 +193,16 @@
 
                                                 <div class="item-content item-campaign-wrapper">
                                                     <div class="entry-thumbnail text-center">
-                                                        <img src='{% render url('campaign_get_image', {'id': campaign.id}) %}'  class='attachment-thumbnails-crowdfunding wp-post-image'>
+                                                        <img src='{% render url('campaign_get_image', {'id': campaign.id}) %}'
+                                                             class='attachment-thumbnails-crowdfunding wp-post-image'>
 
-                                                        <div class="donate-now" style="{{ is_granted("ROLE_ADMIN") ?'left:30%' :'left:50%' }}">
-                                                            <a href="{{ path('donation_create',{id:campaign.id}) }}" class="btn btn-slide">
+                                                        <div class="donate-now"
+                                                             style="{{ is_granted("ROLE_ADMIN") ?'left:30%' :'left:50%' }}">
+                                                            <a href="{{ path('donation_create',{id:campaign.id}) }}"
+                                                               class="btn btn-slide">
                                                                 Donate now
                                                             </a>&nbsp;
-                                                           {# {% if is_granted("ROLE_ADMIN") %}
+                                                            {# {% if is_granted("ROLE_ADMIN") %}
                                                                 <a href="{{ path('campaign_individual_update',{id:campaign.id}) }}" class="btn btn-slide" style="float: right">Edit</a>
                                                             {% endif %}#}
                                                         </div>
@@ -200,7 +213,7 @@
 
                                                             <li class="campaign-raised">
                                                                 <span class="label">Current</span>
-                                                                 <span class="text">&#036;{{ campaign.amount|default('') }}</span>
+                                                                <span class="text">&#036;{{ campaign.amount|default('') }}</span>
                                                             </li>
 
                                                             <li class="campaign-funded">
@@ -220,10 +233,11 @@
                                                     </div>
                                                     <div class="clearfix"></div>
                                                     <div class="desciption text-center">
-                                                        {{ campaign.description|readmore(path('campaign_detail',{id:campaign.id}),40)}}
+                                                        {{ campaign.description|readmore(path('campaign_detail',{id:campaign.id}),40) }}
                                                     </div>
                                                     <div class="entry-author text-center">
-                                                        <span>By</span> <strong> {{ campaign.createdBy.profile.fullName|default('N/A')}}</strong>
+                                                        <span>By</span>
+                                                        <strong> {{ campaign.createdBy.profile.fullName|default('N/A') }}</strong>
                                                     </div>
 
                                                 </div>
@@ -239,7 +253,7 @@
                                     {% endif %}
                                     <div style="clear: both;"></div>
                                     <div class="col-lg-9 col-md-8 col-sm-6 col-xs-12">
-                                    {{ knp_pagination_render(campaigns) }}
+                                        {{ knp_pagination_render(campaigns) }}
                                     </div>
                                 </div>
                             </div>

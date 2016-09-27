@@ -12,7 +12,10 @@
 namespace Bundle\UserBundle\Controller;
 
 use Bundle\AppBundle\Controller\BaseController;
+use Bundle\UserBundle\Entity\Profile;
 use Bundle\UserBundle\Entity\User;
+use Bundle\UserBundle\Form\Type\ChangePasswordFormType;
+use Bundle\UserBundle\Form\Type\UserRegistrationType;
 use Bundle\UserBundle\Form\Type\UserType;
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\FormEvent;
@@ -343,4 +346,119 @@ class RegistrationController extends BaseController
 
     }
 
+    public function userUpdateAction(Request $request,User $user) {
+
+        /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
+        $userManager = $this->get('fos_user.user_manager');
+
+
+        $form = $this->createForm(new UserRegistrationType(null), $user);
+
+        if ('POST' == $request->getMethod()) {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+
+                if($user->getProfile()->getConfirmationTokenPhoneVerify() != 1) {
+                    $this->verificationPhone($user->getProfile()->getPhoneNumber());
+                }
+                $user->addRole('ROLE_USER');
+                $userManager->updateUser($user);
+
+                $massage = 'Profile Successfully Updated';
+                $this->get('session')->getFlashBag()->add('notice', $massage);
+                return $this->redirect($this->generateUrl('campaign_list'));
+            }
+        }
+
+        return $this->render(
+            'BundleUserBundle:Profile:UserEdit.html.twig',
+            array(
+                'form'     => $form->createView(),
+                'user'     => $user
+            )
+        );
+    }
+
+    public function changePassword1Action(Request $request)
+    {
+        $user = $this->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+
+        /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
+        $dispatcher = $this->get('event_dispatcher');
+
+        $event = new GetResponseUserEvent($user, $request);
+        $dispatcher->dispatch(FOSUserEvents::CHANGE_PASSWORD_INITIALIZE, $event);
+
+        if (null !== $event->getResponse()) {
+            return $event->getResponse();
+        }
+
+        /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
+       $formFactory = $this->get('fos_user.change_password.form.factory');
+
+
+        $form = $formFactory->createForm();
+
+        $form->setData($user);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
+            $userManager = $this->get('fos_user.user_manager');
+
+            $event = new FormEvent($form, $request);
+            $dispatcher->dispatch(FOSUserEvents::CHANGE_PASSWORD_SUCCESS, $event);
+
+            $userManager->updateUser($user);
+
+            if (null === $response = $event->getResponse()) {
+                return $this->redirect($this->generateUrl('campaign_list'));
+            }
+
+            $dispatcher->dispatch(FOSUserEvents::CHANGE_PASSWORD_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+
+            return $response;
+        }
+
+        return $this->render('BundleUserBundle:ChangePassword:UserChangedPassword.html.twig', array(
+            'form' => $form->createView()
+        ));
+    }
+
+    public function changePasswordAction(Request $request, User $user)
+    {
+        if (false === $this->container->get('security.context')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {
+            return new RedirectResponse('/', 403);
+        }
+        $form = $this->createForm(new ChangePasswordFormType(), $user);
+
+        if ($request->getMethod() == 'POST') {
+
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+
+                $user->setPassword($form->get('plainPassword')->getData());
+                $user->setPlainPassword($form->get('plainPassword')->getData());
+
+                $this->getDoctrine()->getRepository('BundleUserBundle:User')->update($user);
+
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    'Password Successfully Change'
+                );
+
+                return $this->redirect($this->generateUrl('campaign_list'));
+            }
+        }
+
+        return $this->render('BundleUserBundle:ChangePassword:UserChangedPassword.html.twig', array(
+            'form' => $form->createView()
+        ));
+    }
 }

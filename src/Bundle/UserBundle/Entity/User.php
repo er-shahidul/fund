@@ -10,6 +10,10 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
  * @ORM\Entity(repositoryClass="Bundle\UserBundle\Repository\UserRepository")
+ * @ORM\AttributeOverrides({
+ *      @ORM\AttributeOverride(name="email", column=@ORM\Column(type="string", name="email", length=255, unique=true, nullable=true)),
+ *      @ORM\AttributeOverride(name="emailCanonical", column=@ORM\Column(type="string", name="email_canonical", length=255, unique=true, nullable=true))
+ * })
  */
 class User extends BaseUser
 {
@@ -26,6 +30,13 @@ class User extends BaseUser
      * @ORM\Column(name="facebook", type="bigint", nullable=true)
      */
     private $facebook;
+
+    /**
+     * @var bigint
+     *
+     * @ORM\Column(name="twitter", type="bigint", nullable=true)
+     */
+    private $twitter;
 
     /**
      * @ORM\OneToOne(targetEntity="Profile", mappedBy="user", cascade={"persist"})
@@ -70,5 +81,21 @@ class User extends BaseUser
     {
         $profile->setUser($this);
         $this->profile = $profile;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTwitter()
+    {
+        return $this->twitter;
+    }
+
+    /**
+     * @param mixed $twitter
+     */
+    public function setTwitter($twitter)
+    {
+        $this->twitter = $twitter;
     }
 }

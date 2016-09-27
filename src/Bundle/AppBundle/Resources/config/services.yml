@@ -1,7 +1,7 @@
 services:
     app.provider.oauth:
         class: Bundle\AppBundle\Service\OAuthUserProvider
-        arguments: [@session,@fos_user.user_manager,{facebook: facebook}]
+        arguments: [@session,@fos_user.user_manager,{facebook: facebook , twitter: twitter}]
 
     sms.transporter:
             class: Bundle\AppBundle\Service\SMSTransporter
